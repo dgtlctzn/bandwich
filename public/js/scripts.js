@@ -1,54 +1,69 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  // jQuery targeting the big record/pause/stop buttons
+  // feel free to change html ids to match those in handlebars.
+  const mainRecordEl = $("#main-record");
+  const mainStopEl = $("#main-stop");
+  const mainPauseEl = $("#main-pause");
 
-    const mainRecordEl = $("#main-record");
+  URL = window.URL || window.webkitURL;
 
+  let gumStream;
+  let rec;
+  let input;
 
-    URL = window.URL || window.webkitURL;
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
 
-    let gumStream;
-    let rec;
-    let input;
+  function startRecording() {
+    console.log("record!");
+    const audioContext = new AudioContext();
 
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const constraints = {
+      audio: true,
+      video: false,
+    };
 
-    function startRecording() {
-        console.log("record!");
-        const audioContext = new AudioContext();
-    
-        const constraints = {
-          audio: true,
-          video: false,
-        };
-    
-        mainRecordEl.disabled = true;
-        mainStopEl.disabled = false;
-        mainPauseEl.disabled = false;
-        
-        navigator.mediaDevices
-          .getUserMedia(constraints)
-          .then(function (stream) {
-            console.log(
-              "getUserMedia() success, stream created, initializing Recorder.js ..."
-            );
-            /* assign to gumStream for later use */
-            gumStream = stream;
-            /* use the stream */
-            input = audioContext.createMediaStreamSource(stream);
-            /* Create the Recorder object and configure to record mono sound (1 channel) Recording 2 channels will double the file size */
-            rec = new Recorder(input, {
-              numChannels: 1,
-            });
-            //start the recording process
-            rec.record();
-            console.log("Recording started");
-          })
-          .catch(function (err) {
-            //enable the record button if getUserMedia() fails
-            mainRecordEl.disabled = false;
-            mainStopEl.disabled = true;
-            mainPauseEl.disabled = true;
-          });
-      }
+    mainRecordEl.disabled = true;
+    mainStopEl.disabled = false;
+    mainPauseEl.disabled = false;
 
+    navigator.mediaDevices
+      .getUserMedia(constraints)
+      .then(function (stream) {
+        console.log(
+          "getUserMedia() success, stream created, initializing Recorder.js ..."
+        );
+        /* assign to gumStream for later use */
+        gumStream = stream;
+        /* use the stream */
+        input = audioContext.createMediaStreamSource(stream);
+        // recorder.js constructor
+        rec = new Recorder(input, {
+          // mono sound
+          numChannels: 1,
+        });
+        //start the recording process
+        rec.record();
+        console.log("Recording started");
+      })
+      .catch(function (err) {
+        //enable the record button if getUserMedia() fails
+        mainRecordEl.disabled = false;
+        mainStopEl.disabled = true;
+        mainPauseEl.disabled = true;
+      });
+  }
 
-})
+  function pauseRecord() {
+    console.log("Recording paused", rec.recording);
+    if (rec.recording) {
+      // pause
+      rec.stop();
+      // here maybe we can target the pause button (mainPauseEl) and get it to blink/change color
+    } else {
+      // resume
+      rec.record();
+      // same for here
+    }
+  }
+  
+});
