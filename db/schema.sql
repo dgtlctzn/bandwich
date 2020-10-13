@@ -1,0 +1,5 @@
+DROP DATABASE IF EXISTS bandwichDB;
+
+CREATE DATABASE bandwichDB;
+
+USE bandwichDB;
