@@ -111,7 +111,7 @@ $(document).ready(function () {
         // sent to server side app.post
         // contents: req.body.audio and req.body.file
         audio: JSON.stringify(base64data),
-        file: fileName,
+        path: fileName,
       });
     };
   }
