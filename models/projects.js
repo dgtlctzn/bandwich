@@ -5,9 +5,9 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Project.associate = function(models) {
-      // Associating Project with audioFiles
-      // When a Project is deleted, also delete any associated audioFiles
-      Project.hasMany(models.audioFiles, {
+      // Associating Project with Audiofile
+      // When a Project is deleted, also delete any associated Audiofile
+      Project.hasMany(models.Audiofile, {
         onDelete: "cascade"
       });
     };
