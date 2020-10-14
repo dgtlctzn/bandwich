@@ -65,5 +65,17 @@ $(document).ready(function () {
       // same for here
     }
   }
-  
+
+  function stopRecording() {
+    console.log("Recording stopped");
+    //disable the stop button, enable the record too allow for new recordings
+    mainRecordEl.disabled = false;
+    mainStopEl.disabled = true;
+    mainPauseEl.disabled = true;
+    // stops the recording and gets the track
+    rec.stop(); 
+    gumStream.getAudioTracks()[0].stop();
+    // creates wav blob and passes blob as argument to the callback
+    rec.exportWAV(createDownloadLink);
+  }
 });
