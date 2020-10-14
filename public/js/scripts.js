@@ -32,9 +32,9 @@ $(document).ready(function () {
         console.log(
           "getUserMedia() success, stream created, initializing Recorder.js ..."
         );
-        /* assign to gumStream for later use */
+
         gumStream = stream;
-        /* use the stream */
+
         input = audioContext.createMediaStreamSource(stream);
         // recorder.js constructor
         rec = new Recorder(input, {
@@ -78,4 +78,22 @@ $(document).ready(function () {
     // creates wav blob and passes blob as argument to the callback
     rec.exportWAV(createDownloadLink);
   }
+
+  function postAudio(data) {
+      // sends the audio data from the client to the server via POST request
+      $.ajax("/api/audio", {
+        type: "POST",
+        data: data,
+      })
+        .then(function(response) {
+          // maybe location.reload?
+          // it takes time for this request to Post so we don't want to refresh the page too fast
+          // might need to do a setTimeoutInterval before reloading
+        })
+        .catch(function(err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
 });
