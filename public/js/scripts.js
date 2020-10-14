@@ -117,6 +117,8 @@ $(document).ready(function () {
     };
   }
 
+  // when a user hits the save button it captures the text in the form and posts the song name
+  // the post route in api-routes.js creates a nnew project in the database
   saveTrackEl.on("submit", function(event) {
     event.preventDefault()
 
