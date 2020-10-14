@@ -1,7 +1,11 @@
 // DEFINING MODULES
 const express = require("express");
 const exphbs = require("express-handlebars");
+const handlebars = require("handlebars");
 const db = require("./models");
+const {
+  allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
 
 // DEFINING PORT
 const PORT = process.env.PORT || 8080;
@@ -17,7 +21,15 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // HANDLEBARS MIDDLEWARE
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+// app.set("view engine", "handlebars");
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main",
+    handlebars: allowInsecurePrototypeAccess(handlebars),
+  })
+);
 app.set("view engine", "handlebars");
 
 // ROUTE MODULE CONNECTION
@@ -25,7 +37,7 @@ require("./routes/html-routes")(app);
 require("./routes/api-routes.js")(app);
 
 // LISTEN ON SERVER
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log(`App listening at: http://localhost:${PORT}`);
   });
