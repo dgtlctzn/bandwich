@@ -30,6 +30,9 @@ button {
   border-radius: 4px;
 }
 
+.play:hover {
+cursor: pointer;
+}
 
 
 /* toggle switch */
