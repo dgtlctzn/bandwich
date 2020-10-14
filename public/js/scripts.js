@@ -5,6 +5,11 @@ $(document).ready(function () {
   const mainStopEl = $("#main-stop");
   const mainPauseEl = $("#main-pause");
 
+  // click events on the big record/pause/stop buttons
+  mainRecordEl.on("click", startRecord);
+  mainStopEl.on("click", stopRecord);
+  mainPauseEl.on("click", pauseRecord);
+
   URL = window.URL || window.webkitURL;
 
   let gumStream;
@@ -13,7 +18,7 @@ $(document).ready(function () {
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
 
-  function startRecording() {
+  function startRecord() {
     console.log("record!");
     const audioContext = new AudioContext();
 
@@ -64,7 +69,7 @@ $(document).ready(function () {
     }
   }
 
-  function stopRecording() {
+  function stopRecord() {
     console.log("Recording stopped");
     //disable the stop button, enable the record too allow for new recordings
     mainRecordEl.disabled = false;
