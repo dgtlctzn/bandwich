@@ -140,4 +140,59 @@ $(document).ready(function () {
       getProject(songName.name);
     });
   })
+  // PLAY BTN FOR EACH TRACK
+  // ========================================================
+  const playBtn1 = $("#playBtn1");
+  const playBtn2 = $("#playBtn2");
+  const playBtn3 = $("#playBtn3");
+  const playBtn4 = $("#playBtn4");
+  const audioId1 = $("#audio1");
+  const audioId2 = $("#audio2");
+  const audioId3 = $("#audio3");
+  const audioId4 = $("#audio4");
+
+  playBtn1.on("click", function () {
+    const audioSrc = audioId1.attr("src");
+    const audio = new Audio(audioSrc);
+
+    function playAudio() {
+      audio.play();
+    }
+
+    playAudio();
+  });
+
+  playBtn2.on("click", function () {
+    const audioSrc = audioId2.attr("src");
+    const audio = new Audio(audioSrc);
+
+    function playAudio() {
+      audio.play();
+    }
+
+    playAudio();
+  });
+
+  playBtn3.on("click", function () {
+    const audioSrc = audioId3.attr("src");
+    const audio = new Audio(audioSrc);
+
+    function playAudio() {
+      audio.play();
+    }
+
+    playAudio();
+  });
+
+  playBtn4.on("click", function () {
+    const audioSrc = audioId4.attr("src");
+    const audio = new Audio(audioSrc);
+
+    function playAudio() {
+      audio.play();
+    }
+
+    playAudio();
+  });
+  // ========================================================
 });
