@@ -29,9 +29,7 @@ $(document).ready(function () {
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then(function (stream) {
-        console.log(
-          "getUserMedia() success, stream created, initializing Recorder.js ..."
-        );
+        console.log("getUserMedia success");
 
         gumStream = stream;
 
@@ -73,27 +71,43 @@ $(document).ready(function () {
     mainStopEl.disabled = true;
     mainPauseEl.disabled = true;
     // stops the recording and gets the track
-    rec.stop(); 
+    rec.stop();
     gumStream.getAudioTracks()[0].stop();
     // creates wav blob and passes blob as argument to the callback
-    rec.exportWAV(createDownloadLink);
+    rec.exportWAV(convertToBase64);
   }
 
   function postAudio(data) {
-      // sends the audio data from the client to the server via POST request
-      $.ajax("/api/audio", {
-        type: "POST",
-        data: data,
+    // sends the audio data from the client to the server via POST request
+    $.ajax("/api/audio", {
+      type: "POST",
+      data: data,
+    })
+      .then(function (response) {
+        // maybe location.reload?
+        // it takes time for this request to Post so we don't want to refresh the page too fast
+        // might need to do a setTimeoutInterval before reloading
       })
-        .then(function(response) {
-          // maybe location.reload?
-          // it takes time for this request to Post so we don't want to refresh the page too fast
-          // might need to do a setTimeoutInterval before reloading
-        })
-        .catch(function(err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
+      .catch(function (err) {
+        if (err) {
+          console.log(err);
+        }
+      });
+  }
+
+  function convertToBase64(blob) {
+    const fileName = new Date().toISOString() + ".wav";
+
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = function () {
+      const base64data = reader.result;
+      postAudio({
+        // sent to server side app.post
+        // contents: req.body.audio and req.body.file
+        audio: JSON.stringify(base64data),
+        file: fileName,
+      });
+    };
+  }
 });
