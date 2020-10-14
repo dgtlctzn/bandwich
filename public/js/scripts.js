@@ -4,6 +4,7 @@ $(document).ready(function () {
   const mainRecordEl = $("#main-record");
   const mainStopEl = $("#main-stop");
   const mainPauseEl = $("#main-pause");
+  const saveTrackEl = $("save-track")
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", startRecord);
@@ -115,4 +116,17 @@ $(document).ready(function () {
       });
     };
   }
+
+  saveTrackEl.on("submit", function(event) {
+    event.preventDefault()
+
+    const songName = {
+      name: name
+    }
+
+    $.ajax("/api/project", {
+      type: "POST",
+      data: songName
+    })
+  })
 });
