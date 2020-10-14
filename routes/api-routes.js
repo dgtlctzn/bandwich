@@ -6,6 +6,7 @@ module.exports = function(app) {
         db.audioFiles.create({
             audioFile: req.body.audio,
             path: req.body.path,
+            
         }).then(()=> {
 
         }).catch(err => {
