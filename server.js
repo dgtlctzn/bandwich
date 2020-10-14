@@ -1,6 +1,7 @@
 // DEFINING MODULES
 const express = require("express");
 const exphbs = require("express-handlebars");
+const db = require("./models");
 
 // DEFINING PORT
 const PORT = process.env.PORT || 8080;
@@ -24,6 +25,8 @@ require("./routes/html-routes")(app);
 require("./routes/api-routes.js")(app);
 
 // LISTEN ON SERVER
-app.listen(PORT, () => {
-    console.log(`App listening at: http://localhost:${PORT}`)
-})
+db.sequelize.sync({force: true}).then(() => {
+  app.listen(PORT, () => {
+    console.log(`App listening at: http://localhost:${PORT}`);
+  });
+});

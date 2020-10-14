@@ -18,7 +18,7 @@ module.exports = function (app) {
       projectPassword: "password",
     })
       .then(() => {
-        // what happens here????
+        res.end();
       })
       .catch((err) => {});
   });

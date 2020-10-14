@@ -4,7 +4,7 @@ $(document).ready(function () {
   const mainRecordEl = $("#main-record");
   const mainStopEl = $("#main-stop");
   const mainPauseEl = $("#main-pause");
-  const saveTrackEl = $("name-input")
+  const saveTrackEl = $("#name-input")
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", startRecord);
