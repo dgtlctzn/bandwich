@@ -1,0 +1,92 @@
+/* Flexbox */
+
+header,
+.track,
+.master-controls,
+.track-controls {
+    display: flex;
+}
+
+header {
+    align-items: center;
+    justify-content: center;
+}
+
+.track{
+    justify-content: space-between;
+}
+
+.track-controls,
+.master-controls {
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.input-range{
+    align-self: center;
+}
+
+.track {
+    flex-direction: column;
+}
+
+
+
+/* Grid */
+
+header {
+    grid-area: header;
+}
+
+#track-one {
+    grid-area: trk-1;
+}
+
+#track-two {
+    grid-area: trk-2;
+}
+
+#track-three {
+    grid-area: trk-3;
+}
+
+#track-four {
+    grid-area: trk-4;
+}
+
+.master-controls {
+    grid-area: ctls;
+}
+
+#container {
+    max-width: 960px;
+    /* min-width: 400px; */
+    margin: auto;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 20px 1fr 20px;
+    grid-template-rows: 80px 80px 160px 160px 160px 160px;
+    grid-template-areas:
+        "...  header  ..."
+        "... ctls ..."
+        "...  trk-1 ..."
+        "...  trk-2 ..."
+        "...  trk-3 ..."
+        "...  trk-4 ...";
+}
+
+
+/* breakpoints */
+
+@media only screen and (min-width: 768px) {
+    
+    #container {
+        grid-template-columns: 20px 1fr 1fr 1fr 1fr 20px;
+        grid-template-rows: 120px 400px 160px;
+        grid-template-areas:
+            "... header header header header ..."
+            "... trk-1 trk-2 trk-3 trk-4 ..."
+            "... ctls ctls ctls ctls ...";
+    }
+
+}    

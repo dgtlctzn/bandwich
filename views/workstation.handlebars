@@ -1,5 +1,122 @@
-<div id="container">
+    <div id="container">
+      <header>
+        <h3>jello-rhino-hubcaps</h3>
+        <button> <i class="fas fa-save"></i> Save</button>
+      </header>
 
+      <div class="track ui-block" id="track-one">
+        Track One
+        <input
+          class="input-range"
+          orient="vertical"
+          type="range"
+          step="0.5"
+          value="5"
+          min="1"
+          max="10"
+        />
+        <div class="track-controls">
+          <i class="fas fa-play play" data-id="{{this.id}}">
+            <audio
+              id="audio{{this.id}}"
+              class="play-audio"
+              src="{{this.download}}"
+            >
+              Here
+            </audio>
+          </i>
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class="track ui-block" id="track-two">
+        Track Two
+        <input
+          class="input-range"
+          orient="vertical"
+          type="range"
+          step="0.5"
+          value="5"
+          min="1"
+          max="10"
+        />
+        <div class="track-controls">
+          <i class="fas fa-play play" data-id="{{this.id}}">
+            <audio
+              id="audio{{this.id}}"
+              class="play-audio"
+              src="{{this.download}}"
+            >
+              Here
+            </audio>
+          </i>
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class="track ui-block" id="track-three">
+        Track Three
+        <input
+          class="input-range"
+          orient="vertical"
+          type="range"
+          step="0.5"
+          value="5"
+          min="1"
+          max="10"
+        />
+        <div class="track-controls">
+          <i class="fas fa-play play" data-id="{{this.id}}">
+            <audio
+              id="audio{{this.id}}"
+              class="play-audio"
+              src="{{this.download}}"
+            >
+              Here
+            </audio>
+          </i>
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class="track ui-block" id="track-four">
+        Track Four
+        <input
+          class="input-range"
+          orient="vertical"
+          type="range"
+          step="0.5"
+          value="5"
+          min="1"
+          max="10"
+        />
+        <div class="track-controls">
+          <i class="fas fa-play play" data-id="{{this.id}}">
+            <audio
+              id="audio{{this.id}}"
+              class="play-audio"
+              src="{{this.download}}"
+            >
+              Here
+            </audio>
+          </i>
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
 
-</div>
+      <div class="master-controls ui-block">
+        <i class="fas fa-play-circle"></i>
+        <i class="fas fa-pause-circle"></i>
+        <i class="fas fa-circle"></i>
+      </div>
+    </div>
 <script src="" async defer></script>
