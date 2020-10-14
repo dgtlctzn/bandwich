@@ -1,8 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
     var Audiofile = sequelize.define("Audiofile", {
-      audiotext: DataTypes.LONGTEXT,
+      audiotext: DataTypes.TEXT,
       path: DataTypes.STRING,
-      projectId: DataTypes.INTEGER
+      // projectId: DataTypes.INTEGER
     });
 
     Audiofile.associate = function(models) {

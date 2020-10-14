@@ -4,6 +4,7 @@ $(document).ready(function () {
   const mainRecordEl = $("#main-record");
   const mainStopEl = $("#main-stop");
   const mainPauseEl = $("#main-pause");
+  const saveTrackEl = $("#name-input")
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", startRecord);
@@ -111,11 +112,34 @@ $(document).ready(function () {
         // sent to server side app.post
         // contents: req.body.audio and req.body.file
         audio: JSON.stringify(base64data),
-        file: fileName,
+        path: fileName,
       });
     };
   }
 
+  function getProject(name) {
+    $.get("/api/project/:" + name, function(response) {
+      // add project id to data attribute
+      // update the project title on the page
+    })
+  }
+
+  // when a user hits the save button it captures the text in the form and posts the song name
+  // the post route in api-routes.js creates a nnew project in the database
+  saveTrackEl.on("submit", function(event) {
+    event.preventDefault()
+
+    const songName = {
+      name: $("#lname").val()
+    }
+
+    $.ajax("/api/project", {
+      type: "POST",
+      data: songName
+    }).then(function() {
+      getProject(songName.name);
+    });
+  })
   // PLAY BTN FOR EACH TRACK
   // ========================================================
   const playBtn1 = $("#playBtn1");
