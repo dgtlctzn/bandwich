@@ -4,7 +4,7 @@ $(document).ready(function () {
   const mainRecordEl = $("#main-record");
   const mainStopEl = $("#main-stop");
   const mainPauseEl = $("#main-pause");
-  const saveTrackEl = $("save-track")
+  const saveTrackEl = $("name-input")
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", startRecord);
@@ -121,7 +121,7 @@ $(document).ready(function () {
     event.preventDefault()
 
     const songName = {
-      name: name
+      name: $("#lname").val()
     }
 
     $.ajax("/api/project", {

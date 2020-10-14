@@ -20,7 +20,8 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // ROUTE MODULE CONNECTION
-const router = require("./controllers/controller");
+require("./routes/html-routes")(app);
+require("./routes/api-routes.js")(app);
 
 // LISTEN ON SERVER
 app.listen(PORT, () => {
