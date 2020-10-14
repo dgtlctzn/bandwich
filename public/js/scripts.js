@@ -117,6 +117,13 @@ $(document).ready(function () {
     };
   }
 
+  function getProject(name) {
+    $.get("/api/project/:" + name, function(response) {
+      // add project id to data attribute
+      // update the project title on the page
+    })
+  }
+
   // when a user hits the save button it captures the text in the form and posts the song name
   // the post route in api-routes.js creates a nnew project in the database
   saveTrackEl.on("submit", function(event) {
@@ -129,6 +136,8 @@ $(document).ready(function () {
     $.ajax("/api/project", {
       type: "POST",
       data: songName
-    })
+    }).then(function() {
+      getProject(songName.name);
+    });
   })
 });
