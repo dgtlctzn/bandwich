@@ -12,16 +12,28 @@ module.exports = function (app) {
     db.Project.create({
       projectName: temporaryName,
       projectPassword: "password",
-    }).then(()=> {
-        // retrieves the id of that database,
-        db.Project.findOne({
-            where: {
-                projectName: temporaryName,
-            }
-        }).then((project)=> {
-            // and then displays it via handlebars
-            res.render("workstation", {project: project});
-        })
+    }).then(() => {
+      // retrieves the id of that database,
+      db.Project.findOne({
+        where: {
+          projectName: temporaryName,
+        },
+      }).then((project) => {
+        // and then displays it via handlebars
+        res.render("workstation", { project: project });
+      });
+    });
+  });
+
+  app.get("/workstation/:id", (req, res) => {
+    console.log(req.params.id)
+    db.Project.findOne({
+      where: {
+        id: req.params.id,
+      },
+    }).then((project) => {
+      // and then displays it via handlebars
+      res.render("workstation", { project: project });
     });
   });
 };

@@ -12,16 +12,15 @@ module.exports = function (app) {
     }));
   });
 
-  app.post("/api/project", (req, res) => {
-    db.Project.create({
-      projectName: req.body.name,
-      projectPassword: "password",
+  app.put("/api/project", (req,res) => {
+    db.Project.update({
+      projectName: req.body.name
+    },{
+      where: {
+        id: req.body.id
+      }
     })
-      .then(() => {
-        res.end();
-      })
-      .catch((err) => {});
-  });
+  })
 
   app.post("/api/audio", (req, res) => {
     db.AudioFile.create({
