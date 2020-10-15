@@ -135,6 +135,9 @@ $(document).ready(function () {
     $("#proj-name").hide();
     $("#new-name").show();
     $("#new-name").val(currentTitle);
+    $("#new-name").show();
+    $("#new-name").focus();
+
     // $(this).children("input.edit").val(currentTitle);
     // $(this).children("input.edit").show();
     // $(this).children("input.edit").focus();
