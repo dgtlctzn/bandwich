@@ -117,6 +117,7 @@ $(document).ready(function () {
         // contents: req.body.audio and req.body.file
         audio: JSON.stringify(base64data),
         path: fileName,
+        id: $("#proj-name").data("id")
       });
     };
   }
