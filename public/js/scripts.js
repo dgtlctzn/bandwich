@@ -4,7 +4,8 @@ $(document).ready(function () {
   const mainRecordEl = $("#main-record");
   const mainStopEl = $("#main-stop");
   const mainPauseEl = $("#main-pause");
-  const saveTrackEl = $("#name-input")
+  const saveTrackEl = $("#name-input");
+  const newProjectEl = $("#new-project");
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", startRecord);
@@ -117,9 +118,18 @@ $(document).ready(function () {
     };
   }
 
-
+  // When new project button is clicked it sends user info (IP adress at some point...)
+  // Promise is a reassign for the created project
+  newProjectEl.on("click", function() {
+    $.ajax("/api/project", {
+      type: "POST",
+      data: "userIpAddress"
+    }).then(function(project) {
+      location.assign("/workstation/" + project.id);
+    });
+  });
   // when a user hits the save button it captures the text in the form and posts the song name
-  // the post route in api-routes.js creates a nnew project in the database
+  // the post route in api-routes.js creates a new project in the database
   saveTrackEl.on("submit", function(event) {
     event.preventDefault()
 
@@ -131,8 +141,8 @@ $(document).ready(function () {
     $.ajax("/api/project", {
       type: "PUT",
       data: projectName
-    }).then(function() {
-  
+    }).then(function(project) {
+      location.assign("/workstation/" + project);
     });
   })
   // PLAY BTN FOR EACH TRACK
@@ -247,5 +257,8 @@ $(document).ready(function () {
           audio4.pause();
     };
   });
-    
+
+  $("#home").on("click", function(){
+    location.assign("/");
+  })
 });
