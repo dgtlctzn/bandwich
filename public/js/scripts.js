@@ -128,14 +128,27 @@ $(document).ready(function () {
       location.assign("/workstation/" + project.id);
     });
   });
+
+  saveTrackEl.on("click", function() {
+    console.log(this.children[0].innerHTML);
+    var currentTitle = this.children[0].innerHTML;
+    $("#proj-name").hide();
+    $("#new-name").show();
+    $("#new-name").val(currentTitle);
+    // $(this).children("input.edit").val(currentTitle);
+    // $(this).children("input.edit").show();
+    // $(this).children("input.edit").focus();
+
+  
+  })
   // when a user hits the save button it captures the text in the form and posts the song name
   // the post route in api-routes.js creates a new project in the database
   saveTrackEl.on("submit", function(event) {
     event.preventDefault()
 
     const projectName = {
-      name: $("#lname").val(),
-      id: $("#proj-num").data("id")
+      name: $("#new-name").val(),
+      id: $("#proj-name").data("id")
     }
 
     $.ajax("/api/project", {
