@@ -199,4 +199,8 @@ $(document).ready(function () {
 
     playAudio();
   });
+
+  $("#home").on("click", function(){
+    location.assign("/");
+  })
 });
