@@ -25,15 +25,15 @@ module.exports = function (app) {
     });
   });
 
-  // app.get("/workstation/:id", (req, res) => {
-  //   console.log(req.params.id)
-  //   db.Project.findOne({
-  //     where: {
-  //       id: req.params.id,
-  //     },
-  //   }).then((project) => {
-  //     // and then displays it via handlebars
-  //     res.render("workstation", { project: project });
-  //   });
-  // });
+  app.get("/workstation/:id", (req, res) => {
+    console.log(req.params.id)
+    db.Project.findOne({
+      where: {
+        id: req.params.id,
+      },
+    }).then((project) => {
+      // and then displays it via handlebars
+      res.render("workstation", { project: project });
+    });
+  });
 };
