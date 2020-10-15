@@ -37,8 +37,13 @@ cursor: pointer;
 h1 {
   text-align: center; 
   margin-top: 50px; 
-  margin-bottom: 100px; 
+  margin-bottom: 50px; 
   font-size: 75px
+}
+
+.home {
+  margin: 25px;
+  text-align: center;
 }
 
 #btnDiv {

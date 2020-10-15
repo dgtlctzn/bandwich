@@ -276,7 +276,7 @@ $(document).ready(function () {
     };
   });
 
-  $("#home").on("click", function(){
+  $(".home").on("click", function(){
     location.assign("/");
   })
 });
