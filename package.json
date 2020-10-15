@@ -27,6 +27,7 @@
     "handlebars": "^4.7.6",
     "mysql2": "^2.2.5",
     "random-words": "^1.1.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "wavefile": "^11.0.0"
   }
 }

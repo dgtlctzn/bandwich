@@ -1,4 +1,6 @@
 const db = require("../models");
+const WaveFile = require("wavefile").WaveFile;
+const fs = require("fs");
 
 module.exports = function (app) {
   app.get("/", (req, res) => {
@@ -18,10 +20,31 @@ module.exports = function (app) {
       where: {
         id: req.params.id,
       },
+      include: db.Audiofile
     }).then((project) => {
       // and then displays it via handlebars
-      console.log(project);
-      res.render("workstation", { project: project });
+      // console.log('here')
+      // console.log(project);
+      if (project.Audiofiles.length > 0) {
+        for (let file of project.Audiofiles) {
+          // console.log(file.path)
+          // item.download = "audio/" + item.download;
+          wav = new WaveFile();
+          const wavData = file.audiotext;
+          fs.writeFileSync(
+            "./public/audio/" + file.path,
+            Buffer.from(wavData.replace("data:audio/wav;base64,", ""), "base64")
+          );
+          file.path = "audio/" + file.path;
+        }
+        // console.log(project);
+        // console.log(project.Audiofiles[0].path);
+        res.render("workstation", { project: project });
+      } else {
+        res.render("workstation");
+      }
+
+      // res.render("workstation", { project: project });
     });
   });
 };
