@@ -86,11 +86,13 @@ $(document).ready(function () {
 
   function postAudio(data) {
     // sends the audio data from the client to the server via POST request
-    $.ajax("/api/audio", {
+    $.ajax({
+      url: "/api/audio",
       type: "POST",
       data: data,
     })
       .then(function (response) {
+        console.log(response);
         // maybe location.reload?
         // it takes time for this request to Post so we don't want to refresh the page too fast
         // might need to do a setTimeoutInterval before reloading

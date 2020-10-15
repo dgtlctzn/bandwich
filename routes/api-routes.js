@@ -46,12 +46,16 @@ module.exports = function (app) {
   })
 
   app.post("/api/audio", (req, res) => {
-    db.AudioFile.create({
-      audioFile: req.body.audio,
+    db.Audiofile.create({
+      audiotext: req.body.audio,
       path: req.body.path,
       projectId: req.body.id,
     })
-      .then(() => {})
-      .catch((err) => {});
+      .then(() => {
+        res.end();
+      })
+      .catch((err) => {
+        if (err) throw err;
+      });
   });
 };
