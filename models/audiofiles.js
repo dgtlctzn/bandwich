@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     var Audiofile = sequelize.define("Audiofile", {
-      audiotext: DataTypes.TEXT,
+      audiotext: DataTypes.TEXT("long"),
       path: DataTypes.STRING,
       // projectId: DataTypes.INTEGER
     });
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       // Audiofile can't be created without an Project due to the foreign key constraint
       Audiofile.belongsTo(models.Project, {
         foreignKey: {
-          allowNull: false
+          allowNull: true
         }
       });
     };
