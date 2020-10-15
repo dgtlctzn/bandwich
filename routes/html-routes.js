@@ -1,4 +1,5 @@
 const db = require("../models");
+const randomWords = require('random-words');
 
 module.exports = function (app) {
   app.get("/", (req, res) => {
@@ -11,7 +12,8 @@ module.exports = function (app) {
 
   app.get("/workstation", (req, res) => {
     // When 'New Project' is selected it...
-    const temporaryName = "Project " + Date.now(); // date.now generates a unique string of numbers for the project name
+    // const temporaryName = "Project " + Date.now(); // date.now generates a unique string of numbers for the project name
+    const temporaryName = randomWords({ exactly: 3, join: '-' });
     // creates a database,
     db.Project.create({
       projectName: temporaryName,
