@@ -2,6 +2,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const handlebars = require("handlebars");
+const bodyParser = require("body-parser");
 const db = require("./models");
 const {
   allowInsecurePrototypeAccess,
@@ -14,8 +15,16 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 
 // POST REQUEST MIDDLEWARE
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
+app.use(bodyParser.json({ limit: "50mb" }));
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
 
 // STATIC MIDDLEWARE
 app.use(express.static("public"));

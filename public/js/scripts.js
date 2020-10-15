@@ -155,48 +155,110 @@ $(document).ready(function () {
   const audioId2 = $("#audio2");
   const audioId3 = $("#audio3");
   const audioId4 = $("#audio4");
+  var count1 = 0;
+  var count2 = 0;
+  var count3 = 0;
+  var count4 = 0;
+  var playPauseReset = 2;
+  const audioSrc1 = audioId1.attr("src");
+  const audio1 = new Audio(audioSrc1);
+  const audioSrc2 = audioId2.attr("src");
+  const audio2 = new Audio(audioSrc2);
+  const audioSrc3 = audioId3.attr("src");
+  const audio3 = new Audio(audioSrc3);
+  const audioSrc4 = audioId4.attr("src");
+  const audio4 = new Audio(audioSrc4);
 
   playBtn1.on("click", function () {
-    const audioSrc = audioId1.attr("src");
-    const audio = new Audio(audioSrc);
-
-    function playAudio() {
-      audio.play();
+    if (count1 === 0) {
+      playAudio();
+      console.log("Playing");
+    } else if (count1 === 1) {
+      pauseAudio();
+      console.log("Stopping");
     }
 
-    playAudio();
+    count1 += 1 
+
+    if (count1 === playPauseReset)
+        count1 = 0
+
+    function playAudio() {
+          audio1.play();
+    };
+    function pauseAudio() {
+          audio1.pause();
+    };
   });
 
   playBtn2.on("click", function () {
-    const audioSrc = audioId2.attr("src");
-    const audio = new Audio(audioSrc);
-
-    function playAudio() {
-      audio.play();
+    if (count2 === 0) {
+      playAudio();
+      console.log("Playing");
+    } else if (count2 === 1) {
+      pauseAudio();
+      console.log("Stopping");
     }
 
-    playAudio();
+    count2 += 1 
+
+    if (count2 === playPauseReset)
+        count2 = 0
+
+    function playAudio() {
+          audio2.play();
+    };
+    function pauseAudio() {
+          audio2.pause();
+    };
   });
 
   playBtn3.on("click", function () {
-    const audioSrc = audioId3.attr("src");
-    const audio = new Audio(audioSrc);
-
-    function playAudio() {
-      audio.play();
+    if (count3 === 0) {
+      playAudio();
+      console.log("Playing" );
+    } else if (count3 === 1) {
+      pauseAudio();
+      console.log("Stopping");
     }
 
-    playAudio();
+    count3 += 1 
+
+    if (count3 === playPauseReset)
+        count3 = 0
+
+    function playAudio() {
+          audio3.play();
+    };
+    function pauseAudio() {
+          audio3.pause();
+    };
   });
+    
 
   playBtn4.on("click", function () {
-    const audioSrc = audioId4.attr("src");
-    const audio = new Audio(audioSrc);
-
-    function playAudio() {
-      audio.play();
+    if (count4 === 0) {
+      playAudio();
+      console.log("Playing");
+    } else if (count4 === 1) {
+      pauseAudio();
+      console.log("Stopping");
     }
 
-    playAudio();
+    count4 += 1 
+
+    if (count4 === playPauseReset)
+        count4 = 0
+
+    function playAudio() {
+          audio4.play();
+    };
+    function pauseAudio() {
+          audio4.pause();
+    };
   });
+
+  $("#home").on("click", function(){
+    location.assign("/");
+  })
 });

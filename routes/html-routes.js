@@ -6,7 +6,10 @@ module.exports = function (app) {
   });
   
   app.get("/projects", (req, res) => {
-    res.render("songs-dir");
+    db.Project.findAll().then(function(result){
+      console.log(result)
+      res.render("songs-dir", { project: result });
+    })
   });
 
   app.get("/workstation/:id", (req, res) => {

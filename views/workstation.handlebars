@@ -1,130 +1,82 @@
-
-
-    <div id="container">
-      <header>
-        <form id="name-input" action="">
-          <input type="text" id="lname" name="lname" placeholder="Add song title to save"><br><br>
-          <input type="submit" value="Submit" id="save-song">
-        </form>
-        <!-- <h3>jello-rhino-hubcaps</h3>
+<div id="container">
+  <header>
+    <form id="name-input" action="">
+      <input type="text" id="lname" name="lname" placeholder="Add song title to save"><br><br>
+      <input type="submit" value="Submit" id="save-song">
+    </form>
+    <!-- <h3>jello-rhino-hubcaps</h3>
         <button> <i class="fas fa-save"></i> Save</button> -->
-      </header>
-      <h5 id="proj-num" data-id={{project.id}}>{{project.projectName}}</h5>
+  </header>
+  <h5 id="proj-num" data-id={{project.id}}>{{project.projectName}}</h5>
 
-      <div class="track ui-block" id="track-one">
-        Track One
-        <input
-          class="input-range"
-          orient="vertical"
-          type="range"
-          step="0.5"
-          value="5"
-          min="1"
-          max="10"
-        />
-        <div class="track-controls">
-          <i class="fas fa-play play" id="playBtn1" data-id="{{this.id}}">
-            <audio
-              id="audio1"
-              class="play-audio"
-              src="{{this.download}}"
-            >
-              Here
-            </audio>
-          </i>
-          <label class="switch">
-            <input type="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-      </div>
-      <div class="track ui-block" id="track-two">
-        Track Two
-        <input
-          class="input-range"
-          orient="vertical"
-          type="range"
-          step="0.5"
-          value="5"
-          min="1"
-          max="10"
-        />
-        <div class="track-controls">
-          <i class="fas fa-play play" id="playBtn2" data-id="{{this.id}}">
-            <audio
-              id="audio2"
-              class="play-audio"
-              src="{{this.download}}"
-            >
-              Here
-            </audio>
-          </i>
-          <label class="switch">
-            <input type="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-      </div>
-      <div class="track ui-block" id="track-three">
-        Track Three
-        <input
-          class="input-range"
-          orient="vertical"
-          type="range"
-          step="0.5"
-          value="5"
-          min="1"
-          max="10"
-        />
-        <div class="track-controls">
-          <i class="fas fa-play play" id="playBtn3" data-id="{{this.id}}">
-            <audio
-              id="audio3"
-              class="play-audio"
-              src="{{this.download}}"
-            >
-              Here
-            </audio>
-          </i>
-          <label class="switch">
-            <input type="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-      </div>
-      <div class="track ui-block" id="track-four">
-        Track Four
-        <input
-          class="input-range"
-          orient="vertical"
-          type="range"
-          step="0.5"
-          value="5"
-          min="1"
-          max="10"
-        />
-        <div class="track-controls">
-          <i class="fas fa-play play" id="playBtn4" data-id="{{this.id}}">
-            <audio
-              id="audio4"
-              class="play-audio"
-              src="{{this.download}}"
-            >
-              Here
-            </audio>
-          </i>
-          <label class="switch">
-            <input type="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-      </div>
-
-      <div class="master-controls ui-block">
-        <i class="fas fa-play-circle"></i>
-        <i class="fas fa-pause-circle"></i>
-        <i class="fas fa-stop-circle"></i>
-        <i class="fas fa-circle"></i>
-      </div>
+  <div class="track ui-block" id="track-one">
+    Track One
+    <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
+    <div class="track-controls">
+      <i class="fas fa-play play" id="playBtn1" data-id="{{this.id}}">
+        <audio id="audio1" class="play-audio" src="{{this.download}}">
+          Here
+        </audio>
+      </i>
+      <label class="switch">
+        <input type="checkbox" />
+        <span class="slider round"></span>
+      </label>
     </div>
+  </div>
+  <div class="track ui-block" id="track-two">
+    Track Two
+    <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
+    <div class="track-controls">
+      <i class="fas fa-play play" id="playBtn2" data-id="{{this.id}}">
+        <audio id="audio2" class="play-audio" src="{{this.download}}">
+          Here
+        </audio>
+      </i>
+      <label class="switch">
+        <input type="checkbox" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="track ui-block" id="track-three">
+    Track Three
+    <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
+    <div class="track-controls">
+      <i class="fas fa-play play" id="playBtn3" data-id="{{this.id}}">
+        <audio id="audio3" class="play-audio" src="{{this.download}}">
+          Here
+        </audio>
+      </i>
+      <label class="switch">
+        <input type="checkbox" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="track ui-block" id="track-four">
+    Track Four
+    <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
+    <div class="track-controls">
+      <i class="fas fa-play play" id="playBtn4" data-id="{{this.id}}">
+        <audio id="audio4" class="play-audio" src="{{this.download}}">
+          Here
+        </audio>
+      </i>
+      <label class="switch">
+        <input type="checkbox" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
 
+  <div class="master-controls ui-block">
+    <i class="fas fa-play-circle"></i>
+    <i class="fas fa-pause-circle" id="main-pause"></i>
+    <i class="fas fa-stop-circle" id="main-stop"></i>
+    <i class="fas fa-circle" id="main-record"></i>
+  </div>
+</div>
+<div id="home">
+  <i class="fas fa-home fa-3x"></i>
+</div>

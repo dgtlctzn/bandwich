@@ -30,7 +30,18 @@ header {
     flex-direction: column;
 }
 
+#name-input {
+    text-align: center;
+}
 
+.fas:hover {
+    cursor: pointer;
+}
+
+#home {
+    margin: 25px;
+    text-align: center;
+}
 
 /* Grid */
 
