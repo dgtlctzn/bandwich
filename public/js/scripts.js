@@ -138,7 +138,7 @@ $(document).ready(function () {
 
     const projectName = {
       name: $("#lname").val(),
-      id: $("#proj-num").data("id")
+      id: $("#proj-name").data("id")
     }
 
     $.ajax("/api/project", {
