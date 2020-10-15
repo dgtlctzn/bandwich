@@ -49,7 +49,7 @@ module.exports = function (app) {
     db.Audiofile.create({
       audiotext: req.body.audio,
       path: req.body.path,
-      projectId: req.body.id,
+      ProjectId: req.body.id,
     })
       .then(() => {
         res.end();
