@@ -5,6 +5,7 @@ $(document).ready(function () {
   const mainStopEl = $("#main-stop");
   const mainPauseEl = $("#main-pause");
   const saveTrackEl = $("#name-input");
+  const editTrackEl = $("#new-name")
   const newProjectEl = $("#new-project");
 
   // click events on the big record/pause/stop buttons
@@ -135,14 +136,12 @@ $(document).ready(function () {
     $("#proj-name").hide();
     $("#new-name").show();
     $("#new-name").val(currentTitle);
-    $("#new-name").show();
     $("#new-name").focus();
+  })
 
-    // $(this).children("input.edit").val(currentTitle);
-    // $(this).children("input.edit").show();
-    // $(this).children("input.edit").focus();
-
-  
+  editTrackEl.on("blur", function() {
+    $("#new-name").hide();
+    $("#proj-name").show();
   })
   // when a user hits the save button it captures the text in the form and posts the song name
   // the post route in api-routes.js creates a new project in the database
