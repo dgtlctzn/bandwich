@@ -94,9 +94,10 @@ $(document).ready(function () {
     })
       .then(function (response) {
         console.log(response);
-        // maybe location.reload?
-        // it takes time for this request to Post so we don't want to refresh the page too fast
-        // might need to do a setTimeoutInterval before reloading
+        // sets an interval before reloading page to allow big POST request
+        setTimeout(function() {
+          location.reload();
+        }, 3000);
       })
       .catch(function (err) {
         if (err) {
