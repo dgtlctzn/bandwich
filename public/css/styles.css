@@ -26,8 +26,17 @@ button {
   margin: 24px;
 }
 
+.play {
+  margin-right: 30px;
+}
+
 .ui-block {
   border-radius: 4px;
+}
+
+.menu {
+  font-size: 26px;
+  margin-left: 20px;
 }
 
 .play:hover {
@@ -41,13 +50,18 @@ h1 {
   font-size: 75px
 }
 
-.home {
-  margin: 25px;
-  text-align: center;
-}
 
 #btnDiv {
   text-align: center;
+}
+
+
+#name-input {
+  text-align: center;
+}
+
+.fas:hover {
+  cursor: pointer;
 }
 
 .button {
