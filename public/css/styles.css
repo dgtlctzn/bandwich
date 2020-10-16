@@ -22,7 +22,7 @@ button {
 
 
 .play {
-  margin-right: 30px;
+  margin-right: 40px;
 }
 
 .ui-block {
@@ -185,6 +185,12 @@ input[type=text]:focus {
     .master-controls {
       font-size: 72px;
     }
+
+    .ui-block {
+      padding: 40px;
+    }
+
+    
 
   }
 
