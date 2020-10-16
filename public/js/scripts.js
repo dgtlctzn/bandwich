@@ -212,15 +212,19 @@ $(document).ready(function () {
 
   function playAll() {
     if (audioSrc1 !== "/") {
+      audio1.load();
       audio1.play();
     }
     if (audioSrc2 !== "/") {
+      audio2.load();
       audio2.play();
     }
     if (audioSrc3 !== "/") {
+      audio3.load();
       audio3.play();
     }
     if (audioSrc4 !== "/") {
+      audio4.load();
       audio4.play();
     }
   }
