@@ -82,6 +82,7 @@ module.exports = function (app) {
       audiotext: req.body.audio,
       path: req.body.path,
       ProjectId: req.body.id,
+      track: req.body.track
     })
       .then(() => {
         res.end();

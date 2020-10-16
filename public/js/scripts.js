@@ -119,7 +119,8 @@ $(document).ready(function () {
         // contents: req.body.audio and req.body.file
         audio: JSON.stringify(base64data),
         path: fileName,
-        id: $("#proj-name").data("id")
+        id: $("#proj-name").data("id"),
+        track: track
       });
     };
   }
@@ -128,14 +129,9 @@ $(document).ready(function () {
   $(".check").on("change", function () {
     if ($(this).is(":checked")) {
       switchStatus = $(this).is(":checked");
-      console.log(switchStatus);
       track = $(this).data("track");
-      console.log(track);
-      // alert(switchStatus); // To verify
     } else {
       switchStatus = $(this).is(":checked");
-      console.log(switchStatus);
-      // alert(switchStatus); // To verify
     }
   });
 
