@@ -218,9 +218,13 @@ $(document).ready(function () {
   playBtn2.on("click", function () {
     if (count2 === 0) {
       playAudio();
+      playBtn2.removeClass("fas fa-play");
+      playBtn2.addClass("fas fa-pause");
       console.log("Playing");
     } else if (count2 === 1) {
       pauseAudio();
+      playBtn2.removeClass("fas fa-pause");
+      playBtn2.addClass("fas fa-play");
       console.log("Stopping");
     }
 
@@ -240,9 +244,13 @@ $(document).ready(function () {
   playBtn3.on("click", function () {
     if (count3 === 0) {
       playAudio();
-      console.log("Playing" );
+      playBtn3.removeClass("fas fa-play");
+      playBtn3.addClass("fas fa-pause");
+      console.log("Playing");
     } else if (count3 === 1) {
       pauseAudio();
+      playBtn3.removeClass("fas fa-pause");
+      playBtn3.addClass("fas fa-play");
       console.log("Stopping");
     }
 
@@ -258,14 +266,17 @@ $(document).ready(function () {
           audio3.pause();
     };
   });
-    
 
   playBtn4.on("click", function () {
     if (count4 === 0) {
       playAudio();
+      playBtn4.removeClass("fas fa-play");
+      playBtn4.addClass("fas fa-pause");
       console.log("Playing");
     } else if (count4 === 1) {
       pauseAudio();
+      playBtn4.removeClass("fas fa-pause");
+      playBtn4.addClass("fas fa-play");
       console.log("Stopping");
     }
 
