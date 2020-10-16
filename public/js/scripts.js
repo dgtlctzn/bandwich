@@ -9,7 +9,13 @@ $(document).ready(function () {
   const newProjectEl = $("#new-project");
 
   // click events on the big record/pause/stop buttons
-  mainRecordEl.on("click", startRecord);
+  mainRecordEl.on("click", function() {
+    if (track) {
+      startRecord();
+    } else {
+      alert("Please record enable one of the tracks!")
+    }
+  });
   mainStopEl.on("click", stopRecord);
   mainPauseEl.on("click", pauseRecord);
 
@@ -18,6 +24,7 @@ $(document).ready(function () {
   let gumStream;
   let rec;
   let input;
+  let track;
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
 
@@ -119,9 +126,20 @@ $(document).ready(function () {
         audio: JSON.stringify(base64data),
         path: fileName,
         id: $("#proj-name").data("id"),
+        track: track
       });
     };
   }
+
+  let switchStatus = false;
+  $(".check").on("change", function () {
+    if ($(this).is(":checked")) {
+      switchStatus = $(this).is(":checked");
+      track = $(this).data("track");
+    } else {
+      switchStatus = $(this).is(":checked");
+    }
+  });
 
   // When new project button is clicked it sends user info (IP adress at some point...)
   // Promise is a reassign for the created project

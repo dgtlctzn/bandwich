@@ -15,6 +15,10 @@ module.exports = function (app) {
   });
 
   app.get("/workstation/:id", (req, res) => {
+    let track1;
+    let track2;
+    let track3;
+    let track4;
     console.log("this is req.params.id: " + req.params.id);
     db.Project.findOne({
       where: {
@@ -23,6 +27,7 @@ module.exports = function (app) {
       include: db.Audiofile,
     }).then((project) => {
       for (let file of project.Audiofiles) {
+        console.log("This is my track number: " + file.track)
         wav = new WaveFile();
         const wavData = file.audiotext;
         fs.writeFile(
@@ -33,8 +38,20 @@ module.exports = function (app) {
           }
         );
         file.path = `audio/audio${file.id}`;
+        if (file.track === 1) {
+          track1 = file.path;
+        } else if (file.track === 2) {
+          track2 = file.path;
+        } else if (file.track === 3) {
+          track3 = file.path;
+        } else if (file.track === 4) {
+          track4 = file.path;
+        }
       }
-      res.render("workstation", { project: project });
+      console.log(track1)
+      console.log(track2)
+      // console.log(project.Audiofiles.track1)
+      res.render("workstation", { project: project, track1: track1, track2: track2, track3: track3, track4: track4});
     });
   });
 };
