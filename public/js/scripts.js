@@ -5,7 +5,7 @@ $(document).ready(function () {
   const mainStopEl = $("#main-stop");
   const mainPauseEl = $("#main-pause");
   const saveTrackEl = $("#name-input");
-  const editTrackEl = $("#new-name")
+  const editTrackEl = $("#new-name");
   const newProjectEl = $("#new-project");
 
   // click events on the big record/pause/stop buttons
@@ -95,7 +95,7 @@ $(document).ready(function () {
       .then(function (response) {
         console.log(response);
         // sets an interval before reloading page to allow big POST request
-        setTimeout(function() {
+        setTimeout(function () {
           location.reload();
         }, 3000);
       })
@@ -118,52 +118,52 @@ $(document).ready(function () {
         // contents: req.body.audio and req.body.file
         audio: JSON.stringify(base64data),
         path: fileName,
-        id: $("#proj-name").data("id")
+        id: $("#proj-name").data("id"),
       });
     };
   }
 
   // When new project button is clicked it sends user info (IP adress at some point...)
   // Promise is a reassign for the created project
-  newProjectEl.on("click", function() {
+  newProjectEl.on("click", function () {
     $.ajax("/api/project", {
       type: "POST",
-      data: "userIpAddress"
-    }).then(function(project) {
+      data: "userIpAddress",
+    }).then(function (project) {
       location.assign("/workstation/" + project.id);
     });
   });
 
-  saveTrackEl.on("click", function() {
+  saveTrackEl.on("click", function () {
     console.log(this.children[0].innerHTML);
     var currentTitle = this.children[0].innerHTML;
     $("#proj-name").hide();
     $("#new-name").show();
     $("#new-name").val(currentTitle);
     $("#new-name").focus();
-  })
+  });
 
-  editTrackEl.on("blur", function() {
+  editTrackEl.on("blur", function () {
     $("#new-name").hide();
     $("#proj-name").show();
-  })
+  });
   // when a user hits the save button it captures the text in the form and posts the song name
   // the post route in api-routes.js creates a new project in the database
-  saveTrackEl.on("submit", function(event) {
-    event.preventDefault()
+  saveTrackEl.on("submit", function (event) {
+    event.preventDefault();
 
     const projectName = {
       name: $("#new-name").val(),
-      id: $("#proj-name").data("id")
-    }
+      id: $("#proj-name").data("id"),
+    };
 
     $.ajax("/api/project", {
       type: "PUT",
-      data: projectName
-    }).then(function(project) {
+      data: projectName,
+    }).then(function (project) {
       location.assign("/workstation/" + project);
     });
-  })
+  });
   // PLAY BTN FOR EACH TRACK
   // ========================================================
   const playBtn1 = $("#playBtn1");
@@ -201,18 +201,20 @@ $(document).ready(function () {
       console.log("Stopping");
     }
 
-    count1 += 1 
+    count1 += 1;
 
-    if (count1 === playPauseReset)
-        count1 = 0
+    if (count1 === playPauseReset) count1 = 0;
 
     function playAudio() {
-          audio1.play();
-          
-    };
+      audio1.play();
+      if (audio1.ended) {
+        playBtn1.removeClass("fas fa-pause");
+        playBtn1.addClass("fas fa-play");
+      }
+    }
     function pauseAudio() {
-          audio1.pause();
-    };
+      audio1.pause();
+    }
   });
 
   playBtn2.on("click", function () {
@@ -228,17 +230,18 @@ $(document).ready(function () {
       console.log("Stopping");
     }
 
-    count2 += 1 
+    count2 += 1;
 
-    if (count2 === playPauseReset)
-        count2 = 0
+    if (count2 === playPauseReset) count2 = 0;
 
     function playAudio() {
-          audio2.play();
-    };
+      audio2.play();
+      playBtn1.removeClass("fas fa-pause");
+      playBtn1.addClass("fas fa-play");
+    }
     function pauseAudio() {
-          audio2.pause();
-    };
+      audio2.pause();
+    }
   });
 
   playBtn3.on("click", function () {
@@ -254,17 +257,18 @@ $(document).ready(function () {
       console.log("Stopping");
     }
 
-    count3 += 1 
+    count3 += 1;
 
-    if (count3 === playPauseReset)
-        count3 = 0
+    if (count3 === playPauseReset) count3 = 0;
 
     function playAudio() {
-          audio3.play();
-    };
+      audio3.play();
+      playBtn1.removeClass("fas fa-pause");
+      playBtn1.addClass("fas fa-play");
+    }
     function pauseAudio() {
-          audio3.pause();
-    };
+      audio3.pause();
+    }
   });
 
   playBtn4.on("click", function () {
@@ -280,20 +284,21 @@ $(document).ready(function () {
       console.log("Stopping");
     }
 
-    count4 += 1 
+    count4 += 1;
 
-    if (count4 === playPauseReset)
-        count4 = 0
+    if (count4 === playPauseReset) count4 = 0;
 
     function playAudio() {
-          audio4.play();
-    };
+      audio4.play();
+      playBtn1.removeClass("fas fa-pause");
+      playBtn1.addClass("fas fa-play");
+    }
     function pauseAudio() {
-          audio4.pause();
-    };
+      audio4.pause();
+    }
   });
 
-  $(".home").on("click", function(){
+  $(".home").on("click", function () {
     location.assign("/");
-  })
+  });
 });
