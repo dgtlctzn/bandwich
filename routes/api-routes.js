@@ -44,7 +44,7 @@ module.exports = function (app) {
       randomString = randomString + randomWord + "-";
     }
     const temporaryName = randomString.slice(0, -1);
-    
+
     // creates a database,
     db.Project.create({
       projectName: temporaryName,
@@ -77,12 +77,27 @@ module.exports = function (app) {
     });
   });
 
+  app.delete("/api/audio/:id", (req, res) => {
+    console.log(req.params.id);
+    db.Audiofile.destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+      .then(() => {
+        res.end();
+      })
+      .catch((err) => {
+        if (err) throw err;
+      });
+  });
+
   app.post("/api/audio", (req, res) => {
     db.Audiofile.create({
       audiotext: req.body.audio,
       path: req.body.path,
       ProjectId: req.body.id,
-      track: req.body.track
+      track: req.body.track,
     })
       .then(() => {
         res.end();
