@@ -18,6 +18,7 @@ $(document).ready(function () {
   let gumStream;
   let rec;
   let input;
+  let track;
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
 
@@ -122,6 +123,21 @@ $(document).ready(function () {
       });
     };
   }
+
+  let switchStatus = false;
+  $(".check").on("change", function () {
+    if ($(this).is(":checked")) {
+      switchStatus = $(this).is(":checked");
+      console.log(switchStatus);
+      track = $(this).data("track");
+      console.log(track);
+      // alert(switchStatus); // To verify
+    } else {
+      switchStatus = $(this).is(":checked");
+      console.log(switchStatus);
+      // alert(switchStatus); // To verify
+    }
+  });
 
   // When new project button is clicked it sends user info (IP adress at some point...)
   // Promise is a reassign for the created project
