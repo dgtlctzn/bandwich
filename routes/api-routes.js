@@ -22,15 +22,19 @@ const curatedRandomWords = [
 ];
 
 module.exports = function (app) {
-  app.get("/api/project/:name", (req, res) => {
-    db.Project.findOne({
-      where: {
-        projectName: req.params.name,
-      },
-    }).then((project) => {
-      res.render("workstation", { project: project });
-    });
+  app.get("/api/projects/:name", (req, res) => {
+    if (req.params.name) {
+      db.Project.findOne({
+        where: {
+          projectName: req.params.name,
+        },
+      }).then((project) => {
+        
+        res.json(project);
+      })
+    } 
   });
+
 
   app.post("/api/project", (req, res) => {
     // const temporaryName = "Project " + Date.now(); // date.now generates a unique string of numbers for the project name
