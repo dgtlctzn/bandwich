@@ -1,11 +1,7 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD:Config/config.json
     "password": "s0mUchdAt@",
-=======
-    "password": "katsu",
->>>>>>> main:config/config.json
     "database": "bandwichDB",
     "host": "127.0.0.1",
     "dialect": "mysql"

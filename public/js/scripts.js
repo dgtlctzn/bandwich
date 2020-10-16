@@ -188,6 +188,8 @@ $(document).ready(function () {
   const audioSrc4 = audioId4.attr("src");
   const audio4 = new Audio(audioSrc4);
 
+  
+
   playBtn1.on("click", function () {
     if (count1 === 0) {
       playAudio();
@@ -207,10 +209,11 @@ $(document).ready(function () {
 
     function playAudio() {
       audio1.play();
-      if (audio1.ended) {
+      audio1.onended = function() {
         playBtn1.removeClass("fas fa-pause");
         playBtn1.addClass("fas fa-play");
-      }
+        count1 = 0;
+      };
     }
     function pauseAudio() {
       audio1.pause();
@@ -236,8 +239,11 @@ $(document).ready(function () {
 
     function playAudio() {
       audio2.play();
-      playBtn1.removeClass("fas fa-pause");
-      playBtn1.addClass("fas fa-play");
+      audio2.onended = function() {
+        playBtn2.removeClass("fas fa-pause");
+        playBtn2.addClass("fas fa-play");
+        count2 = 0;
+      };
     }
     function pauseAudio() {
       audio2.pause();
@@ -263,8 +269,11 @@ $(document).ready(function () {
 
     function playAudio() {
       audio3.play();
-      playBtn1.removeClass("fas fa-pause");
-      playBtn1.addClass("fas fa-play");
+      audio3.onended = function() {
+        playBtn3.removeClass("fas fa-pause");
+        playBtn3.addClass("fas fa-play");
+        count3 = 0;
+      };
     }
     function pauseAudio() {
       audio3.pause();
@@ -290,8 +299,11 @@ $(document).ready(function () {
 
     function playAudio() {
       audio4.play();
-      playBtn1.removeClass("fas fa-pause");
-      playBtn1.addClass("fas fa-play");
+      audio4.onended = function() {
+        playBtn4.removeClass("fas fa-pause");
+        playBtn4.addClass("fas fa-play");
+        count4 = 0;
+      };
     }
     function pauseAudio() {
       audio4.pause();
