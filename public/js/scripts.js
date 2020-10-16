@@ -191,9 +191,13 @@ $(document).ready(function () {
   playBtn1.on("click", function () {
     if (count1 === 0) {
       playAudio();
+      playBtn1.removeClass("fas fa-play");
+      playBtn1.addClass("fas fa-pause");
       console.log("Playing");
     } else if (count1 === 1) {
       pauseAudio();
+      playBtn1.removeClass("fas fa-pause");
+      playBtn1.addClass("fas fa-play");
       console.log("Stopping");
     }
 
@@ -204,6 +208,7 @@ $(document).ready(function () {
 
     function playAudio() {
           audio1.play();
+          
     };
     function pauseAudio() {
           audio1.pause();
