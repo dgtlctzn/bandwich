@@ -25,11 +25,14 @@ module.exports = function (app) {
       for (let file of project.Audiofiles) {
         wav = new WaveFile();
         const wavData = file.audiotext;
-        fs.writeFileSync(
-          "./public/audio/" + file.path,
-          Buffer.from(wavData.replace("data:audio/wav;base64,", ""), "base64")
+        fs.writeFile(
+          `./public/audio/audio${file.id}`,
+          Buffer.from(wavData.replace("data:audio/wav;base64,", ""), "base64"),
+          function () {
+            console.log("New audio posted!");
+          }
         );
-        file.path = "audio/" + file.path;
+        file.path = `audio/audio${file.id}`;
       }
       res.render("workstation", { project: project });
     });
