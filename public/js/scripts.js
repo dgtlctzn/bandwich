@@ -9,7 +9,13 @@ $(document).ready(function () {
   const newProjectEl = $("#new-project");
 
   // click events on the big record/pause/stop buttons
-  mainRecordEl.on("click", startRecord);
+  mainRecordEl.on("click", function() {
+    if (track) {
+      startRecord();
+    } else {
+      alert("Please record enable one of the tracks!")
+    }
+  });
   mainStopEl.on("click", stopRecord);
   mainPauseEl.on("click", pauseRecord);
 
