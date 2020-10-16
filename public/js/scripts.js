@@ -9,11 +9,11 @@ $(document).ready(function () {
   const newProjectEl = $("#new-project");
 
   // click events on the big record/pause/stop buttons
-  mainRecordEl.on("click", function() {
+  mainRecordEl.on("click", function () {
     if (track) {
       startRecord();
     } else {
-      alert("Please record enable one of the tracks!")
+      alert("Please record enable one of the tracks!");
     }
   });
   mainStopEl.on("click", stopRecord);
@@ -126,7 +126,7 @@ $(document).ready(function () {
         audio: JSON.stringify(base64data),
         path: fileName,
         id: $("#proj-name").data("id"),
-        track: track
+        track: track,
       });
     };
   }
@@ -206,8 +206,6 @@ $(document).ready(function () {
   const audioSrc4 = audioId4.attr("src");
   const audio4 = new Audio(audioSrc4);
 
-  
-
   playBtn1.on("click", function () {
     if (count1 === 0) {
       playAudio();
@@ -227,7 +225,7 @@ $(document).ready(function () {
 
     function playAudio() {
       audio1.play();
-      audio1.onended = function() {
+      audio1.onended = function () {
         playBtn1.removeClass("fas fa-pause");
         playBtn1.addClass("fas fa-play");
         count1 = 0;
@@ -257,7 +255,7 @@ $(document).ready(function () {
 
     function playAudio() {
       audio2.play();
-      audio2.onended = function() {
+      audio2.onended = function () {
         playBtn2.removeClass("fas fa-pause");
         playBtn2.addClass("fas fa-play");
         count2 = 0;
@@ -287,7 +285,7 @@ $(document).ready(function () {
 
     function playAudio() {
       audio3.play();
-      audio3.onended = function() {
+      audio3.onended = function () {
         playBtn3.removeClass("fas fa-pause");
         playBtn3.addClass("fas fa-play");
         count3 = 0;
@@ -317,7 +315,7 @@ $(document).ready(function () {
 
     function playAudio() {
       audio4.play();
-      audio4.onended = function() {
+      audio4.onended = function () {
         playBtn4.removeClass("fas fa-pause");
         playBtn4.addClass("fas fa-play");
         count4 = 0;
@@ -330,5 +328,81 @@ $(document).ready(function () {
 
   $(".home").on("click", function () {
     location.assign("/");
+  });
+
+  $("#destroyBtn1").on("click", function () {
+    let gettingID = audioId1.attr("src");
+    gettingID = gettingID.split("");
+    gettingID = parseFloat(gettingID.pop());
+
+    audioId1.attr("src", "/");
+
+    $.ajax({
+      url: `/api/audio/${gettingID}`,
+      method: "DELETE",
+      success: function () {
+        setTimeout(function () {
+          location.reload();
+        }, 1000);
+        console.log(111);
+      },
+    });
+  });
+
+  $("#destroyBtn2").on("click", function () {
+    let gettingID = audioId2.attr("src");
+    gettingID = gettingID.split("");
+    gettingID = parseFloat(gettingID.pop());
+
+    audioId2.attr("src", "/");
+
+    $.ajax({
+      url: `/api/audio/${gettingID}`,
+      method: "DELETE",
+      success: function () {
+        setTimeout(function () {
+          location.reload();
+        }, 1000);
+        console.log(111);
+      },
+    });
+  });
+
+  $("#destroyBtn3").on("click", function () {
+    let gettingID = audioId3.attr("src");
+    gettingID = gettingID.split("");
+    gettingID = parseFloat(gettingID.pop());
+
+    audioId3.attr("src", "/");
+
+    $.ajax({
+      url: `/api/audio/${gettingID}`,
+      method: "DELETE",
+      success: function () {
+        setTimeout(function () {
+          location.reload();
+        }, 1000);
+        console.log(111);
+      },
+    });
+  });
+
+  $("#destroyBtn4").on("click", function () {
+    let gettingID = audioId4.attr("src");
+    gettingID = gettingID.split("");
+    gettingID = parseFloat(gettingID.pop());
+
+    audioId4.attr("src", "/");
+
+    $.ajax({
+      url: `/api/audio/${gettingID}`,
+      method: "DELETE",
+      success: function () {
+        setTimeout(function () {
+          location.reload();
+        }, 1000);
+        console.log(111);
+      },
+    });
   });
 });
