@@ -70,6 +70,7 @@ $(document).ready(function () {
 
   function pauseRecord() {
     console.log("Recording paused", rec.recording);
+    recIcon.removeClass("pulsing");
     if (rec.recording) {
       // pause
       rec.stop();
@@ -83,11 +84,14 @@ $(document).ready(function () {
 
   function stopRecord() {
     console.log("Recording stopped");
+    recIcon.removeClass("pulsing");
+    recIcon.removeAttr("id","glow");
+    
     //disable the stop button, enable the record too allow for new recordings
     mainRecordEl.disabled = false;
     mainStopEl.disabled = true;
     mainPauseEl.disabled = true;
-    $('#rec-icon').removeAttr("id","glow");
+    
     // stops the recording and gets the track
     rec.stop();
     gumStream.getAudioTracks()[0].stop();
@@ -139,10 +143,10 @@ $(document).ready(function () {
     if ($(this).is(":checked")) {
       switchStatus = $(this).is(":checked");
       track = $(this).data("track");
-      $('#rec-icon').attr("id","glow");
+      recIcon.attr("id","glow");
     } else {
       switchStatus = $(this).is(":checked");
-      $('#rec-icon').removeAttr("id","glow");
+      recIcon.removeAttr("id","glow");
     }
   });
 

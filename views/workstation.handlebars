@@ -27,7 +27,8 @@
     <div class="track ui-block" id="track-one">
       <div class="title-bar">
         <h4>One</h4>
-        <button id="destroyBtn1 clear">CLEAR</button>
+        <i class="fas fa-trash-alt" id="destroyBtn1"></i>
+        {{!-- <button id="destroyBtn1">CLEAR</button> --}}
       </div>
       <div class="track-controls">
         <i class="fas fa-play-circle play trk-ctl-btn" id="playBtn1" data-id="{{this.id}}">
@@ -46,7 +47,8 @@
     <div class="track ui-block" id="track-two">
       <div class="title-bar">
         <h4>Two</h4>
-        <button id="destroyBtn2 clear">CLEAR</button>
+        <i class="fas fa-trash-alt" id="destroyBtn2"></i>
+        {{!-- <button id="destroyBtn2">CLEAR</button> --}}
       </div>
       <div class="track-controls">
         <i class="fas fa-play-circle play trk-ctl-btn" id="playBtn2" data-id="{{this.id}}">
@@ -65,7 +67,8 @@
     <div class="track ui-block" id="track-three">
       <div class="title-bar">
         <h4>Three</h4>
-        <button id="destroyBtn3 clear">CLEAR</button>
+        <i class="fas fa-trash-alt" id="destroyBtn3"></i>
+        {{!-- <button id="destroyBtn3"><i class="fas fa-trash-alt"></i>CLEAR</button> --}}
       </div>
       <div class="track-controls">
         <i class="fas fa-play-circle play trk-ctl-btn" id="playBtn3" data-id="{{this.id}}">
@@ -84,15 +87,16 @@
     <div class="track ui-block" id="track-four">
       <div class="title-bar">
         <h4>Four</h4>
-        <button id="destroyBtn4 clear" style="display: none">CLEAR</button>
+        <i class="fas fa-trash-alt" id="destroyBtn4" style="display: none"></i>
+        {{!-- <button id="destroyBtn4" style="display: none"></i>CLEAR</button> --}}
       </div>
       <div class="track-controls">
-        <i class="fas fa-circle trk-ctl-btn" id="playBtn4" data-id="{{this.id}}">
+        {{!-- <i class="fas fa-play-circle trk-ctl-btn" id="playBtn4" data-id="{{this.id}}">
           <audio id="audio4" class="play-audio" src="/{{track4}}">
             Here
           </audio>
-        </i>
-        <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
+        </i> --}}
+        <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" style="display: none"/>
         <label class="switch">
           <input class="check" type="checkbox" value="false" data-track="4" />
           <span class="slider round"></span>
@@ -100,64 +104,6 @@
         
       </div>
     </div>
-
-    {{!-- <div class="track ui-block" id="track-two">
-      Track Two
-      <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
-      <div class="track-controls">
-        <i class="fas fa-play play trk-ctl-btn" id="playBtn2" data-id="{{this.id}}">
-          <audio id="audio2" class="play-audio" src="/{{track2}}">
-            Here
-          </audio>
-        </i>
-        <label class="switch">
-          <input class="check" type="checkbox" value="false" data-track="2" />
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <button id="destroyBtn2">DELETE</button>
-    </div>
-
-    <div class="track ui-block" id="track-three">
-      Track Three
-      <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
-      <div class="track-controls">
-        <i class="fas fa-play play trk-ctl-btn" id="playBtn3" data-id="{{this.id}}">
-          <audio id="audio3" class="play-audio" src="/{{track3}}">
-            Here
-          </audio>
-        </i>
-        <label class="switch">
-          <input class="check" type="checkbox" value="false" data-track="3" />
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <button id="destroyBtn3">DELETE</button>
-    </div>
-
-    <div class="track ui-block" id="track-four">
-      Track Four
-      <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
-      <div class="track-controls">
-        <i class="fas fa-play play trk-ctl-btn" id="playBtn4" data-id="{{this.id}}">
-          <audio id="audio4" class="play-audio" src="/{{track4}}">
-            Here
-          </audio>
-        </i>
-        <label class="switch">
-          <input class="check" type="checkbox" value="false" data-track="4" />
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <button id="destroyBtn4">DELETE</button>
-    </div> --}}
-
-    {{!-- <div class="master-controls ui-block">
-      <i class="fas fa-play-circle"></i>
-      <i class="fas fa-pause-circle" id="main-pause"></i>
-      <i class="fas fa-stop-circle" id="main-stop"></i>
-      <i class="fas fa-circle" id="main-record"></i>
-    </div> --}}
 
     <div class="master-controls ui-block">
       <div class="mstr-ctl-btn" id="main-play">
