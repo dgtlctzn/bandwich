@@ -7,6 +7,7 @@ $(document).ready(function () {
   const saveTrackEl = $("#name-input");
   const editTrackEl = $("#new-name");
   const newProjectEl = $("#new-project");
+  const recIcon = $("#rec-icon");
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
@@ -30,6 +31,7 @@ $(document).ready(function () {
 
   function startRecord() {
     console.log("record!");
+    recIcon.addClass("pulsing");
     const audioContext = new AudioContext();
 
     const constraints = {
@@ -85,6 +87,7 @@ $(document).ready(function () {
     mainRecordEl.disabled = false;
     mainStopEl.disabled = true;
     mainPauseEl.disabled = true;
+    $('#rec-icon').removeAttr("id","glow");
     // stops the recording and gets the track
     rec.stop();
     gumStream.getAudioTracks()[0].stop();
@@ -136,8 +139,10 @@ $(document).ready(function () {
     if ($(this).is(":checked")) {
       switchStatus = $(this).is(":checked");
       track = $(this).data("track");
+      $('#rec-icon').attr("id","glow");
     } else {
       switchStatus = $(this).is(":checked");
+      $('#rec-icon').removeAttr("id","glow");
     }
   });
 

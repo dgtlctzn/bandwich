@@ -56,7 +56,7 @@
         </i>
         <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
         <label class="switch">
-          <input class="check" type="checkbox" value="false" data-track="1" />
+          <input class="check" type="checkbox" value="false" data-track="2" />
           <span class="slider round"></span>
         </label>
       </div>
@@ -75,7 +75,7 @@
         </i>
         <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
         <label class="switch">
-          <input class="check" type="checkbox" value="false" data-track="1" />
+          <input class="check" type="checkbox" value="false" data-track="3" />
           <span class="slider round"></span>
         </label>
       </div>
@@ -84,19 +84,20 @@
     <div class="track ui-block" id="track-four">
       <div class="title-bar">
         <h4>Four</h4>
-        <button id="destroyBtn4 clear">CLEAR</button>
+        <button id="destroyBtn4 clear" style="display: none">CLEAR</button>
       </div>
       <div class="track-controls">
-        <i class="fas fa-play-circle play trk-ctl-btn" id="playBtn4" data-id="{{this.id}}">
+        <i class="fas fa-circle trk-ctl-btn" id="playBtn4" data-id="{{this.id}}">
           <audio id="audio4" class="play-audio" src="/{{track4}}">
             Here
           </audio>
         </i>
         <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
         <label class="switch">
-          <input class="check" type="checkbox" value="false" data-track="1" />
+          <input class="check" type="checkbox" value="false" data-track="4" />
           <span class="slider round"></span>
         </label>
+        
       </div>
     </div>
 

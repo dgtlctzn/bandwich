@@ -46,6 +46,7 @@ input[type=range]{
 
 h4 {
   margin: 0;
+  letter-spacing: .2px;
 }
 
 
@@ -125,10 +126,10 @@ button {
   margin-left: 8px;
 }
 
-.fa-circle,
+/* .fa-circle,
 .fa-square {
   color: #FF4A4A;
-}
+} */
 
 
 .button {
@@ -182,6 +183,29 @@ button {
     -webkit-transition: .4s;
     transition: .4s;
   }
+
+  #glow {
+    color: rgb(255, 74, 74);
+  }
+
+  .pulsing {
+    animation: pulse 2s infinite;
+    color: rgb(255, 74, 74);
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(0.9);
+    }
+    70% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(0.9);
+    }
+  }
+
+
   
   .slider:before {
     position: absolute;
@@ -196,11 +220,11 @@ button {
   }
   
   input:checked + .slider {
-    background-color: #006AFF;
+    background-color: rgb(255, 74, 74);
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #006AFF;
+    box-shadow: 0 0 1px rgb(255, 74, 74);
   }
   
   input:checked + .slider:before {
