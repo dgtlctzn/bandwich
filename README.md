@@ -39,15 +39,16 @@ Below is a image of how the workstation will look.
 
 To view other songs, go to the song directory. The user can look through all the songs in a list or if they know the title of the project they want to work on, the user can search the title in the search bar. They will then be redirected to a page that either has a link to the desired project, or if the search doesn't exist they will be redirected to a no results page.
 
-Below is a image of how the song directory will look.
-![Example directory]()
+<!-- Below is a image of how the song directory will look.
+![Example directory]() -->
 
 
 ## Credits
 
 * [Node.js](https://nodejs.org/en/)
 * [MySQL](https://www.npmjs.com/package/mysql)
-* []()
+* [Recorder.js](https://www.npmjs.com/package/recorder-js)
+
 
 
 ## License
