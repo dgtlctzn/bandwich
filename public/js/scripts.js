@@ -11,7 +11,7 @@ $(document).ready(function () {
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
     if (track) {
-      startRecord();
+      startRecord(playAll);
     } else {
       alert("Please record enable one of the tracks!");
     }
@@ -28,7 +28,7 @@ $(document).ready(function () {
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
 
-  function startRecord() {
+  function startRecord(cb) {
     console.log("record!");
     const audioContext = new AudioContext();
 
@@ -55,10 +55,10 @@ $(document).ready(function () {
           numChannels: 1,
         });
         //start the recording process
-        playAll();
+        cb();
         setTimeout(function () {
           rec.record();
-        }, 150);
+        }, 100);
         console.log("Recording started");
       })
       .catch(function (err) {
