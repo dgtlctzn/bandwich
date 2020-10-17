@@ -402,7 +402,7 @@ $("#projectsearch-btn").on("click", function() {
     console.log(newID);
     // gettingID = parseFloat(gettingID.pop());
 
-    audioId4.attr("src", "/");
+    audioId1.attr("src", "/");
 
     $.ajax({
       url: `/api/audio/${newID}`,
@@ -431,7 +431,7 @@ $("#projectsearch-btn").on("click", function() {
     console.log(newID);
     // gettingID = parseFloat(gettingID.pop());
 
-    audioId4.attr("src", "/");
+    audioId2.attr("src", "/");
 
     $.ajax({
       url: `/api/audio/${newID}`,
@@ -460,7 +460,7 @@ $("#projectsearch-btn").on("click", function() {
     console.log(newID);
     // gettingID = parseFloat(gettingID.pop());
 
-    audioId4.attr("src", "/");
+    audioId3.attr("src", "/");
 
     $.ajax({
       url: `/api/audio/${newID}`,
