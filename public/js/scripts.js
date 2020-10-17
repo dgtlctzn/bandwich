@@ -55,7 +55,10 @@ $(document).ready(function () {
           numChannels: 1,
         });
         //start the recording process
-        rec.record();
+        playAll();
+        setTimeout(function () {
+          rec.record();
+        }, 150);
         console.log("Recording started");
       })
       .catch(function (err) {
@@ -214,6 +217,7 @@ $("#projectsearch-btn").on("click", function() {
 
   // PLAY BTN FOR EACH TRACK
   // ========================================================
+  const mainPlayEl = $("#main-play");
   const playBtn1 = $("#playBtn1");
   const playBtn2 = $("#playBtn2");
   const playBtn3 = $("#playBtn3");
@@ -235,6 +239,29 @@ $("#projectsearch-btn").on("click", function() {
   const audio3 = new Audio(audioSrc3);
   const audioSrc4 = audioId4.attr("src");
   const audio4 = new Audio(audioSrc4);
+
+  function playAll() {
+    if (audioSrc1 !== "/") {
+      audio1.load();
+      audio1.play();
+    }
+    if (audioSrc2 !== "/") {
+      audio2.load();
+      audio2.play();
+    }
+    if (audioSrc3 !== "/") {
+      audio3.load();
+      audio3.play();
+    }
+    if (audioSrc4 !== "/") {
+      audio4.load();
+      audio4.play();
+    }
+  }
+
+  mainPlayEl.on("click", function () {
+    playAll();
+  });
 
   playBtn1.on("click", function () {
     if (count1 === 0) {
