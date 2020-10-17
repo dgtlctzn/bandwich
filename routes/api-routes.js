@@ -29,7 +29,6 @@ module.exports = function (app) {
           projectName: req.params.name,
         },
       }).then((project) => {
-        
         res.json(project);
       })
     } 

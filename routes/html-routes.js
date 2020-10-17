@@ -23,25 +23,25 @@ module.exports = function (app) {
   });
   
   app.get("/projects/:name", (req, res) => {
-    console.log("inside", req.params.name)
     if (req.params.name) {
       db.Project.findOne({
         where: {
           projectName: req.params.name,
         },
       }).then((project) => {
-        console.log(project)
-        res.render("specific-song", project.dataValues);
+        if (project !== null) {
+          res.render("specific-song", project.dataValues)
+        } else {
+          res.render("no-results")
+        }
+          
       })
-    } else {
-      res.render("no-results")
-    }
-  });
+    } 
+  })
 
   app.get("/", (req, res) => {
     res.render("index");
   });
 };
-
 
 

@@ -187,6 +187,8 @@ $("#projectsearch-btn").on("click", function() {
     // if the data is not there, then return an error message
     if (data) {
       window.location.assign("/projects/" + searchedProject)
+    } else {
+      window.location.assign("/projects/no-results")
     }
   });
 });
