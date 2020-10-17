@@ -4,11 +4,13 @@ header,
 .track,
 .master-controls,
 .track-controls,
-#project-settings {
+#project-settings,
+#intro-page {
     display: flex;
 }
 
-#project-settings {
+#project-settings,
+#intro-page {
     align-items: center;
     justify-content: center;
 }
@@ -28,7 +30,8 @@ header,
     align-self: center;
 }
 
-.track {
+.track,
+#intro-page {
     flex-direction: column;
 }
 
