@@ -25,6 +25,7 @@ $(document).ready(function () {
   let rec;
   let input;
   let track;
+  let meter;
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
 
@@ -49,6 +50,7 @@ $(document).ready(function () {
         gumStream = stream;
 
         input = audioContext.createMediaStreamSource(stream);
+
         // recorder.js constructor
         rec = new Recorder(input, {
           // mono sound
@@ -59,7 +61,14 @@ $(document).ready(function () {
         setTimeout(function () {
           rec.record();
         }, 150);
+
         console.log("Recording started");
+
+        // creates the audio level meter
+        meter = createAudioMeter(audioContext);
+        input.connect(meter);
+        // kick off the visual updating
+        drawLoop();
       })
       .catch(function (err) {
         //enable the record button if getUserMedia() fails
@@ -134,6 +143,70 @@ $(document).ready(function () {
     };
   }
 
+  // the following three functions are forked with permission from cwilso/volume-meter
+  function createAudioMeter(audioContext, clipLevel, averaging, clipLag) {
+    var processor = audioContext.createScriptProcessor(512);
+    processor.onaudioprocess = volumeAudioProcess;
+    processor.clipping = false;
+    processor.lastClip = 0;
+    processor.volume = 0;
+    processor.clipLevel = clipLevel || 0.98;
+    processor.averaging = averaging || 0.95;
+    processor.clipLag = clipLag || 750;
+
+    processor.connect(audioContext.destination);
+
+    processor.checkClipping = function () {
+      if (!this.clipping) return false;
+      if (this.lastClip + this.clipLag < window.performance.now())
+        this.clipping = false;
+      return this.clipping;
+    };
+
+    processor.shutdown = function () {
+      this.disconnect();
+      this.onaudioprocess = null;
+    };
+
+    return processor;
+  }
+
+  function volumeAudioProcess(event) {
+    var buf = event.inputBuffer.getChannelData(0);
+    var bufLength = buf.length;
+    var sum = 0;
+    var x;
+
+    for (var i = 0; i < bufLength; i++) {
+      x = buf[i];
+      if (Math.abs(x) >= this.clipLevel) {
+        this.clipping = true;
+        this.lastClip = window.performance.now();
+      }
+      sum += x * x;
+    }
+
+    var rms = Math.sqrt(sum / bufLength);
+
+    this.volume = Math.max(rms, this.volume * this.averaging);
+  }
+
+  function drawLoop(time) {
+    let WIDTH = 50;
+    let HEIGHT = 500;
+
+    const canvas = document.getElementById("myCanvas" + track).getContext("2d");
+
+    canvas.clearRect(0, 0, WIDTH, HEIGHT);
+
+    if (meter.checkClipping()) canvas.fillStyle = "red";
+    else canvas.fillStyle = "green";
+
+    canvas.fillRect(0, 0, WIDTH, meter.volume * HEIGHT * 1.4);
+
+    rafID = window.requestAnimationFrame(drawLoop);
+  }
+
   let switchStatus = false;
   $(".check").on("change", function () {
     if ($(this).is(":checked")) {
@@ -184,36 +257,34 @@ $(document).ready(function () {
     }).then(function (project) {
       location.assign("/workstation/" + project);
     });
-  })
+  });
 
   // when user hits the search-btn
-$("#projectsearch-btn").on("click", function() {
-  // save the character they typed into the character-search input
-  var searchedProject = $("#projects-search")
-    .val()
-    .trim();
-  console.log("click works")
-  console.log(searchedProject)
-  // Using a RegEx Pattern to remove spaces from searchedCharacter
-  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  searchedProject = searchedProject.replace(/\s+/g, "").toLowerCase();
+  $("#projectsearch-btn").on("click", function () {
+    // save the character they typed into the character-search input
+    var searchedProject = $("#projects-search").val().trim();
+    console.log("click works");
+    console.log(searchedProject);
+    // Using a RegEx Pattern to remove spaces from searchedCharacter
+    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+    searchedProject = searchedProject.replace(/\s+/g, "").toLowerCase();
 
-  // run an AJAX GET-request for our servers api,
-  // including the user's character in the url
-  $.get("/api/projects/" + searchedProject, function(data) {
-    // log the data to our console
-    console.log(data);
-    console.log("Get works")
-    // empty to well-section before adding new content
-    $("#results-section").empty();
-    // if the data is not there, then return an error message
-    if (data) {
-      window.location.assign("/projects/" + searchedProject)
-    } else {
-      window.location.assign("/projects/no-results")
-    }
+    // run an AJAX GET-request for our servers api,
+    // including the user's character in the url
+    $.get("/api/projects/" + searchedProject, function (data) {
+      // log the data to our console
+      console.log(data);
+      console.log("Get works");
+      // empty to well-section before adding new content
+      $("#results-section").empty();
+      // if the data is not there, then return an error message
+      if (data) {
+        window.location.assign("/projects/" + searchedProject);
+      } else {
+        window.location.assign("/projects/no-results");
+      }
+    });
   });
-});
 
   // PLAY BTN FOR EACH TRACK
   // ========================================================

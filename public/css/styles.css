@@ -1,7 +1,7 @@
 body {
-    font-family: 'Rubik', sans-serif;
-    color: #EAEAEA;
-    background-color: black;
+  font-family: "Rubik", sans-serif;
+  color: #eaeaea;
+  background-color: black;
 }
 
 /* Home */
@@ -31,7 +31,7 @@ button:hover {
 
 .button {
   background-color: rgb(80, 80, 255); /* Green */
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -47,9 +47,7 @@ button:hover {
   cursor: pointer;
 }
 
-
 /* Workstation */
-
 
 .projectName {
   text-align: center;
@@ -67,13 +65,12 @@ button {
   margin: 24px;
 }
 
-
 .play {
   margin-right: 40px;
 }
 
 .ui-block {
-  background-color: #1F1F1F;
+  background-color: #1f1f1f;
   padding: 20px;
   border-radius: 4px;
 }
@@ -84,28 +81,28 @@ button {
 }
 
 .play:hover {
-cursor: pointer;
+  cursor: pointer;
 }
 
 h1 {
-  text-align: center; 
-  margin-top: 50px; 
-  margin-bottom: 50px; 
-  font-size: 75px
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 75px;
 }
 
-input[type=range]{
+input[type="range"] {
   width: 280px;
 }
 
 input {
-  background-color: #1F1F1F;
+  background-color: #1f1f1f;
 }
 
-input[type=text] {
+input[type="text"] {
   min-width: 100px;
   text-align: center;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   color: white;
   font-size: 1.17em;
   padding: 12px 20px;
@@ -116,70 +113,68 @@ input[type=text] {
   box-sizing: border-box;
 }
 
-input[type=text]:focus {
+input[type="text"]:focus {
   outline: none;
   border: none;
 }
-
-
 
 /* toggle switch */
 
 /* The switch - the box around the slider */
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  input:checked + .slider {
-    background-color: #006AFF;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #006AFF;
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
-  /* Rounded sliders */
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #006aff;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #006aff;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
 .slider.round {
   border-radius: 4px;
 }
@@ -188,28 +183,31 @@ input[type=text]:focus {
   border-radius: 10%;
 }
 
+/* breakpoints */
 
-  /* breakpoints */
-
-  @media only screen and (min-width: 768px) {
-    input[type=range][orient=vertical] {
-        writing-mode: bt-lr; /* IE */
-        -webkit-appearance: slider-vertical; /* WebKit */
-        width: 8px;
-        height: 160px;
-        padding: 0 5px;
-    }
-
-    .master-controls {
-      font-size: 72px;
-    }
-
-    .ui-block {
-      padding: 40px;
-    }
-
-    
-
+@media only screen and (min-width: 768px) {
+  input[type="range"][orient="vertical"] {
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 160px;
+    padding: 0 5px;
   }
 
+  .master-controls {
+    font-size: 72px;
+  }
 
+  .ui-block {
+    padding: 40px;
+  }
+}
+
+.audio-meter {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  background-color: #ccc;
+}
