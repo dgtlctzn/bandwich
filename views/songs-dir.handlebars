@@ -1,11 +1,26 @@
-<h1>All Projects</h1>
+<div id="container">
 
-{{#each project}}
-<a href="/workstation/{{ id }}">
-<p class="projectName">{{ projectName }}</p>
-</a>
-{{/each}}
+  <header>
+    <div>
+      <img src="/img/bw-logo.svg" alt="bandwich logo">
+    </div>
+    <div>
+      <i class="fas fa-home home menu"></i>
+      <i class="fas fa-microphone-alt workstation menu"></i>
+      <i class="fas fa-list songs menu"></i>
+    </div>
+  </header>
 
-<div class="home">
-  <i class="fas fa-home fa-3x"></i>
+  <main>
+    <h1>All Projects</h1>
+
+    {{#each project}}
+    <a href="/workstation/{{ id }}">
+      <p class="projectName">{{ projectName }}</p>
+    </a>
+    {{/each}}
+
+  </main>
+
+
 </div>

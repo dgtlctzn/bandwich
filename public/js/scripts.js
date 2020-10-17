@@ -209,13 +209,13 @@ $(document).ready(function () {
   playBtn1.on("click", function () {
     if (count1 === 0) {
       playAudio();
-      playBtn1.removeClass("fas fa-play");
-      playBtn1.addClass("fas fa-pause");
+      playBtn1.removeClass("fas fa-play-circle");
+      playBtn1.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count1 === 1) {
       pauseAudio();
-      playBtn1.removeClass("fas fa-pause");
-      playBtn1.addClass("fas fa-play");
+      playBtn1.removeClass("fas fa-pause-circle");
+      playBtn1.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -226,8 +226,8 @@ $(document).ready(function () {
     function playAudio() {
       audio1.play();
       audio1.onended = function () {
-        playBtn1.removeClass("fas fa-pause");
-        playBtn1.addClass("fas fa-play");
+        playBtn1.removeClass("fas fa-pause-circle");
+        playBtn1.addClass("fas fa-play-circle");
         count1 = 0;
       };
     }
@@ -239,13 +239,13 @@ $(document).ready(function () {
   playBtn2.on("click", function () {
     if (count2 === 0) {
       playAudio();
-      playBtn2.removeClass("fas fa-play");
-      playBtn2.addClass("fas fa-pause");
+      playBtn2.removeClass("fas fa-play-circle");
+      playBtn2.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count2 === 1) {
       pauseAudio();
-      playBtn2.removeClass("fas fa-pause");
-      playBtn2.addClass("fas fa-play");
+      playBtn2.removeClass("fas fa-pause-circle");
+      playBtn2.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -256,8 +256,8 @@ $(document).ready(function () {
     function playAudio() {
       audio2.play();
       audio2.onended = function () {
-        playBtn2.removeClass("fas fa-pause");
-        playBtn2.addClass("fas fa-play");
+        playBtn2.removeClass("fas fa-pause-circle");
+        playBtn2.addClass("fas fa-play-circle");
         count2 = 0;
       };
     }
@@ -269,13 +269,13 @@ $(document).ready(function () {
   playBtn3.on("click", function () {
     if (count3 === 0) {
       playAudio();
-      playBtn3.removeClass("fas fa-play");
-      playBtn3.addClass("fas fa-pause");
+      playBtn3.removeClass("fas fa-play-circle");
+      playBtn3.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count3 === 1) {
       pauseAudio();
-      playBtn3.removeClass("fas fa-pause");
-      playBtn3.addClass("fas fa-play");
+      playBtn3.removeClass("fas fa-pause-circle");
+      playBtn3.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -286,8 +286,8 @@ $(document).ready(function () {
     function playAudio() {
       audio3.play();
       audio3.onended = function () {
-        playBtn3.removeClass("fas fa-pause");
-        playBtn3.addClass("fas fa-play");
+        playBtn3.removeClass("fas fa-pause-circle");
+        playBtn3.addClass("fas fa-play-circle");
         count3 = 0;
       };
     }
@@ -299,13 +299,13 @@ $(document).ready(function () {
   playBtn4.on("click", function () {
     if (count4 === 0) {
       playAudio();
-      playBtn4.removeClass("fas fa-play");
-      playBtn4.addClass("fas fa-pause");
+      playBtn4.removeClass("fas fa-play-circle");
+      playBtn4.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count4 === 1) {
       pauseAudio();
-      playBtn4.removeClass("fas fa-pause");
-      playBtn4.addClass("fas fa-play");
+      playBtn4.removeClass("fas fa-pause-circle");
+      playBtn4.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -316,8 +316,8 @@ $(document).ready(function () {
     function playAudio() {
       audio4.play();
       audio4.onended = function () {
-        playBtn4.removeClass("fas fa-pause");
-        playBtn4.addClass("fas fa-play");
+        playBtn4.removeClass("fas fa-pause-circle");
+        playBtn4.addClass("fas fa-play-circle");
         count4 = 0;
       };
     }

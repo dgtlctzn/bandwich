@@ -2,24 +2,34 @@
 
 header,
 .track,
+.title-bar,
 .master-controls,
 .track-controls,
-#project-settings {
+#project-settings,
+.mstr-ctl-btn {
     display: flex;
 }
 
-#project-settings {
+/* .title-bar {
+    justify-content: space-between;
+
+} */
+
+#project-settings,
+.mstr-ctl-btn {
     align-items: center;
     justify-content: center;
 }
 header,
-.track{
+.track,
+.title-bar{
     justify-content: space-between;
     align-items: center;
 }
 
 .track-controls,
-.master-controls {
+.master-controls
+ {
     justify-content: space-evenly;
     align-items: center;
 }
@@ -110,6 +120,10 @@ main {
             "prj prj prj prj"
             "trk-1 trk-2 trk-3 trk-4"
             "ctls ctls ctls ctls";
+    }
+
+    .track-controls {
+        flex-direction: column;
     }
 
 }    

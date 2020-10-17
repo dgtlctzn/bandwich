@@ -5,29 +5,57 @@ body {
 }
 
 input[type=range]{
-    width: 280px;
+    width: 50%;
 }
 
 .master-controls {
-  font-size: 48px;
-}
-
-.track-controls {
   font-size: 24px;
 }
 
-button {
+.track-controls {
+  font-size: 36px;
+  height: 100%;
+  width: 100%;
+}
+
+/* button {
   margin: 24px;
+} */
+
+
+#clear {
+  height: 36px;
+}
+
+/* .track {
+  position: relative;
+} */
+
+
+.title-bar {
+  /* position: absolute;
+  left: 0px;
+  top: 0px; */
+  box-sizing: border-box;
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 8px 16px ;
+  background-color: rgba(255, 255, 255, .05);
+}
+
+h4 {
+  margin: 0;
 }
 
 
-.play {
+/* .trk-ctl-btn {
   margin-right: 40px;
-}
+} */
 
 .ui-block {
   background-color: #1F1F1F;
-  padding: 20px;
+  padding: 0px !important;
   border-radius: 4px;
 }
 
@@ -36,9 +64,6 @@ button {
   margin-left: 30px;
 }
 
-.play:hover {
-cursor: pointer;
-}
 
 h1 {
   text-align: center; 
@@ -79,9 +104,32 @@ input[type=text]:focus {
   text-align: center;
 } */
 
-.fas:hover {
+i:hover,
+button:hover {
   cursor: pointer;
 }
+
+button {
+  font-family: 'Rubik', sans-serif;
+  letter-spacing: 1px;
+}
+
+.mstr-ctl-btn {
+  background-color: rgba(255, 255, 255, .1);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.nudge {
+  margin-left: 8px;
+}
+
+.fa-circle,
+.fa-square {
+  color: #FF4A4A;
+}
+
 
 .button {
   background-color: rgb(80, 80, 255); /* Green */
@@ -178,12 +226,12 @@ input[type=text]:focus {
         writing-mode: bt-lr; /* IE */
         -webkit-appearance: slider-vertical; /* WebKit */
         width: 8px;
-        height: 160px;
+        height: 140px;
         padding: 0 5px;
     }
 
-    .master-controls {
-      font-size: 72px;
+    .mstr-ctl-btn {
+      font-size: 32px;
     }
 
     .ui-block {
