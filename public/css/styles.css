@@ -47,6 +47,18 @@ button:hover {
   cursor: pointer;
 }
 
+.deleteBtn {
+  padding: 5px 10px;
+  background-color: white;
+  font-family: 'Rubik', sans-serif;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.deleteBtn:hover {
+  background-color: rgb(220, 220, 220);
+}
+
 
 /* Workstation */
 
