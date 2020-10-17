@@ -388,14 +388,24 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn1").on("click", function () {
+    console.log("Clicked");
     let gettingID = audioId1.attr("src");
     gettingID = gettingID.split("");
-    gettingID = parseFloat(gettingID.pop());
+    let newID = [];
+    for (let i = 0; i < gettingID.length; i++) {
+      const parsedAudioName = parseInt(gettingID[i]);
+      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+        newID.push(parsedAudioName);
+      }
+    }
+    newID = parseInt(newID.join(""));
+    console.log(newID);
+    // gettingID = parseFloat(gettingID.pop());
 
     audioId1.attr("src", "/");
 
     $.ajax({
-      url: `/api/audio/${gettingID}`,
+      url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
         setTimeout(function () {
@@ -407,14 +417,24 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn2").on("click", function () {
+    console.log("Clicked");
     let gettingID = audioId2.attr("src");
     gettingID = gettingID.split("");
-    gettingID = parseFloat(gettingID.pop());
+    let newID = [];
+    for (let i = 0; i < gettingID.length; i++) {
+      const parsedAudioName = parseInt(gettingID[i]);
+      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+        newID.push(parsedAudioName);
+      }
+    }
+    newID = parseInt(newID.join(""));
+    console.log(newID);
+    // gettingID = parseFloat(gettingID.pop());
 
     audioId2.attr("src", "/");
 
     $.ajax({
-      url: `/api/audio/${gettingID}`,
+      url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
         setTimeout(function () {
@@ -426,14 +446,24 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn3").on("click", function () {
+    console.log("Clicked");
     let gettingID = audioId3.attr("src");
     gettingID = gettingID.split("");
-    gettingID = parseFloat(gettingID.pop());
+    let newID = [];
+    for (let i = 0; i < gettingID.length; i++) {
+      const parsedAudioName = parseInt(gettingID[i]);
+      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+        newID.push(parsedAudioName);
+      }
+    }
+    newID = parseInt(newID.join(""));
+    console.log(newID);
+    // gettingID = parseFloat(gettingID.pop());
 
     audioId3.attr("src", "/");
 
     $.ajax({
-      url: `/api/audio/${gettingID}`,
+      url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
         setTimeout(function () {
@@ -445,14 +475,24 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn4").on("click", function () {
+    console.log("Clicked");
     let gettingID = audioId4.attr("src");
     gettingID = gettingID.split("");
-    gettingID = parseFloat(gettingID.pop());
+    let newID = [];
+    for (let i = 0; i < gettingID.length; i++) {
+      const parsedAudioName = parseInt(gettingID[i]);
+      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+        newID.push(parsedAudioName);
+      }
+    }
+    newID = parseInt(newID.join(""));
+    console.log(newID);
+    // gettingID = parseFloat(gettingID.pop());
 
     audioId4.attr("src", "/");
 
     $.ajax({
-      url: `/api/audio/${gettingID}`,
+      url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
         setTimeout(function () {
