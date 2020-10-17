@@ -3,13 +3,10 @@ const WaveFile = require("wavefile").WaveFile;
 const fs = require("fs");
 
 module.exports = function (app) {
-  app.get("/", (req, res) => {
-    res.render("index");
-  });
-
+  
   app.get("/projects", (req, res) => {
-    db.Project.findAll().then(function (result) {
-      console.log(result);
+    db.Project.findAll().then(function(result){
+      // console.log(result)
       res.render("songs-dir", { project: result });
     });
   });
@@ -54,4 +51,27 @@ module.exports = function (app) {
       res.render("workstation", { project: project, track1: track1, track2: track2, track3: track3, track4: track4});
     });
   });
+  
+  app.get("/projects/:name", (req, res) => {
+    if (req.params.name) {
+      db.Project.findOne({
+        where: {
+          projectName: req.params.name,
+        },
+      }).then((project) => {
+        if (project !== null) {
+          res.render("specific-song", project.dataValues)
+        } else {
+          res.render("no-results")
+        }
+          
+      })
+    } 
+  })
+
+  app.get("/", (req, res) => {
+    res.render("index");
+  });
 };
+
+

@@ -184,7 +184,37 @@ $(document).ready(function () {
     }).then(function (project) {
       location.assign("/workstation/" + project);
     });
+  })
+
+  // when user hits the search-btn
+$("#projectsearch-btn").on("click", function() {
+  // save the character they typed into the character-search input
+  var searchedProject = $("#projects-search")
+    .val()
+    .trim();
+  console.log("click works")
+  console.log(searchedProject)
+  // Using a RegEx Pattern to remove spaces from searchedCharacter
+  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+  searchedProject = searchedProject.replace(/\s+/g, "").toLowerCase();
+
+  // run an AJAX GET-request for our servers api,
+  // including the user's character in the url
+  $.get("/api/projects/" + searchedProject, function(data) {
+    // log the data to our console
+    console.log(data);
+    console.log("Get works")
+    // empty to well-section before adding new content
+    $("#results-section").empty();
+    // if the data is not there, then return an error message
+    if (data) {
+      window.location.assign("/projects/" + searchedProject)
+    } else {
+      window.location.assign("/projects/no-results")
+    }
   });
+});
+
   // PLAY BTN FOR EACH TRACK
   // ========================================================
   const mainPlayEl = $("#main-play");
