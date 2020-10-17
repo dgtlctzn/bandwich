@@ -1,4 +1,6 @@
 const db = require("../models");
+const WaveFile = require("wavefile").WaveFile;
+const fs = require("fs");
 
 module.exports = function (app) {
   
@@ -6,19 +8,47 @@ module.exports = function (app) {
     db.Project.findAll().then(function(result){
       // console.log(result)
       res.render("songs-dir", { project: result });
-    })
+    });
   });
 
   app.get("/workstation/:id", (req, res) => {
-    console.log("this is req.params.id: " + req.params.id)
+    let track1;
+    let track2;
+    let track3;
+    let track4;
+    console.log("this is req.params.id: " + req.params.id);
     db.Project.findOne({
       where: {
         id: req.params.id,
       },
+      include: db.Audiofile,
     }).then((project) => {
-      // and then displays it via handlebars
-      // console.log(project);
-      res.render("workstation", { project: project });
+      for (let file of project.Audiofiles) {
+        console.log("This is my track number: " + file.track)
+        wav = new WaveFile();
+        const wavData = file.audiotext;
+        fs.writeFile(
+          `./public/audio/audio${file.id}`,
+          Buffer.from(wavData.replace("data:audio/wav;base64,", ""), "base64"),
+          function () {
+            console.log("New audio posted!");
+          }
+        );
+        file.path = `audio/audio${file.id}`;
+        if (file.track === 1) {
+          track1 = file.path;
+        } else if (file.track === 2) {
+          track2 = file.path;
+        } else if (file.track === 3) {
+          track3 = file.path;
+        } else if (file.track === 4) {
+          track4 = file.path;
+        }
+      }
+      console.log(track1)
+      console.log(track2)
+      // console.log(project.Audiofiles.track1)
+      res.render("workstation", { project: project, track1: track1, track2: track2, track3: track3, track4: track4});
     });
   });
   

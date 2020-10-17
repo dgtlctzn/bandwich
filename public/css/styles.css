@@ -1,9 +1,3 @@
-.track,
-.master-controls {
-    background-color: #1F1F1F;
-    padding: 20px;
-}
-
 body {
     font-family: 'Rubik', sans-serif;
     color: #EAEAEA;
@@ -26,8 +20,20 @@ button {
   margin: 24px;
 }
 
+
+.play {
+  margin-right: 40px;
+}
+
 .ui-block {
+  background-color: #1F1F1F;
+  padding: 20px;
   border-radius: 4px;
+}
+
+.menu {
+  font-size: 26px;
+  margin-left: 30px;
 }
 
 .play:hover {
@@ -37,12 +43,44 @@ cursor: pointer;
 h1 {
   text-align: center; 
   margin-top: 50px; 
-  margin-bottom: 100px; 
+  margin-bottom: 50px; 
   font-size: 75px
 }
 
 #btnDiv {
   text-align: center;
+}
+
+input {
+  background-color: #1F1F1F;
+}
+
+input[type=text] {
+  min-width: 100px;
+  text-align: center;
+  font-family: 'Rubik', sans-serif;
+  color: white;
+  font-size: 1.17em;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=text]:focus {
+  outline: none;
+  border: none;
+}
+
+
+/* #name-input {
+  text-align: center;
+} */
+
+.fas:hover {
+  cursor: pointer;
 }
 
 .button {
@@ -146,6 +184,12 @@ h1 {
     .master-controls {
       font-size: 72px;
     }
+
+    .ui-block {
+      padding: 40px;
+    }
+
+    
 
   }
 

@@ -2,6 +2,7 @@ module.exports = function(sequelize, DataTypes) {
     var Audiofile = sequelize.define("Audiofile", {
       audiotext: DataTypes.TEXT("long"),
       path: DataTypes.STRING,
+      track: DataTypes.INTEGER
       // projectId: DataTypes.INTEGER
     });
 
