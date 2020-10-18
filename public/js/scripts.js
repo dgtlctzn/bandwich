@@ -109,19 +109,18 @@ $(document).ready(function () {
       url: "/api/audio",
       type: "POST",
       data: data,
-    })
-      .then(function (response) {
-        console.log(response);
+      success: function (response) {
         // sets an interval before reloading page to allow big POST request
         setTimeout(function () {
           location.reload();
         }, 3000);
-      })
-      .catch(function (err) {
+      },
+      error: function (err) {
         if (err) {
           console.log(err);
         }
-      });
+      }
+    })
   }
 
   function convertToBase64(blob) {
