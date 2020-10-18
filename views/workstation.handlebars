@@ -24,20 +24,20 @@
         <button> <i class="fas fa-save"></i> Save</button> -->
     </div>
 
-    <div class="track ui-block recorded-track" id="track-one">
+    <div class="track ui-block" id="track-one">
       <div class="title-bar">
         <h4>One</h4>
-        <i class="fas fa-trash-alt" id="destroyBtn1"></i>
+        <i class="fas fa-trash-alt hide" id="destroyBtn1"></i>
         {{!-- <button id="destroyBtn1">CLEAR</button> --}}
       </div>
       <div class="track-controls">
-        <i class="fas fa-play-circle play trk-ctl-btn" id="playBtn1" data-id="{{this.id}}">
+        <i class="fas fa-play-circle play trk-ctl-btn disable" id="playBtn1" data-id="{{this.id}}">
           <audio id="audio1" class="play-audio" src="/{{track1}}">
             Here
           </audio>
         </i>
         <div class="volume-controls">
-          <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
+          <input class="input-range disable" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
           <canvas id="myCanvas1" class="audio-meter"></canvas>
         </div>
         <label class="switch">
@@ -47,20 +47,20 @@
       </div>
     </div>
 
-    <div class="track ui-block recorded-track" id="track-two">
+    <div class="track ui-block" id="track-two">
       <div class="title-bar">
         <h4>Two</h4>
-        <i class="fas fa-trash-alt" id="destroyBtn2"></i>
+        <i class="fas fa-trash-alt hide" id="destroyBtn2"></i>
         {{!-- <button id="destroyBtn2">CLEAR</button> --}}
       </div>
       <div class="track-controls">
-        <i class="fas fa-play-circle play trk-ctl-btn" id="playBtn2" data-id="{{this.id}}">
+        <i class="fas fa-play-circle play trk-ctl-btn disable" id="playBtn2" data-id="{{this.id}}">
           <audio id="audio2" class="play-audio" src="/{{track2}}">
             Here
           </audio>
         </i>
         <div class="volume-controls">
-          <input class="input-range" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
+          <input class="input-range disable" orient="vertical" type="range" step="0.5" value="5" min="1" max="10" />
           <canvas id="myCanvas2" class="audio-meter"></canvas>
         </div>
         <label class="switch">
