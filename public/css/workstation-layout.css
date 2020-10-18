@@ -7,7 +7,10 @@ header,
 .track-controls,
 #project-settings,
 .mstr-ctl-btn,
-.volume-controls {
+.volume-controls,
+#intro-page,
+#btnDiv,
+#projectList {
     display: flex;
 }
 
@@ -44,9 +47,21 @@ header,
 }
 
 .track,
-.volume-controls {
+.volume-controls,
+#intro-page,
+#btnDiv,
+#projectList  {
     flex-direction: column;
 }
+
+#intro-page {
+    align-items: center;
+}
+
+#projectList {
+    align-items: center;
+}
+
 
 
 

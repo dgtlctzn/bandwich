@@ -318,7 +318,7 @@ $(document).ready(function () {
     canvas.clearRect(0, 0, WIDTH, HEIGHT);
 
     if (meter.checkClipping()) canvas.fillStyle = "red";
-    else canvas.fillStyle = "green";
+    else canvas.fillStyle = "blue";
 
     canvas.fillRect(0, 0, WIDTH, meter.volume * HEIGHT * 1.4);
 

@@ -20,6 +20,65 @@ input[type="range"] {
   width: 100%;
 }
 
+#home-logo {
+  width: 100%;
+  max-width: 400px;
+}
+
+
+
+
+#blurb {
+  font-size: 21px;
+  text-align: center;
+}
+
+#btnDiv {
+  margin-top: 40px;
+}
+
+/* Song directory */
+
+#projects-search {
+ width: 320px;
+ text-align: left;
+}
+
+#projectsearch-btn{
+  margin-top: 8px;
+}
+
+#activeList {
+  margin-top: 40px;
+  line-height: 2;
+  width: 320px;
+}
+
+/* #activeListItem{
+  height: 60px;
+  text-align: left;
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: 4px;
+  margin: 0 !important;
+} */
+
+.projectName {
+  color: rgb(80, 80, 255);
+  font-size: 20px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.projectName:hover {
+  color: rgb(134, 134, 255);
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
 .ui-block {
   background-color: #181818;
   padding: 0px;
@@ -122,7 +181,7 @@ h1 {
 }
 
 input[type="range"] {
-  width: 280px;
+  width: 240px;
 }
 
 input {
@@ -196,9 +255,6 @@ button {
   cursor: pointer;
 }
 
-.projectName {
-  text-align: center;
-}
 
 /* toggle switch */
 
@@ -313,6 +369,18 @@ input:checked + .slider:before {
     margin-top: 0px;
     margin-left: 40px;
   }
+
+  #projectSearch {
+    width: 600px;
+   }
+   
+   #activeList {
+     margin-top: 40px;
+     line-height: 2;
+     width: 600px;
+   }
+
+  
 }
 
 .audio-meter {
