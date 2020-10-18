@@ -48,6 +48,11 @@ To view other songs, go to the song directory. The user can look through all the
 * [Node.js](https://nodejs.org/en/)
 * [MySQL](https://www.npmjs.com/package/mysql)
 * [Recorder.js](https://www.npmjs.com/package/recorder-js)
+* [Octavian Naicu](https://blog.addpipe.com/using-recorder-js-to-capture-wav-audio-in-your-html5-web-site/) 
+* [Volume-meter.js](https://github.com/cwilso/volume-meter) 
+* [Random-words](https://www.npmjs.com/package/random-words) 
+* [Body-parser](https://www.npmjs.com/package/body-parser) 
+* [Wavefile](https://www.npmjs.com/package/wavefile) 
 
 
 
