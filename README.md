@@ -14,7 +14,7 @@ This project is a web app that will all the user to make collaborative music pro
 
 
 ## Installation
-The user does not need to install anything to use this application if they choose to use the deployed Heruko application. This can be accessed [here](https://bandwich-app.herokuapp.com/)
+The user does not need to install anything to use this application if they choose to use the deployed Heruko application. This can be accessed [here](https://bandwich-app.herokuapp.com/).
 
 However, if the user wants to locally host the app, they must download the files from this repository. Those can be accessed [here](https://github.com/dgtlctzn/bandwich).
 
@@ -24,7 +24,7 @@ Run "npm install" to install the app.
 
 
 ## Usage 
-*If the user uses the app locally, run the command node server.js in the terminal, then open the localhost:[PORT] in a web browser.* 
+*If the user uses the app locally, run the command node server.js in the terminal, then open localhost:8080 in a web browser.* 
 
 Once in the app, the user will be placed on the home page, with the option to create a new project or to look through existing songs. When creating a new project, the user is sent to the project workstation. On here, there will be four tracks, along with a play/pause button for each track and a row of play, pause, stop recording, and start recording buttons that control the whole project. 
 
@@ -48,6 +48,11 @@ To view other songs, go to the song directory. The user can look through all the
 * [Node.js](https://nodejs.org/en/)
 * [MySQL](https://www.npmjs.com/package/mysql)
 * [Recorder.js](https://www.npmjs.com/package/recorder-js)
+* [Octavian Naicu](https://blog.addpipe.com/using-recorder-js-to-capture-wav-audio-in-your-html5-web-site/) 
+* [Volume-meter.js](https://github.com/cwilso/volume-meter) 
+* [Random-words](https://www.npmjs.com/package/random-words) 
+* [Body-parser](https://www.npmjs.com/package/body-parser) 
+* [Wavefile](https://www.npmjs.com/package/wavefile) 
 
 
 
