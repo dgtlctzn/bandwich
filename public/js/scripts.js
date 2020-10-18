@@ -81,10 +81,10 @@ $(document).ready(function () {
           numChannels: 1,
         });
         //start the recording process
-        rec.record();
+        cb();
         setTimeout(function () {
-          cb();
-        }, 200);
+          rec.record();
+        }, 400);
         console.log("Recording started");
 
         // creates the audio level meter
