@@ -7,12 +7,16 @@ $(document).ready(function () {
   const saveTrackEl = $("#name-input");
   const editTrackEl = $("#new-name");
   const newProjectEl = $("#new-project");
+  const recIcon = $("#rec-icon");
+  
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
-    if (track) {
-      startRecord();
-    } else {
+    // conditional ensures a track is enabled and no audio stream is currently active
+    if (track && !input) {
+      // start record function is called with playAll audio as a callback for synchronous play/record
+      startRecord(playAll);
+    } else if (!track) {
       alert("Please record enable one of the tracks!");
     }
   });
@@ -25,11 +29,13 @@ $(document).ready(function () {
   let rec;
   let input;
   let track;
+  let meter;
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
 
-  function startRecord() {
+  function startRecord(cb) {
     console.log("record!");
+    recIcon.addClass("pulsing");
     const audioContext = new AudioContext();
 
     const constraints = {
@@ -49,17 +55,24 @@ $(document).ready(function () {
         gumStream = stream;
 
         input = audioContext.createMediaStreamSource(stream);
+
         // recorder.js constructor
         rec = new Recorder(input, {
           // mono sound
           numChannels: 1,
         });
         //start the recording process
-        playAll();
+        cb();
         setTimeout(function () {
           rec.record();
-        }, 150);
+        }, 100);
         console.log("Recording started");
+
+        // creates the audio level meter
+        meter = createAudioMeter(audioContext);
+        input.connect(meter);
+        // kick off the visual updating
+        drawLoop();
       })
       .catch(function (err) {
         //enable the record button if getUserMedia() fails
@@ -71,6 +84,7 @@ $(document).ready(function () {
 
   function pauseRecord() {
     console.log("Recording paused", rec.recording);
+    recIcon.removeClass("pulsing");
     if (rec.recording) {
       // pause
       rec.stop();
@@ -83,16 +97,25 @@ $(document).ready(function () {
   }
 
   function stopRecord() {
-    console.log("Recording stopped");
-    //disable the stop button, enable the record too allow for new recordings
-    mainRecordEl.disabled = false;
-    mainStopEl.disabled = true;
-    mainPauseEl.disabled = true;
-    // stops the recording and gets the track
-    rec.stop();
-    gumStream.getAudioTracks()[0].stop();
-    // creates wav blob and passes blob as argument to the callback
-    rec.exportWAV(convertToBase64);
+    if (input) {
+      console.log("Recording stopped");
+      //disable the stop button, enable the record too allow for new recordings
+      mainRecordEl.disabled = false;
+      mainStopEl.disabled = true;
+      mainPauseEl.disabled = true;
+      // stops the recording and gets the track
+      rec.stop();
+      gumStream.getAudioTracks()[0].stop();
+      // creates wav blob and passes blob as argument to the callback
+      rec.exportWAV(convertToBase64);
+
+      recIcon.removeClass("pulsing");
+      recIcon.removeAttr("id","glow");
+    } else {
+      stopAll();
+      recIcon.removeClass("pulsing");
+      recIcon.removeAttr("id","glow");
+    }
   }
 
   function postAudio(data) {
@@ -101,19 +124,18 @@ $(document).ready(function () {
       url: "/api/audio",
       type: "POST",
       data: data,
-    })
-      .then(function (response) {
-        console.log(response);
+      success: function (response) {
         // sets an interval before reloading page to allow big POST request
         setTimeout(function () {
           location.reload();
         }, 3000);
-      })
-      .catch(function (err) {
+      },
+      error: function (err) {
         if (err) {
           console.log(err);
         }
-      });
+      }
+    })
   }
 
   function convertToBase64(blob) {
@@ -134,13 +156,122 @@ $(document).ready(function () {
     };
   }
 
+  function playAll() {
+    // prevents play button with no associated audio
+    if (audioSrc1 === "/" && audioSrc2 === "/" && audioSrc3 === "/" && audioSrc4 === "/" && !input) {
+      alert("There is no recorded audio to play!")
+    } else {
+      // plays each audio track if exists
+      if (audioSrc1 !== "/") {
+        audio1.load();
+        audio1.play();
+      }
+      if (audioSrc2 !== "/") {
+        audio2.load();
+        audio2.play();
+      }
+      if (audioSrc3 !== "/") {
+        audio3.load();
+        audio3.play();
+      }
+      if (audioSrc4 !== "/") {
+        audio4.load();
+        audio4.play();
+      }
+    }
+  }
+
+  function stopAll() {
+    if (audioSrc1 !== "/") {
+      audio1.pause();
+    }
+    if (audioSrc2 !== "/") {
+      audio2.pause();
+    }
+    if (audioSrc3 !== "/") {
+      audio3.pause();
+    }
+    if (audioSrc4 !== "/") {
+      audio4.pause();
+    }
+  }
+
+  // the following three functions are forked with permission from cwilso/volume-meter
+  function createAudioMeter(audioContext, clipLevel, averaging, clipLag) {
+    var processor = audioContext.createScriptProcessor(512);
+    processor.onaudioprocess = volumeAudioProcess;
+    processor.clipping = false;
+    processor.lastClip = 0;
+    processor.volume = 0;
+    processor.clipLevel = clipLevel || 0.98;
+    processor.averaging = averaging || 0.95;
+    processor.clipLag = clipLag || 750;
+
+    processor.connect(audioContext.destination);
+
+    processor.checkClipping = function () {
+      if (!this.clipping) return false;
+      if (this.lastClip + this.clipLag < window.performance.now())
+        this.clipping = false;
+      return this.clipping;
+    };
+
+    processor.shutdown = function () {
+      this.disconnect();
+      this.onaudioprocess = null;
+    };
+
+    return processor;
+  }
+
+  function volumeAudioProcess(event) {
+    var buf = event.inputBuffer.getChannelData(0);
+    var bufLength = buf.length;
+    var sum = 0;
+    var x;
+
+    for (var i = 0; i < bufLength; i++) {
+      x = buf[i];
+      if (Math.abs(x) >= this.clipLevel) {
+        this.clipping = true;
+        this.lastClip = window.performance.now();
+      }
+      sum += x * x;
+    }
+
+    var rms = Math.sqrt(sum / bufLength);
+
+    this.volume = Math.max(rms, this.volume * this.averaging);
+  }
+
+  function drawLoop(time) {
+    let WIDTH = 300;
+    let HEIGHT = 500;
+
+    const canvas = document.getElementById("myCanvas" + track).getContext("2d");
+
+    canvas.clearRect(0, 0, WIDTH, HEIGHT);
+
+    if (meter.checkClipping()) canvas.fillStyle = "red";
+    else canvas.fillStyle = "green";
+
+    canvas.fillRect(0, 0, WIDTH, meter.volume * HEIGHT * 1.4);
+
+    rafID = window.requestAnimationFrame(drawLoop);
+  }
+
   let switchStatus = false;
   $(".check").on("change", function () {
     if ($(this).is(":checked")) {
       switchStatus = $(this).is(":checked");
       track = $(this).data("track");
+      $( ".switch" ).css( "pointer-events", "none" );
+      $(this).parent().css("pointer-events", "initial");
+      recIcon.attr("id","glow");
     } else {
       switchStatus = $(this).is(":checked");
+      recIcon.removeAttr("id","glow");
+      $( ".switch" ).css( "pointer-events", "initial" );
     }
   });
 
@@ -184,36 +315,34 @@ $(document).ready(function () {
     }).then(function (project) {
       location.assign("/workstation/" + project);
     });
-  })
+  });
 
   // when user hits the search-btn
-$("#projectsearch-btn").on("click", function() {
-  // save the character they typed into the character-search input
-  var searchedProject = $("#projects-search")
-    .val()
-    .trim();
-  console.log("click works")
-  console.log(searchedProject)
-  // Using a RegEx Pattern to remove spaces from searchedCharacter
-  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  searchedProject = searchedProject.replace(/\s+/g, "").toLowerCase();
+  $("#projectsearch-btn").on("click", function () {
+    // save the character they typed into the character-search input
+    var searchedProject = $("#projects-search").val().trim();
+    console.log("click works");
+    console.log(searchedProject);
+    // Using a RegEx Pattern to remove spaces from searchedCharacter
+    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+    searchedProject = searchedProject.replace(/\s+/g, "").toLowerCase();
 
-  // run an AJAX GET-request for our servers api,
-  // including the user's character in the url
-  $.get("/api/projects/" + searchedProject, function(data) {
-    // log the data to our console
-    console.log(data);
-    console.log("Get works")
-    // empty to well-section before adding new content
-    $("#results-section").empty();
-    // if the data is not there, then return an error message
-    if (data) {
-      window.location.assign("/projects/" + searchedProject)
-    } else {
-      window.location.assign("/projects/no-results")
-    }
+    // run an AJAX GET-request for our servers api,
+    // including the user's character in the url
+    $.get("/api/projects/" + searchedProject, function (data) {
+      // log the data to our console
+      console.log(data);
+      console.log("Get works");
+      // empty to well-section before adding new content
+      $("#results-section").empty();
+      // if the data is not there, then return an error message
+      if (data) {
+        window.location.assign("/projects/" + searchedProject);
+      } else {
+        window.location.assign("/projects/no-results");
+      }
+    });
   });
-});
 
   // PLAY BTN FOR EACH TRACK
   // ========================================================
@@ -240,25 +369,6 @@ $("#projectsearch-btn").on("click", function() {
   const audioSrc4 = audioId4.attr("src");
   const audio4 = new Audio(audioSrc4);
 
-  function playAll() {
-    if (audioSrc1 !== "/") {
-      audio1.load();
-      audio1.play();
-    }
-    if (audioSrc2 !== "/") {
-      audio2.load();
-      audio2.play();
-    }
-    if (audioSrc3 !== "/") {
-      audio3.load();
-      audio3.play();
-    }
-    if (audioSrc4 !== "/") {
-      audio4.load();
-      audio4.play();
-    }
-  }
-
   mainPlayEl.on("click", function () {
     playAll();
   });
@@ -266,13 +376,13 @@ $("#projectsearch-btn").on("click", function() {
   playBtn1.on("click", function () {
     if (count1 === 0) {
       playAudio();
-      playBtn1.removeClass("fas fa-play");
-      playBtn1.addClass("fas fa-pause");
+      playBtn1.removeClass("fas fa-play-circle");
+      playBtn1.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count1 === 1) {
       pauseAudio();
-      playBtn1.removeClass("fas fa-pause");
-      playBtn1.addClass("fas fa-play");
+      playBtn1.removeClass("fas fa-pause-circle");
+      playBtn1.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -283,8 +393,8 @@ $("#projectsearch-btn").on("click", function() {
     function playAudio() {
       audio1.play();
       audio1.onended = function () {
-        playBtn1.removeClass("fas fa-pause");
-        playBtn1.addClass("fas fa-play");
+        playBtn1.removeClass("fas fa-pause-circle");
+        playBtn1.addClass("fas fa-play-circle");
         count1 = 0;
       };
     }
@@ -296,13 +406,13 @@ $("#projectsearch-btn").on("click", function() {
   playBtn2.on("click", function () {
     if (count2 === 0) {
       playAudio();
-      playBtn2.removeClass("fas fa-play");
-      playBtn2.addClass("fas fa-pause");
+      playBtn2.removeClass("fas fa-play-circle");
+      playBtn2.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count2 === 1) {
       pauseAudio();
-      playBtn2.removeClass("fas fa-pause");
-      playBtn2.addClass("fas fa-play");
+      playBtn2.removeClass("fas fa-pause-circle");
+      playBtn2.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -313,8 +423,8 @@ $("#projectsearch-btn").on("click", function() {
     function playAudio() {
       audio2.play();
       audio2.onended = function () {
-        playBtn2.removeClass("fas fa-pause");
-        playBtn2.addClass("fas fa-play");
+        playBtn2.removeClass("fas fa-pause-circle");
+        playBtn2.addClass("fas fa-play-circle");
         count2 = 0;
       };
     }
@@ -326,13 +436,13 @@ $("#projectsearch-btn").on("click", function() {
   playBtn3.on("click", function () {
     if (count3 === 0) {
       playAudio();
-      playBtn3.removeClass("fas fa-play");
-      playBtn3.addClass("fas fa-pause");
+      playBtn3.removeClass("fas fa-play-circle");
+      playBtn3.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count3 === 1) {
       pauseAudio();
-      playBtn3.removeClass("fas fa-pause");
-      playBtn3.addClass("fas fa-play");
+      playBtn3.removeClass("fas fa-pause-circle");
+      playBtn3.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -343,8 +453,8 @@ $("#projectsearch-btn").on("click", function() {
     function playAudio() {
       audio3.play();
       audio3.onended = function () {
-        playBtn3.removeClass("fas fa-pause");
-        playBtn3.addClass("fas fa-play");
+        playBtn3.removeClass("fas fa-pause-circle");
+        playBtn3.addClass("fas fa-play-circle");
         count3 = 0;
       };
     }
@@ -356,13 +466,13 @@ $("#projectsearch-btn").on("click", function() {
   playBtn4.on("click", function () {
     if (count4 === 0) {
       playAudio();
-      playBtn4.removeClass("fas fa-play");
-      playBtn4.addClass("fas fa-pause");
+      playBtn4.removeClass("fas fa-play-circle");
+      playBtn4.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count4 === 1) {
       pauseAudio();
-      playBtn4.removeClass("fas fa-pause");
-      playBtn4.addClass("fas fa-play");
+      playBtn4.removeClass("fas fa-pause-circle");
+      playBtn4.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -373,8 +483,8 @@ $("#projectsearch-btn").on("click", function() {
     function playAudio() {
       audio4.play();
       audio4.onended = function () {
-        playBtn4.removeClass("fas fa-pause");
-        playBtn4.addClass("fas fa-play");
+        playBtn4.removeClass("fas fa-pause-circle");
+        playBtn4.addClass("fas fa-play-circle");
         count4 = 0;
       };
     }
@@ -387,8 +497,17 @@ $("#projectsearch-btn").on("click", function() {
     location.assign("/");
   });
 
+
+
+  function disableTrack(button){
+    button.css("display","none");
+    button.parent().next().children().eq(0).addClass("disable");
+    button.parent().next().children().eq(1).children().eq(0).addClass("disable");
+    button.parent().parent().removeClass("recorded-track");
+  }
+
   $("#destroyBtn1").on("click", function () {
-    console.log("Clicked");
+    disableTrack($("#destroyBtn1"));
     let gettingID = audioId1.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
@@ -402,7 +521,7 @@ $("#projectsearch-btn").on("click", function() {
     console.log(newID);
     // gettingID = parseFloat(gettingID.pop());
 
-    audioId4.attr("src", "/");
+    audioId1.attr("src", "/");
 
     $.ajax({
       url: `/api/audio/${newID}`,
@@ -417,7 +536,7 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn2").on("click", function () {
-    console.log("Clicked");
+    disableTrack($("#destroyBtn2"));
     let gettingID = audioId2.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
@@ -431,7 +550,7 @@ $("#projectsearch-btn").on("click", function() {
     console.log(newID);
     // gettingID = parseFloat(gettingID.pop());
 
-    audioId4.attr("src", "/");
+    audioId2.attr("src", "/");
 
     $.ajax({
       url: `/api/audio/${newID}`,
@@ -446,7 +565,7 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn3").on("click", function () {
-    console.log("Clicked");
+    disableTrack($("#destroyBtn3"));
     let gettingID = audioId3.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
@@ -460,7 +579,7 @@ $("#projectsearch-btn").on("click", function() {
     console.log(newID);
     // gettingID = parseFloat(gettingID.pop());
 
-    audioId4.attr("src", "/");
+    audioId3.attr("src", "/");
 
     $.ajax({
       url: `/api/audio/${newID}`,
@@ -475,7 +594,7 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn4").on("click", function () {
-    console.log("Clicked");
+    disableTrack($("#destroyBtn4"));
     let gettingID = audioId4.attr("src");
     gettingID = gettingID.split("");
     let newID = [];

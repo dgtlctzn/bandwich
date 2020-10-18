@@ -1,18 +1,31 @@
-<h1>All Projects</h1>
+<div id="container">
 
-<h2 class="searchheader">Search Projects</h2>
-<input type="text" id="projects-search" class="form-control">
-<br>
-<button type="submit" class="btn btn-primary btn-md" id="projectsearch-btn">
-<span class="fa fa-search"></span> Search</button>
+  <header>
+    <div>
+      <img src="/img/bw-logo.svg" alt="bandwich logo">
+    </div>
+    <div>
+      <i class="fas fa-home home menu"></i>
+      <i class="fas fa-microphone-alt workstation menu"></i>
+      <i class="fas fa-list songs menu"></i>
+    </div>
+  </header>
 
+  <main >
+    <h1>All Projects</h1>
 
-{{#each project}}
-<a href="/workstation/{{ id }}">
-<p class="projectName">{{ projectName }}</p>
-</a>
-{{/each}}
+    <h2 class="searchheader">Search Projects</h2>
+    <input type="text" id="projects-search" class="form-control">
+    <br>
+    <button type="submit" class="btn btn-primary btn-md" id="projectsearch-btn">
+      <span class="fa fa-search"></span> Search</button>
 
-<div class="home">
-  <i class="fas fa-home fa-3x"></i>
+    {{#each project}}
+    <a href="/workstation/{{ id }}">
+      <p class="projectName">{{ projectName }}</p>
+    </a>
+    {{/each}}
+
+  </main>
+
 </div>
