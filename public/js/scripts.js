@@ -8,6 +8,7 @@ $(document).ready(function () {
   const editTrackEl = $("#new-name");
   const newProjectEl = $("#new-project");
   const recIcon = $("#rec-icon");
+  
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
@@ -143,10 +144,13 @@ $(document).ready(function () {
     if ($(this).is(":checked")) {
       switchStatus = $(this).is(":checked");
       track = $(this).data("track");
+      $( ".switch" ).css( "pointer-events", "none" );
+      $(this).parent().css("pointer-events", "initial");
       recIcon.attr("id","glow");
     } else {
       switchStatus = $(this).is(":checked");
       recIcon.removeAttr("id","glow");
+      $( ".switch" ).css( "pointer-events", "initial" );
     }
   });
 
@@ -339,7 +343,15 @@ $(document).ready(function () {
     location.assign("/");
   });
 
+  function clearControls(){
+    $(this).parent().next().children().eq(0).css("display","none");
+    $(this).parent().next().children().eq(1).css("display","none");
+  }
+
   $("#destroyBtn1").on("click", function () {
+    $(this).css("display","none");
+    $(this).parent().next().children().eq(0).css("display","none");
+    $(this).parent().next().children().eq(1).css("display","none");
     let gettingID = audioId1.attr("src");
     gettingID = gettingID.split("");
     gettingID = parseFloat(gettingID.pop());
