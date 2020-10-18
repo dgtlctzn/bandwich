@@ -385,8 +385,7 @@ $(document).ready(function () {
     console.log("click works");
     console.log(searchedProject);
     // Using a RegEx Pattern to remove spaces from searchedCharacter
-    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-    searchedProject = searchedProject.replace(/\s+/g, "").toLowerCase();
+    // searchedProject = searchedProject.replace(/\s+/g, "").toLowerCase();
 
     // run an AJAX GET-request for our servers api,
     // including the user's character in the url
@@ -682,6 +681,23 @@ $(document).ready(function () {
     });
   });
 
+  $("#deleteproject-btn").on("click", function () {
+    var deleteAlert = confirm("Are you sure you would like to delete this project?");
+    if(deleteAlert) {
+      const projectName = {
+        name: $("#new-name").val(),
+        id: $("#proj-name").data("id"),
+      };
+  
+      $.ajax("/api/project/" + projectName.id, {
+        type: "DELETE",
+        data: projectName,
+      }).then(function () {
+        location.assign("/");
+      });
+    } 
+  })
+  
   // checks to see which tracks have content and toggles active state
   enableActive();
 
