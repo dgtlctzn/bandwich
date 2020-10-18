@@ -400,20 +400,17 @@ $("#projectsearch-btn").on("click", function() {
     location.assign("/");
   });
 
-  function clearControls(){
-    $(this).parent().next().children().eq(0).css("display","none");
-    $(this).parent().next().children().eq(1).css("display","none");
+
+
+  function disableTrack(button){
+    button.css("display","none");
+    button.parent().next().children().eq(0).addClass("disable");
+    button.parent().next().children().eq(1).children().eq(0).addClass("disable");
+    button.parent().parent().removeClass("recorded-track");
   }
 
   $("#destroyBtn1").on("click", function () {
-<<<<<<< HEAD
-    $(this).css("display","none");
-    $(this).parent().next().children().eq(0).css("display","none");
-    $(this).parent().next().children().eq(1).css("display","none");
-    $(this).parent().next().css("justify-content","flex-end");
-=======
-    console.log("Clicked");
->>>>>>> main
+    disableTrack($("#destroyBtn1"));
     let gettingID = audioId1.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
@@ -442,14 +439,7 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn2").on("click", function () {
-<<<<<<< HEAD
-    $(this).css("display","none");
-    $(this).parent().next().children().eq(0).css("display","none");
-    $(this).parent().next().children().eq(1).css("display","none");
-    $(this).parent().next().css("justify-content","flex-end");
-=======
-    console.log("Clicked");
->>>>>>> main
+    disableTrack($("#destroyBtn2"));
     let gettingID = audioId2.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
@@ -478,14 +468,7 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn3").on("click", function () {
-<<<<<<< HEAD
-    $(this).css("display","none");
-    $(this).parent().next().children().eq(0).css("display","none");
-    $(this).parent().next().children().eq(1).css("display","none");
-    $(this).parent().next().css("justify-content","flex-end");
-=======
-    console.log("Clicked");
->>>>>>> main
+    disableTrack($("#destroyBtn3"));
     let gettingID = audioId3.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
@@ -514,14 +497,7 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn4").on("click", function () {
-<<<<<<< HEAD
-    $(this).css("display","none");
-    $(this).parent().next().children().eq(0).css("display","none");
-    $(this).parent().next().children().eq(1).css("display","none");
-    $(this).parent().next().css("justify-content","flex-end");
-=======
-    console.log("Clicked");
->>>>>>> main
+    disableTrack($("#destroyBtn4"));
     let gettingID = audioId4.attr("src");
     gettingID = gettingID.split("");
     let newID = [];

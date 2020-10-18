@@ -4,64 +4,12 @@ body {
   background-color: black;
 }
 
-<<<<<<< HEAD
 input[type="range"] {
   width: 240px;
 }
 
 .master-controls {
   font-size: 24px;
-=======
-/* Home */
-
-#home-logo {
-  width: 100%;
-  max-width: 400px;
-}
-
-#blurb {
-  margin-top: 40px;
-  line-height: 1.5;
-  width: 80%;
-  font-size: 18px;
-  text-align: center;
-}
-
-#btnDiv {
-  margin-top: 20px;
-  text-align: center;
-}
-
-i:hover,
-button:hover {
-  cursor: pointer;
-}
-
-.button {
-  background-color: rgb(80, 80, 255); /* Green */
-  font-family: 'Rubik', sans-serif;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 10px;
-}
-
-.button:hover {
-  background-color: rgb(0, 0, 255);
-  cursor: pointer;
-}
-
-
-/* Workstation */
-
-
-.projectName {
-  text-align: center;
->>>>>>> main
 }
 
 .track-controls {
@@ -72,9 +20,37 @@ button:hover {
   width: 100%;
 }
 
-<<<<<<< HEAD
+.ui-block {
+  background-color: #181818;
+  padding: 0px;
+  border-radius: 4px;
+}
+
+.recorded-track {
+  /* background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 100%); */
+  background-color: rgba(255,255,255,0.2);
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: inline-block;
+}
+
+.disable {
+  opacity: 20%;
+  pointer-events: none;
+}
+
+.enable {
+  opacity: 100%;
+  pointer-events: initial;
+}
+
 canvas {
-  background-color: rgb(80, 80, 255);
+  background-color: rgba(255,255,255,0.05);
   width: 240px;
   height: 16px;
   margin-top: 20px;
@@ -82,13 +58,6 @@ canvas {
 }
 
 /* button {
-=======
-.master-controls {
-  font-size: 48px;
-}
-
-button {
->>>>>>> main
   margin: 24px;
 } */
 
@@ -124,11 +93,9 @@ h4 {
   margin-right: 40px;
 } */
 
-.ui-block {
-  background-color: #1f1f1f;
-  padding: 0px;
-  border-radius: 4px;
-}
+
+
+
 
 .menu {
   font-size: 26px;
@@ -169,7 +136,6 @@ input[type="text"]:focus {
   border: none;
 }
 
-<<<<<<< HEAD
 /* #name-input {
   text-align: center;
 } */
@@ -221,9 +187,6 @@ button {
 .projectName {
   text-align: center;
 }
-=======
-
->>>>>>> main
 
 /* toggle switch */
 

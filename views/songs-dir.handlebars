@@ -11,8 +11,14 @@
     </div>
   </header>
 
-  <main>
+  <main >
     <h1>All Projects</h1>
+
+    <h2 class="searchheader">Search Projects</h2>
+    <input type="text" id="projects-search" class="form-control">
+    <br>
+    <button type="submit" class="btn btn-primary btn-md" id="projectsearch-btn">
+      <span class="fa fa-search"></span> Search</button>
 
     {{#each project}}
     <a href="/workstation/{{ id }}">
@@ -21,21 +27,5 @@
     {{/each}}
 
   </main>
-
-<<<<<<< HEAD
-=======
-<h2 class="searchheader">Search Projects</h2>
-<input type="text" id="projects-search" class="form-control">
-<br>
-<button type="submit" class="btn btn-primary btn-md" id="projectsearch-btn">
-<span class="fa fa-search"></span> Search</button>
-
-
-{{#each project}}
-<a href="/workstation/{{ id }}">
-<p class="projectName">{{ projectName }}</p>
-</a>
-{{/each}}
->>>>>>> main
 
 </div>
