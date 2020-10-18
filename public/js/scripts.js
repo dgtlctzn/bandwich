@@ -84,7 +84,7 @@ $(document).ready(function () {
         cb();
         setTimeout(function () {
           rec.record();
-        }, 280);
+        }, 500);
         console.log("Recording started");
 
         // creates the audio level meter
