@@ -622,16 +622,19 @@ $(document).ready(function () {
   });
 
   $("#deleteproject-btn").on("click", function () {
-    const projectName = {
-      name: $("#new-name").val(),
-      id: $("#proj-name").data("id"),
-    };
-
-    $.ajax("/api/project/" + projectName.id, {
-      type: "DELETE",
-      data: projectName,
-    }).then(function () {
-      location.assign("/");
-    });
+    var deleteAlert = confirm("Are you sure you would like to delete this project?");
+    if(deleteAlert) {
+      const projectName = {
+        name: $("#new-name").val(),
+        id: $("#proj-name").data("id"),
+      };
+  
+      $.ajax("/api/project/" + projectName.id, {
+        type: "DELETE",
+        data: projectName,
+      }).then(function () {
+        location.assign("/");
+      });
+    } 
   })
 });
