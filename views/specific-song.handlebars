@@ -1,5 +1,21 @@
-<h1>Search Results:</h1>
+<div id="container">
 
-<a href="/workstation/{{ this.id }}">
-<p class="projectName">{{ this.projectName }}</p>
-</a>
+    <header>
+        <div>
+            <img src="/img/bw-logo.svg" alt="bandwich logo">
+        </div>
+        <div>
+            <i class="fas fa-home home menu"></i>
+            {{!-- <i class="fas fa-microphone-alt workstation menu"></i>
+      <i class="fas fa-list songs menu"></i> --}}
+        </div>
+    </header>
+
+    <main>
+        <h1>Search Results:</h1>
+        <a href="/workstation/{{ this.id }}">
+            <p class="projectName">{{ this.projectName }}</p>
+        </a>
+    </main>
+
+</div>

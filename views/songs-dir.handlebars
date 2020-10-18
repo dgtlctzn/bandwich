@@ -6,25 +6,39 @@
     </div>
     <div>
       <i class="fas fa-home home menu"></i>
-      <i class="fas fa-microphone-alt workstation menu"></i>
-      <i class="fas fa-list songs menu"></i>
+      {{!-- <i class="fas fa-microphone-alt workstation menu"></i>
+      <i class="fas fa-list songs menu"></i> --}}
     </div>
   </header>
 
-  <main >
+  <main id="projectList">
     <h1>All Projects</h1>
 
-    <h2 class="searchheader">Search Projects</h2>
-    <input type="text" id="projects-search" class="form-control">
-    <br>
-    <button type="submit" class="btn btn-primary btn-md" id="projectsearch-btn">
-      <span class="fa fa-search"></span> Search</button>
+    <div id="projectSearch">
+      <h2 class="searchheader">Search Projects</h2>
+      <div>
+        <input class="button" type="submit" value="Search" style="float: right" id="projectsearch-btn"/>
+        <div style="overflow: hidden; padding-right: .5em;">
+          <input type="text" class="form-control" id="projects-search" style="width: 100%;" />
+        </div>
 
-    {{#each project}}
-    <a href="/workstation/{{ id }}">
-      <p class="projectName">{{ projectName }}</p>
-    </a>
-    {{/each}}
+        {{!-- <input type="text" id="projects-search" class="form-control">
+        <button type="submit" class="button" id="projectsearch-btn">
+          <span class="fa fa-search"></span> Search</button> --}}
+
+      </div>
+    </div>
+
+
+    <div id="activeList">
+      {{#each project}}
+      <div id="activeListItem"></div>
+        <a href="/workstation/{{ id }}">
+          <p class="projectName">{{ projectName }}</p>
+        </a>
+      {{/each}}
+    </div>
+
 
   </main>
 
