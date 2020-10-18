@@ -109,4 +109,19 @@ module.exports = function (app) {
         if (err) throw err;
       });
   });
+
+  app.delete("/api/project/:id", (req, res) => {
+    console.log(req.params.id)
+    db.Project.destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+      .then(() => {
+        res.end();
+      })
+      .catch((err) => {
+        if (err) throw err;
+      });
+  });
 };
