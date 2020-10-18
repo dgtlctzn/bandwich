@@ -323,3 +323,14 @@ input:checked + .slider:before {
   transform: rotate(180deg);
   background-color: #ccc;
 }
+
+#count {
+  background-color: #ccc;
+  width: 100px;
+  color: black;
+  position: absolute;
+  z-index: 10;
+  top: 270px;
+  left: 47%;
+  display: none;
+}

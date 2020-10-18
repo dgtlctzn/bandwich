@@ -8,14 +8,33 @@ $(document).ready(function () {
   const editTrackEl = $("#new-name");
   const newProjectEl = $("#new-project");
   const recIcon = $("#rec-icon");
+  const countdownEl = $("#count");
+  const trackOne = $("#track-one");
+  const trackTwo = $("#track-two");
+  const trackThree = $("#track-three");
+  const trackFour = $("#track-four");
+  
   
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
     // conditional ensures a track is enabled and no audio stream is currently active
     if (track && !input) {
-      // start record function is called with playAll audio as a callback for synchronous play/record
-      startRecord(playAll);
+      let time = 3;
+      countdownEl.css("display", "block")
+      setTimeout(function() {
+        // start record function is called with playAll audio as a callback for synchronous play/record
+        startRecord(playAll);
+      }, 3000);
+      // countdown timer for the 3 second record delay
+      const timeout = setInterval(function() {
+        time--;
+        countdownEl.text(time);
+        if (time === 0) {
+          clearInterval(timeout);
+          countdownEl.css("display", "none")
+        }
+      }, 1000)
     } else if (!track) {
       alert("Please record enable one of the tracks!");
     }
@@ -65,7 +84,7 @@ $(document).ready(function () {
         cb();
         setTimeout(function () {
           rec.record();
-        }, 100);
+        }, 255);
         console.log("Recording started");
 
         // creates the audio level meter
@@ -128,6 +147,7 @@ $(document).ready(function () {
         // sets an interval before reloading page to allow big POST request
         setTimeout(function () {
           location.reload();
+          trackCheck(track);
         }, 3000);
       },
       error: function (err) {
@@ -155,6 +175,30 @@ $(document).ready(function () {
       });
     };
   }
+
+  function trackCheck(track) {
+    if (track === 1) {
+      enableTrack(trackOne)
+    } 
+    if (track === 2) {
+      enableTrack(trackTwo)
+    } 
+    if (track === 3) {
+      enableTrack(trackThree)
+    } 
+    if (track === 4) {
+      enableTrack(trackFour)
+    }
+  }
+
+  function enableTrack(enabledTrack){
+    enabledTrack.addClass("recorded-track");
+    enabledTrack.children().eq(0).children().eq(1).removeClass("hide");
+    enabledTrack.children().eq(1).children().eq(0).removeClass("disable");
+    enabledTrack.children().eq(1).children().eq(1).children().eq(0).removeClass("disable");
+  }
+
+  // enableTrack(trackOne);
 
   function playAll() {
     // prevents play button with no associated audio
@@ -195,6 +239,23 @@ $(document).ready(function () {
       audio4.pause();
     }
   }
+
+  function enableActive() {
+    if (audioSrc1 !== "/") {
+      enableTrack(trackOne);
+    }
+    if (audioSrc2 !== "/") {
+      enableTrack(trackTwo);
+    }
+    if (audioSrc3 !== "/") {
+      enableTrack(trackThree);
+    }
+    if (audioSrc4 !== "/") {
+      enableTrack(trackFour);
+    }
+  }
+
+  
 
   // the following three functions are forked with permission from cwilso/volume-meter
   function createAudioMeter(audioContext, clipLevel, averaging, clipLag) {
@@ -497,8 +558,7 @@ $(document).ready(function () {
     location.assign("/");
   });
 
-
-
+  
   function disableTrack(button){
     button.css("display","none");
     button.parent().next().children().eq(0).addClass("disable");
@@ -621,4 +681,10 @@ $(document).ready(function () {
       },
     });
   });
+
+  // checks to see which tracks have content and toggles active state
+  enableActive();
+
 });
+
+
