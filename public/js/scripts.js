@@ -352,6 +352,7 @@ $(document).ready(function () {
     $(this).css("display","none");
     $(this).parent().next().children().eq(0).css("display","none");
     $(this).parent().next().children().eq(1).css("display","none");
+    $(this).parent().next().css("justify-content","flex-end");
     let gettingID = audioId1.attr("src");
     gettingID = gettingID.split("");
     gettingID = parseFloat(gettingID.pop());
@@ -371,6 +372,10 @@ $(document).ready(function () {
   });
 
   $("#destroyBtn2").on("click", function () {
+    $(this).css("display","none");
+    $(this).parent().next().children().eq(0).css("display","none");
+    $(this).parent().next().children().eq(1).css("display","none");
+    $(this).parent().next().css("justify-content","flex-end");
     let gettingID = audioId2.attr("src");
     gettingID = gettingID.split("");
     gettingID = parseFloat(gettingID.pop());
@@ -390,6 +395,10 @@ $(document).ready(function () {
   });
 
   $("#destroyBtn3").on("click", function () {
+    $(this).css("display","none");
+    $(this).parent().next().children().eq(0).css("display","none");
+    $(this).parent().next().children().eq(1).css("display","none");
+    $(this).parent().next().css("justify-content","flex-end");
     let gettingID = audioId3.attr("src");
     gettingID = gettingID.split("");
     gettingID = parseFloat(gettingID.pop());
@@ -409,6 +418,10 @@ $(document).ready(function () {
   });
 
   $("#destroyBtn4").on("click", function () {
+    $(this).css("display","none");
+    $(this).parent().next().children().eq(0).css("display","none");
+    $(this).parent().next().children().eq(1).css("display","none");
+    $(this).parent().next().css("justify-content","flex-end");
     let gettingID = audioId4.attr("src");
     gettingID = gettingID.split("");
     gettingID = parseFloat(gettingID.pop());

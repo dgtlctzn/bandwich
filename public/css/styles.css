@@ -1,11 +1,11 @@
 body {
-    font-family: 'Rubik', sans-serif;
-    color: #EAEAEA;
-    background-color: black;
+  font-family: "Rubik", sans-serif;
+  color: #eaeaea;
+  background-color: black;
 }
 
-input[type=range]{
-    width: 50%;
+input[type="range"] {
+  width: 240px;
 }
 
 .master-controls {
@@ -15,21 +15,26 @@ input[type=range]{
 .track-controls {
   box-sizing: border-box;
   font-size: 36px;
-  padding: 20px;
+  padding: 30px;
   height: 100%;
   width: 100%;
+}
+
+canvas {
+  background-color: rgb(80, 80, 255);
+  width: 240px;
+  height: 16px;
+  margin-top: 20px;
+  border-radius: 2px;
 }
 
 /* button {
   margin: 24px;
 } */
 
-
-
 /* .track {
   position: relative;
 } */
-
 
 .title-bar {
   /* position: absolute;
@@ -39,22 +44,28 @@ input[type=range]{
   width: 100%;
   height: 56px;
   margin: 0;
-  padding: 8px 16px ;
-  background-color: rgba(255, 255, 255, .05);
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 h4 {
   margin: 0;
-  letter-spacing: .2px;
+  letter-spacing: 0.2px;
 }
 
+.caption {
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  opacity: 50%;
+}
 
 /* .trk-ctl-btn {
   margin-right: 40px;
 } */
 
 .ui-block {
-  background-color: #1F1F1F;
+  background-color: #1f1f1f;
   padding: 0px;
   border-radius: 4px;
 }
@@ -64,12 +75,11 @@ h4 {
   margin-left: 30px;
 }
 
-
 h1 {
-  text-align: center; 
-  margin-top: 50px; 
-  margin-bottom: 50px; 
-  font-size: 75px
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 75px;
 }
 
 #btnDiv {
@@ -77,13 +87,13 @@ h1 {
 }
 
 input {
-  background-color: #1F1F1F;
+  background-color: #1f1f1f;
 }
 
-input[type=text] {
+input[type="text"] {
   min-width: 100px;
   text-align: center;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   color: white;
   font-size: 1.17em;
   padding: 12px 20px;
@@ -94,11 +104,10 @@ input[type=text] {
   box-sizing: border-box;
 }
 
-input[type=text]:focus {
+input[type="text"]:focus {
   outline: none;
   border: none;
 }
-
 
 /* #name-input {
   text-align: center;
@@ -111,14 +120,14 @@ button:hover,
 }
 
 button {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   letter-spacing: 1px;
 }
 
 .mstr-ctl-btn {
-  background-color: rgba(255, 255, 255, .1);
-  width: 90px;
-  height: 90px;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
 }
 
@@ -130,7 +139,6 @@ button {
 .fa-square {
   color: #FF4A4A;
 } */
-
 
 .button {
   background-color: rgb(80, 80, 255); /* Green */
@@ -153,91 +161,88 @@ button {
   text-align: center;
 }
 
-
 /* toggle switch */
 
 /* The switch - the box around the slider */
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
- 
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
-  #glow {
-    color: rgb(255, 74, 74);
-  }
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 
-  .pulsing {
-    animation: pulse 2s infinite;
-    color: rgb(255, 74, 74);
-    border-radius: 50%;
-  }
+#glow {
+  color: rgb(255, 74, 74);
+}
 
-  @keyframes pulse {
-    0% {
-      transform: scale(0.9);
-      box-shadow: 0 0 0 0 rgba(255, 74, 74, 0.7);
-    }
-    50% {
-      transform: scale(1.1);
-      box-shadow: 0 0 0 10px rgba(255, 74, 74, 0);
-    }
-    100% {
-      transform: scale(0.9);
-    }
-  }
+.pulsing {
+  animation: pulse 2s infinite;
+  color: rgb(255, 74, 74);
+  border-radius: 50%;
+}
 
-   /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-    /* transform: rotate(270deg); */
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(255, 74, 74, 0.7);
   }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(255, 74, 74, 0);
   }
-  
-  input:checked + .slider {
-    background-color: rgb(255, 74, 74);
+  100% {
+    transform: scale(0.9);
   }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px rgb(255, 74, 74);
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
+}
 
-  /* Rounded sliders */
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  /* transform: rotate(270deg); */
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: rgb(255, 74, 74);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px rgb(255, 74, 74);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
 .slider.round {
   border-radius: 4px;
 }
@@ -246,27 +251,27 @@ button {
   border-radius: 10%;
 }
 
+/* breakpoints */
 
-
-  /* breakpoints */
-
-  @media only screen and (min-width: 768px) {
-    input[type=range][orient=vertical] {
-        writing-mode: bt-lr; /* IE */
-        -webkit-appearance: slider-vertical; /* WebKit */
-        width: 8px;
-        height: 140px;
-        padding: 0 5px;
-    }
-
-    .mstr-ctl-btn {
-      font-size: 32px;
-    }
-
-  
-
-    
-
+@media only screen and (min-width: 768px) {
+  input[type="range"][orient="vertical"] {
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 140px;
+    padding: 0 5px;
   }
 
+  .mstr-ctl-btn {
+    font-size: 32px;
+    height: 92px;
+    width: 92px;
+  }
 
+  canvas {
+    width: 40px;
+    height: 140px;
+    margin-top: 0px;
+    margin-left: 40px;
+  }
+}
