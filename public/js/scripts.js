@@ -8,6 +8,11 @@ $(document).ready(function () {
   const editTrackEl = $("#new-name");
   const newProjectEl = $("#new-project");
   const recIcon = $("#rec-icon");
+  const trackOne = $("#track-one");
+  const trackTwo = $("#track-two");
+  const trackThree = $("#track-three");
+  const trackFour = $("#track-four");
+  
   
 
   // click events on the big record/pause/stop buttons
@@ -128,6 +133,7 @@ $(document).ready(function () {
         // sets an interval before reloading page to allow big POST request
         setTimeout(function () {
           location.reload();
+          trackCheck(track);
         }, 3000);
       },
       error: function (err) {
@@ -155,6 +161,30 @@ $(document).ready(function () {
       });
     };
   }
+
+  function trackCheck(track) {
+    if (track === 1) {
+      enableTrack(trackOne)
+    } 
+    if (track === 2) {
+      enableTrack(trackTwo)
+    } 
+    if (track === 3) {
+      enableTrack(trackThree)
+    } 
+    if (track === 4) {
+      enableTrack(trackFour)
+    }
+  }
+
+  function enableTrack(enabledTrack){
+    enabledTrack.addClass("recorded-track");
+    enabledTrack.children().eq(0).children().eq(1).removeClass("hide");
+    enabledTrack.children().eq(1).children().eq(0).removeClass("disable");
+    enabledTrack.children().eq(1).children().eq(1).children().eq(0).removeClass("disable");
+  }
+
+  // enableTrack(trackOne);
 
   function playAll() {
     // prevents play button with no associated audio
@@ -195,6 +225,23 @@ $(document).ready(function () {
       audio4.pause();
     }
   }
+
+  function enableActive() {
+    if (audioSrc1 !== "/") {
+      enableTrack(trackOne);
+    }
+    if (audioSrc2 !== "/") {
+      enableTrack(trackTwo);
+    }
+    if (audioSrc3 !== "/") {
+      enableTrack(trackThree);
+    }
+    if (audioSrc4 !== "/") {
+      enableTrack(trackFour);
+    }
+  }
+
+  
 
   // the following three functions are forked with permission from cwilso/volume-meter
   function createAudioMeter(audioContext, clipLevel, averaging, clipLag) {
@@ -497,8 +544,7 @@ $(document).ready(function () {
     location.assign("/");
   });
 
-
-
+  
   function disableTrack(button){
     button.css("display","none");
     button.parent().next().children().eq(0).addClass("disable");
@@ -621,4 +667,10 @@ $(document).ready(function () {
       },
     });
   });
+
+  // checks to see which tracks have content and toggles active state
+  enableActive();
+
 });
+
+
