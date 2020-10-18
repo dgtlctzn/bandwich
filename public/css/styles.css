@@ -109,7 +109,7 @@ h1 {
   font-size: 75px;
 }
 
-input[type=range]{
+input[type="range"] {
   width: 280px;
 }
 
@@ -301,4 +301,13 @@ input:checked + .slider:before {
     margin-top: 0px;
     margin-left: 40px;
   }
+}
+
+.audio-meter {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  background-color: #ccc;
 }
