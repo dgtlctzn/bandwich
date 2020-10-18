@@ -8,6 +8,7 @@ $(document).ready(function () {
   const editTrackEl = $("#new-name");
   const newProjectEl = $("#new-project");
   const recIcon = $("#rec-icon");
+  const countdownEl = $("#count");
   const trackOne = $("#track-one");
   const trackTwo = $("#track-two");
   const trackThree = $("#track-three");
@@ -19,8 +20,21 @@ $(document).ready(function () {
   mainRecordEl.on("click", function () {
     // conditional ensures a track is enabled and no audio stream is currently active
     if (track && !input) {
-      // start record function is called with playAll audio as a callback for synchronous play/record
-      startRecord(playAll);
+      let time = 3;
+      countdownEl.css("display", "block")
+      setTimeout(function() {
+        // start record function is called with playAll audio as a callback for synchronous play/record
+        startRecord(playAll);
+      }, 3000);
+      // countdown timer for the 3 second record delay
+      const timeout = setInterval(function() {
+        time--;
+        countdownEl.text(time);
+        if (time === 0) {
+          clearInterval(timeout);
+          countdownEl.css("display", "none")
+        }
+      }, 1000)
     } else if (!track) {
       alert("Please record enable one of the tracks!");
     }
