@@ -7,6 +7,8 @@ $(document).ready(function () {
   const saveTrackEl = $("#name-input");
   const editTrackEl = $("#new-name");
   const newProjectEl = $("#new-project");
+  const recIcon = $("#rec-icon");
+  
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
@@ -30,6 +32,7 @@ $(document).ready(function () {
 
   function startRecord() {
     console.log("record!");
+    recIcon.addClass("pulsing");
     const audioContext = new AudioContext();
 
     const constraints = {
@@ -71,6 +74,7 @@ $(document).ready(function () {
 
   function pauseRecord() {
     console.log("Recording paused", rec.recording);
+    recIcon.removeClass("pulsing");
     if (rec.recording) {
       // pause
       rec.stop();
@@ -84,10 +88,14 @@ $(document).ready(function () {
 
   function stopRecord() {
     console.log("Recording stopped");
+    recIcon.removeClass("pulsing");
+    recIcon.removeAttr("id","glow");
+    
     //disable the stop button, enable the record too allow for new recordings
     mainRecordEl.disabled = false;
     mainStopEl.disabled = true;
     mainPauseEl.disabled = true;
+    
     // stops the recording and gets the track
     rec.stop();
     gumStream.getAudioTracks()[0].stop();
@@ -139,8 +147,13 @@ $(document).ready(function () {
     if ($(this).is(":checked")) {
       switchStatus = $(this).is(":checked");
       track = $(this).data("track");
+      $( ".switch" ).css( "pointer-events", "none" );
+      $(this).parent().css("pointer-events", "initial");
+      recIcon.attr("id","glow");
     } else {
       switchStatus = $(this).is(":checked");
+      recIcon.removeAttr("id","glow");
+      $( ".switch" ).css( "pointer-events", "initial" );
     }
   });
 
@@ -266,13 +279,13 @@ $("#projectsearch-btn").on("click", function() {
   playBtn1.on("click", function () {
     if (count1 === 0) {
       playAudio();
-      playBtn1.removeClass("fas fa-play");
-      playBtn1.addClass("fas fa-pause");
+      playBtn1.removeClass("fas fa-play-circle");
+      playBtn1.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count1 === 1) {
       pauseAudio();
-      playBtn1.removeClass("fas fa-pause");
-      playBtn1.addClass("fas fa-play");
+      playBtn1.removeClass("fas fa-pause-circle");
+      playBtn1.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -283,8 +296,8 @@ $("#projectsearch-btn").on("click", function() {
     function playAudio() {
       audio1.play();
       audio1.onended = function () {
-        playBtn1.removeClass("fas fa-pause");
-        playBtn1.addClass("fas fa-play");
+        playBtn1.removeClass("fas fa-pause-circle");
+        playBtn1.addClass("fas fa-play-circle");
         count1 = 0;
       };
     }
@@ -296,13 +309,13 @@ $("#projectsearch-btn").on("click", function() {
   playBtn2.on("click", function () {
     if (count2 === 0) {
       playAudio();
-      playBtn2.removeClass("fas fa-play");
-      playBtn2.addClass("fas fa-pause");
+      playBtn2.removeClass("fas fa-play-circle");
+      playBtn2.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count2 === 1) {
       pauseAudio();
-      playBtn2.removeClass("fas fa-pause");
-      playBtn2.addClass("fas fa-play");
+      playBtn2.removeClass("fas fa-pause-circle");
+      playBtn2.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -313,8 +326,8 @@ $("#projectsearch-btn").on("click", function() {
     function playAudio() {
       audio2.play();
       audio2.onended = function () {
-        playBtn2.removeClass("fas fa-pause");
-        playBtn2.addClass("fas fa-play");
+        playBtn2.removeClass("fas fa-pause-circle");
+        playBtn2.addClass("fas fa-play-circle");
         count2 = 0;
       };
     }
@@ -326,13 +339,13 @@ $("#projectsearch-btn").on("click", function() {
   playBtn3.on("click", function () {
     if (count3 === 0) {
       playAudio();
-      playBtn3.removeClass("fas fa-play");
-      playBtn3.addClass("fas fa-pause");
+      playBtn3.removeClass("fas fa-play-circle");
+      playBtn3.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count3 === 1) {
       pauseAudio();
-      playBtn3.removeClass("fas fa-pause");
-      playBtn3.addClass("fas fa-play");
+      playBtn3.removeClass("fas fa-pause-circle");
+      playBtn3.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -343,8 +356,8 @@ $("#projectsearch-btn").on("click", function() {
     function playAudio() {
       audio3.play();
       audio3.onended = function () {
-        playBtn3.removeClass("fas fa-pause");
-        playBtn3.addClass("fas fa-play");
+        playBtn3.removeClass("fas fa-pause-circle");
+        playBtn3.addClass("fas fa-play-circle");
         count3 = 0;
       };
     }
@@ -356,13 +369,13 @@ $("#projectsearch-btn").on("click", function() {
   playBtn4.on("click", function () {
     if (count4 === 0) {
       playAudio();
-      playBtn4.removeClass("fas fa-play");
-      playBtn4.addClass("fas fa-pause");
+      playBtn4.removeClass("fas fa-play-circle");
+      playBtn4.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count4 === 1) {
       pauseAudio();
-      playBtn4.removeClass("fas fa-pause");
-      playBtn4.addClass("fas fa-play");
+      playBtn4.removeClass("fas fa-pause-circle");
+      playBtn4.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -373,8 +386,8 @@ $("#projectsearch-btn").on("click", function() {
     function playAudio() {
       audio4.play();
       audio4.onended = function () {
-        playBtn4.removeClass("fas fa-pause");
-        playBtn4.addClass("fas fa-play");
+        playBtn4.removeClass("fas fa-pause-circle");
+        playBtn4.addClass("fas fa-play-circle");
         count4 = 0;
       };
     }
@@ -387,8 +400,17 @@ $("#projectsearch-btn").on("click", function() {
     location.assign("/");
   });
 
+
+
+  function disableTrack(button){
+    button.css("display","none");
+    button.parent().next().children().eq(0).addClass("disable");
+    button.parent().next().children().eq(1).children().eq(0).addClass("disable");
+    button.parent().parent().removeClass("recorded-track");
+  }
+
   $("#destroyBtn1").on("click", function () {
-    console.log("Clicked");
+    disableTrack($("#destroyBtn1"));
     let gettingID = audioId1.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
@@ -417,7 +439,7 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn2").on("click", function () {
-    console.log("Clicked");
+    disableTrack($("#destroyBtn2"));
     let gettingID = audioId2.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
@@ -446,7 +468,7 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn3").on("click", function () {
-    console.log("Clicked");
+    disableTrack($("#destroyBtn3"));
     let gettingID = audioId3.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
@@ -475,7 +497,7 @@ $("#projectsearch-btn").on("click", function() {
   });
 
   $("#destroyBtn4").on("click", function () {
-    console.log("Clicked");
+    disableTrack($("#destroyBtn4"));
     let gettingID = audioId4.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
