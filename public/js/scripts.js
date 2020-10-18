@@ -144,6 +144,10 @@ $(document).ready(function () {
       type: "POST",
       data: data,
       success: function (response) {
+        // const stopBtn = $("#main-stop")
+        // stopBtn.empty();
+        // const postAudio = $("<p>").text("Posting audio...").attr("style", "text-align: center;");
+        // stopBtn.append(postAudio);
         // sets an interval before reloading page to allow big POST request
         setTimeout(function () {
           location.reload();
@@ -697,7 +701,25 @@ $(document).ready(function () {
       });
     } 
   })
+
+  // VOLUME SLIDERS
   
+  $("#volumeSlider1").on("input", function(){
+    audio1.volume = $("#volumeSlider1").val();
+  })
+
+  $("#volumeSlider2").on("input", function(){
+    audio2.volume = $("#volumeSlider2").val();
+  })
+
+  $("#volumeSlider3").on("input", function(){
+    audio3.volume = $("#volumeSlider3").val();
+  })
+
+  $("#volumeSlider4").on("input", function(){
+    audio4.volume = $("#volumeSlider4").val();
+  })
+
   // checks to see which tracks have content and toggles active state
   enableActive();
 
