@@ -10,9 +10,11 @@ $(document).ready(function () {
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
-    if (track) {
+    // conditional ensures a track is enabled and no audio stream is currently active
+    if (track && !input) {
+      // start record function is called with playAll audio as a callback for synchronous play/record
       startRecord(playAll);
-    } else {
+    } else if (!track) {
       alert("Please record enable one of the tracks!");
     }
   });
@@ -91,16 +93,20 @@ $(document).ready(function () {
   }
 
   function stopRecord() {
-    console.log("Recording stopped");
-    //disable the stop button, enable the record too allow for new recordings
-    mainRecordEl.disabled = false;
-    mainStopEl.disabled = true;
-    mainPauseEl.disabled = true;
-    // stops the recording and gets the track
-    rec.stop();
-    gumStream.getAudioTracks()[0].stop();
-    // creates wav blob and passes blob as argument to the callback
-    rec.exportWAV(convertToBase64);
+    if (input) {
+      console.log("Recording stopped");
+      //disable the stop button, enable the record too allow for new recordings
+      mainRecordEl.disabled = false;
+      mainStopEl.disabled = true;
+      mainPauseEl.disabled = true;
+      // stops the recording and gets the track
+      rec.stop();
+      gumStream.getAudioTracks()[0].stop();
+      // creates wav blob and passes blob as argument to the callback
+      rec.exportWAV(convertToBase64);
+    } else {
+      stopAll();
+    }
   }
 
   function postAudio(data) {
@@ -139,6 +145,40 @@ $(document).ready(function () {
         track: track,
       });
     };
+  }
+
+  function playAll() {
+    if (audioSrc1 !== "/") {
+      audio1.load();
+      audio1.play();
+    }
+    if (audioSrc2 !== "/") {
+      audio2.load();
+      audio2.play();
+    }
+    if (audioSrc3 !== "/") {
+      audio3.load();
+      audio3.play();
+    }
+    if (audioSrc4 !== "/") {
+      audio4.load();
+      audio4.play();
+    }
+  }
+
+  function stopAll() {
+    if (audioSrc1 !== "/") {
+      audio1.pause();
+    }
+    if (audioSrc2 !== "/") {
+      audio2.pause();
+    }
+    if (audioSrc3 !== "/") {
+      audio3.pause();
+    }
+    if (audioSrc4 !== "/") {
+      audio4.pause();
+    }
   }
 
   // the following three functions are forked with permission from cwilso/volume-meter
@@ -308,25 +348,6 @@ $(document).ready(function () {
   const audio3 = new Audio(audioSrc3);
   const audioSrc4 = audioId4.attr("src");
   const audio4 = new Audio(audioSrc4);
-
-  function playAll() {
-    if (audioSrc1 !== "/") {
-      audio1.load();
-      audio1.play();
-    }
-    if (audioSrc2 !== "/") {
-      audio2.load();
-      audio2.play();
-    }
-    if (audioSrc3 !== "/") {
-      audio3.load();
-      audio3.play();
-    }
-    if (audioSrc4 !== "/") {
-      audio4.load();
-      audio4.play();
-    }
-  }
 
   mainPlayEl.on("click", function () {
     playAll();
