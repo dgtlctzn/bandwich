@@ -8,6 +8,7 @@ $(document).ready(function () {
   const editTrackEl = $("#new-name");
   const newProjectEl = $("#new-project");
   const recIcon = $("#rec-icon");
+  const countdownEl = $("#count");
   const trackOne = $("#track-one");
   const trackTwo = $("#track-two");
   const trackThree = $("#track-three");
@@ -19,8 +20,21 @@ $(document).ready(function () {
   mainRecordEl.on("click", function () {
     // conditional ensures a track is enabled and no audio stream is currently active
     if (track && !input) {
-      // start record function is called with playAll audio as a callback for synchronous play/record
-      startRecord(playAll);
+      let time = 3;
+      countdownEl.css("display", "block")
+      setTimeout(function() {
+        // start record function is called with playAll audio as a callback for synchronous play/record
+        startRecord(playAll);
+      }, 3000);
+      // countdown timer for the 3 second record delay
+      const timeout = setInterval(function() {
+        time--;
+        countdownEl.text(time);
+        if (time === 0) {
+          clearInterval(timeout);
+          countdownEl.css("display", "none")
+        }
+      }, 1000)
     } else if (!track) {
       alert("Please record enable one of the tracks!");
     }
@@ -70,7 +84,7 @@ $(document).ready(function () {
         cb();
         setTimeout(function () {
           rec.record();
-        }, 100);
+        }, 333);
         console.log("Recording started");
 
         // creates the audio level meter
@@ -371,8 +385,7 @@ $(document).ready(function () {
     console.log("click works");
     console.log(searchedProject);
     // Using a RegEx Pattern to remove spaces from searchedCharacter
-    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-    searchedProject = searchedProject.replace(/\s+/g, "").toLowerCase();
+    // searchedProject = searchedProject.replace(/\s+/g, "").toLowerCase();
 
     // run an AJAX GET-request for our servers api,
     // including the user's character in the url
@@ -668,6 +681,23 @@ $(document).ready(function () {
     });
   });
 
+  $("#deleteproject-btn").on("click", function () {
+    var deleteAlert = confirm("Are you sure you would like to delete this project?");
+    if(deleteAlert) {
+      const projectName = {
+        name: $("#new-name").val(),
+        id: $("#proj-name").data("id"),
+      };
+  
+      $.ajax("/api/project/" + projectName.id, {
+        type: "DELETE",
+        data: projectName,
+      }).then(function () {
+        location.assign("/");
+      });
+    } 
+  })
+  
   // checks to see which tracks have content and toggles active state
   enableActive();
 
