@@ -2,27 +2,40 @@
 
 header,
 .track,
+.title-bar,
 .master-controls,
 .track-controls,
 #project-settings,
-#intro-page {
+.mstr-ctl-btn,
+.volume-controls {
     display: flex;
 }
 
+/* .title-bar {
+    justify-content: space-between;
+
+} */
+
 #project-settings,
-#intro-page {
+.mstr-ctl-btn {
     align-items: center;
     justify-content: center;
 }
 header,
-.track{
+.track,
+.title-bar{
     justify-content: space-between;
     align-items: center;
 }
 
-.track-controls,
 .master-controls {
     justify-content: space-evenly;
+    align-items: center;
+}
+
+.track-controls
+ {
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -31,7 +44,7 @@ header,
 }
 
 .track,
-#intro-page {
+.volume-controls {
     flex-direction: column;
 }
 
@@ -113,6 +126,14 @@ main {
             "prj prj prj prj"
             "trk-1 trk-2 trk-3 trk-4"
             "ctls ctls ctls ctls";
+    }
+
+    .track-controls {
+        flex-direction: column;
+    }
+
+    .volume-controls {
+        flex-direction: row;
     }
 
 }    

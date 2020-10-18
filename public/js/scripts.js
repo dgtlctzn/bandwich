@@ -7,6 +7,8 @@ $(document).ready(function () {
   const saveTrackEl = $("#name-input");
   const editTrackEl = $("#new-name");
   const newProjectEl = $("#new-project");
+  const recIcon = $("#rec-icon");
+  
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
@@ -33,6 +35,7 @@ $(document).ready(function () {
 
   function startRecord(cb) {
     console.log("record!");
+    recIcon.addClass("pulsing");
     const audioContext = new AudioContext();
 
     const constraints = {
@@ -81,6 +84,7 @@ $(document).ready(function () {
 
   function pauseRecord() {
     console.log("Recording paused", rec.recording);
+    recIcon.removeClass("pulsing");
     if (rec.recording) {
       // pause
       rec.stop();
@@ -104,8 +108,13 @@ $(document).ready(function () {
       gumStream.getAudioTracks()[0].stop();
       // creates wav blob and passes blob as argument to the callback
       rec.exportWAV(convertToBase64);
+
+      recIcon.removeClass("pulsing");
+      recIcon.removeAttr("id","glow");
     } else {
       stopAll();
+      recIcon.removeClass("pulsing");
+      recIcon.removeAttr("id","glow");
     }
   }
 
@@ -148,21 +157,27 @@ $(document).ready(function () {
   }
 
   function playAll() {
-    if (audioSrc1 !== "/") {
-      audio1.load();
-      audio1.play();
-    }
-    if (audioSrc2 !== "/") {
-      audio2.load();
-      audio2.play();
-    }
-    if (audioSrc3 !== "/") {
-      audio3.load();
-      audio3.play();
-    }
-    if (audioSrc4 !== "/") {
-      audio4.load();
-      audio4.play();
+    // prevents play button with no associated audio
+    if (audioSrc1 === "/" && audioSrc2 === "/" && audioSrc3 === "/" && audioSrc4 === "/" && !input) {
+      alert("There is no recorded audio to play!")
+    } else {
+      // plays each audio track if exists
+      if (audioSrc1 !== "/") {
+        audio1.load();
+        audio1.play();
+      }
+      if (audioSrc2 !== "/") {
+        audio2.load();
+        audio2.play();
+      }
+      if (audioSrc3 !== "/") {
+        audio3.load();
+        audio3.play();
+      }
+      if (audioSrc4 !== "/") {
+        audio4.load();
+        audio4.play();
+      }
     }
   }
 
@@ -230,7 +245,7 @@ $(document).ready(function () {
   }
 
   function drawLoop(time) {
-    let WIDTH = 50;
+    let WIDTH = 300;
     let HEIGHT = 500;
 
     const canvas = document.getElementById("myCanvas" + track).getContext("2d");
@@ -250,8 +265,13 @@ $(document).ready(function () {
     if ($(this).is(":checked")) {
       switchStatus = $(this).is(":checked");
       track = $(this).data("track");
+      $( ".switch" ).css( "pointer-events", "none" );
+      $(this).parent().css("pointer-events", "initial");
+      recIcon.attr("id","glow");
     } else {
       switchStatus = $(this).is(":checked");
+      recIcon.removeAttr("id","glow");
+      $( ".switch" ).css( "pointer-events", "initial" );
     }
   });
 
@@ -356,13 +376,13 @@ $(document).ready(function () {
   playBtn1.on("click", function () {
     if (count1 === 0) {
       playAudio();
-      playBtn1.removeClass("fas fa-play");
-      playBtn1.addClass("fas fa-pause");
+      playBtn1.removeClass("fas fa-play-circle");
+      playBtn1.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count1 === 1) {
       pauseAudio();
-      playBtn1.removeClass("fas fa-pause");
-      playBtn1.addClass("fas fa-play");
+      playBtn1.removeClass("fas fa-pause-circle");
+      playBtn1.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -373,8 +393,8 @@ $(document).ready(function () {
     function playAudio() {
       audio1.play();
       audio1.onended = function () {
-        playBtn1.removeClass("fas fa-pause");
-        playBtn1.addClass("fas fa-play");
+        playBtn1.removeClass("fas fa-pause-circle");
+        playBtn1.addClass("fas fa-play-circle");
         count1 = 0;
       };
     }
@@ -386,13 +406,13 @@ $(document).ready(function () {
   playBtn2.on("click", function () {
     if (count2 === 0) {
       playAudio();
-      playBtn2.removeClass("fas fa-play");
-      playBtn2.addClass("fas fa-pause");
+      playBtn2.removeClass("fas fa-play-circle");
+      playBtn2.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count2 === 1) {
       pauseAudio();
-      playBtn2.removeClass("fas fa-pause");
-      playBtn2.addClass("fas fa-play");
+      playBtn2.removeClass("fas fa-pause-circle");
+      playBtn2.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -403,8 +423,8 @@ $(document).ready(function () {
     function playAudio() {
       audio2.play();
       audio2.onended = function () {
-        playBtn2.removeClass("fas fa-pause");
-        playBtn2.addClass("fas fa-play");
+        playBtn2.removeClass("fas fa-pause-circle");
+        playBtn2.addClass("fas fa-play-circle");
         count2 = 0;
       };
     }
@@ -416,13 +436,13 @@ $(document).ready(function () {
   playBtn3.on("click", function () {
     if (count3 === 0) {
       playAudio();
-      playBtn3.removeClass("fas fa-play");
-      playBtn3.addClass("fas fa-pause");
+      playBtn3.removeClass("fas fa-play-circle");
+      playBtn3.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count3 === 1) {
       pauseAudio();
-      playBtn3.removeClass("fas fa-pause");
-      playBtn3.addClass("fas fa-play");
+      playBtn3.removeClass("fas fa-pause-circle");
+      playBtn3.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -433,8 +453,8 @@ $(document).ready(function () {
     function playAudio() {
       audio3.play();
       audio3.onended = function () {
-        playBtn3.removeClass("fas fa-pause");
-        playBtn3.addClass("fas fa-play");
+        playBtn3.removeClass("fas fa-pause-circle");
+        playBtn3.addClass("fas fa-play-circle");
         count3 = 0;
       };
     }
@@ -446,13 +466,13 @@ $(document).ready(function () {
   playBtn4.on("click", function () {
     if (count4 === 0) {
       playAudio();
-      playBtn4.removeClass("fas fa-play");
-      playBtn4.addClass("fas fa-pause");
+      playBtn4.removeClass("fas fa-play-circle");
+      playBtn4.addClass("fas fa-pause-circle");
       console.log("Playing");
     } else if (count4 === 1) {
       pauseAudio();
-      playBtn4.removeClass("fas fa-pause");
-      playBtn4.addClass("fas fa-play");
+      playBtn4.removeClass("fas fa-pause-circle");
+      playBtn4.addClass("fas fa-play-circle");
       console.log("Stopping");
     }
 
@@ -463,8 +483,8 @@ $(document).ready(function () {
     function playAudio() {
       audio4.play();
       audio4.onended = function () {
-        playBtn4.removeClass("fas fa-pause");
-        playBtn4.addClass("fas fa-play");
+        playBtn4.removeClass("fas fa-pause-circle");
+        playBtn4.addClass("fas fa-play-circle");
         count4 = 0;
       };
     }
@@ -477,15 +497,34 @@ $(document).ready(function () {
     location.assign("/");
   });
 
+
+
+  function disableTrack(button){
+    button.css("display","none");
+    button.parent().next().children().eq(0).addClass("disable");
+    button.parent().next().children().eq(1).children().eq(0).addClass("disable");
+    button.parent().parent().removeClass("recorded-track");
+  }
+
   $("#destroyBtn1").on("click", function () {
+    disableTrack($("#destroyBtn1"));
     let gettingID = audioId1.attr("src");
     gettingID = gettingID.split("");
-    gettingID = parseFloat(gettingID.pop());
+    let newID = [];
+    for (let i = 0; i < gettingID.length; i++) {
+      const parsedAudioName = parseInt(gettingID[i]);
+      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+        newID.push(parsedAudioName);
+      }
+    }
+    newID = parseInt(newID.join(""));
+    console.log(newID);
+    // gettingID = parseFloat(gettingID.pop());
 
     audioId1.attr("src", "/");
 
     $.ajax({
-      url: `/api/audio/${gettingID}`,
+      url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
         setTimeout(function () {
@@ -497,14 +536,24 @@ $(document).ready(function () {
   });
 
   $("#destroyBtn2").on("click", function () {
+    disableTrack($("#destroyBtn2"));
     let gettingID = audioId2.attr("src");
     gettingID = gettingID.split("");
-    gettingID = parseFloat(gettingID.pop());
+    let newID = [];
+    for (let i = 0; i < gettingID.length; i++) {
+      const parsedAudioName = parseInt(gettingID[i]);
+      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+        newID.push(parsedAudioName);
+      }
+    }
+    newID = parseInt(newID.join(""));
+    console.log(newID);
+    // gettingID = parseFloat(gettingID.pop());
 
     audioId2.attr("src", "/");
 
     $.ajax({
-      url: `/api/audio/${gettingID}`,
+      url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
         setTimeout(function () {
@@ -516,14 +565,24 @@ $(document).ready(function () {
   });
 
   $("#destroyBtn3").on("click", function () {
+    disableTrack($("#destroyBtn3"));
     let gettingID = audioId3.attr("src");
     gettingID = gettingID.split("");
-    gettingID = parseFloat(gettingID.pop());
+    let newID = [];
+    for (let i = 0; i < gettingID.length; i++) {
+      const parsedAudioName = parseInt(gettingID[i]);
+      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+        newID.push(parsedAudioName);
+      }
+    }
+    newID = parseInt(newID.join(""));
+    console.log(newID);
+    // gettingID = parseFloat(gettingID.pop());
 
     audioId3.attr("src", "/");
 
     $.ajax({
-      url: `/api/audio/${gettingID}`,
+      url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
         setTimeout(function () {
@@ -535,14 +594,24 @@ $(document).ready(function () {
   });
 
   $("#destroyBtn4").on("click", function () {
+    disableTrack($("#destroyBtn4"));
     let gettingID = audioId4.attr("src");
     gettingID = gettingID.split("");
-    gettingID = parseFloat(gettingID.pop());
+    let newID = [];
+    for (let i = 0; i < gettingID.length; i++) {
+      const parsedAudioName = parseInt(gettingID[i]);
+      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+        newID.push(parsedAudioName);
+      }
+    }
+    newID = parseInt(newID.join(""));
+    console.log(newID);
+    // gettingID = parseFloat(gettingID.pop());
 
     audioId4.attr("src", "/");
 
     $.ajax({
-      url: `/api/audio/${gettingID}`,
+      url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
         setTimeout(function () {

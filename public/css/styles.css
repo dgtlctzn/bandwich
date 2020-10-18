@@ -4,84 +4,102 @@ body {
   background-color: black;
 }
 
-/* Home */
-
-#home-logo {
-  width: 100%;
-  max-width: 400px;
-}
-
-#blurb {
-  margin-top: 40px;
-  line-height: 1.5;
-  width: 80%;
-  font-size: 18px;
-  text-align: center;
-}
-
-#btnDiv {
-  margin-top: 20px;
-  text-align: center;
-}
-
-i:hover,
-button:hover {
-  cursor: pointer;
-}
-
-.button {
-  background-color: rgb(80, 80, 255); /* Green */
-  font-family: "Rubik", sans-serif;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 10px;
-}
-
-.button:hover {
-  background-color: rgb(0, 0, 255);
-  cursor: pointer;
-}
-
-/* Workstation */
-
-.projectName {
-  text-align: center;
-}
-
-.track-controls {
-  font-size: 24px;
+input[type="range"] {
+  width: 240px;
 }
 
 .master-controls {
-  font-size: 48px;
+  font-size: 24px;
 }
 
-button {
-  margin: 24px;
-}
-
-.play {
-  margin-right: 40px;
+.track-controls {
+  box-sizing: border-box;
+  font-size: 36px;
+  padding: 30px;
+  height: 100%;
+  width: 100%;
 }
 
 .ui-block {
-  background-color: #1f1f1f;
-  padding: 20px;
+  background-color: #181818;
+  padding: 0px;
   border-radius: 4px;
 }
+
+.recorded-track {
+  /* background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 100%); */
+  background-color: rgba(255,255,255,0.2);
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: inline-block;
+}
+
+.disable {
+  opacity: 20%;
+  pointer-events: none;
+}
+
+.enable {
+  opacity: 100%;
+  pointer-events: initial;
+}
+
+canvas {
+  background-color: rgba(255,255,255,0.05);
+  width: 240px;
+  height: 16px;
+  margin-top: 20px;
+  border-radius: 2px;
+}
+
+/* button {
+  margin: 24px;
+} */
+
+/* .track {
+  position: relative;
+} */
+
+.title-bar {
+  /* position: absolute;
+  left: 0px;
+  top: 0px; */
+  box-sizing: border-box;
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+h4 {
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.caption {
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  opacity: 50%;
+}
+
+/* .trk-ctl-btn {
+  margin-right: 40px;
+} */
+
+
+
+
 
 .menu {
   font-size: 26px;
   margin-left: 30px;
-}
-
-.play:hover {
-  cursor: pointer;
 }
 
 h1 {
@@ -118,6 +136,58 @@ input[type="text"]:focus {
   border: none;
 }
 
+/* #name-input {
+  text-align: center;
+} */
+
+i:hover,
+button:hover,
+.mstr-ctl-btn:hover {
+  cursor: pointer;
+}
+
+button {
+  font-family: "Rubik", sans-serif;
+  letter-spacing: 1px;
+}
+
+.mstr-ctl-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.nudge {
+  margin-left: 8px;
+}
+
+/* .fa-circle,
+.fa-square {
+  color: #FF4A4A;
+} */
+
+.button {
+  background-color: rgb(80, 80, 255); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.button:hover {
+  background-color: rgb(0, 0, 255);
+  cursor: pointer;
+}
+
+.projectName {
+  text-align: center;
+}
+
 /* toggle switch */
 
 /* The switch - the box around the slider */
@@ -135,6 +205,30 @@ input[type="text"]:focus {
   height: 0;
 }
 
+#glow {
+  color: rgb(255, 74, 74);
+}
+
+.pulsing {
+  animation: pulse 2s infinite;
+  color: rgb(255, 74, 74);
+  border-radius: 50%;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(255, 74, 74, 0.7);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(255, 74, 74, 0);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
 /* The slider */
 .slider {
   position: absolute;
@@ -146,6 +240,7 @@ input[type="text"]:focus {
   background-color: #ccc;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+  /* transform: rotate(270deg); */
 }
 
 .slider:before {
@@ -161,11 +256,11 @@ input[type="text"]:focus {
 }
 
 input:checked + .slider {
-  background-color: #006aff;
+  background-color: rgb(255, 74, 74);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #006aff;
+  box-shadow: 0 0 1px rgb(255, 74, 74);
 }
 
 input:checked + .slider:before {
@@ -190,16 +285,21 @@ input:checked + .slider:before {
     writing-mode: bt-lr; /* IE */
     -webkit-appearance: slider-vertical; /* WebKit */
     width: 8px;
-    height: 160px;
+    height: 140px;
     padding: 0 5px;
   }
 
-  .master-controls {
-    font-size: 72px;
+  .mstr-ctl-btn {
+    font-size: 32px;
+    height: 92px;
+    width: 92px;
   }
 
-  .ui-block {
-    padding: 40px;
+  canvas {
+    width: 40px;
+    height: 140px;
+    margin-top: 0px;
+    margin-left: 40px;
   }
 }
 
