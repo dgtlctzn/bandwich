@@ -127,6 +127,7 @@ $(document).ready(function () {
       gumStream.getAudioTracks()[0].stop();
       // creates wav blob and passes blob as argument to the callback
       rec.exportWAV(convertToBase64);
+      
 
       recIcon.removeClass("pulsing");
       recIcon.removeAttr("id","glow");
@@ -202,11 +203,9 @@ $(document).ready(function () {
     enabledTrack.children().eq(1).children().eq(1).children().eq(0).removeClass("disable");
   }
 
-  // enableTrack(trackOne);
-
   function playAll() {
     // prevents play button with no associated audio
-    if (audioSrc1 === "/" && audioSrc2 === "/" && audioSrc3 === "/" && audioSrc4 === "/" && !input) {
+    if (audioSrc1 === "/" && audioSrc2 === "/" && audioSrc3 === "/" && audioSrc4 === "/" && !mainRecordEl.disabled) {
       alert("There is no recorded audio to play!")
     } else {
       // plays each audio track if exists
