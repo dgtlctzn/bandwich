@@ -1,7 +1,18 @@
 body {
   font-family: "Rubik", sans-serif;
   color: #eaeaea;
+  /* background: url("/img/image.png") no-repeat center center fixed;
+  background-size: cover; */
   background-color: black;
+  padding: 0px;
+}
+
+#bg-image {
+  height: 100vh;
+  background: url("/img/bg.png") no-repeat center center fixed;
+  background-size: cover;
+  background-color: black;
+  margin: 0px;
 }
 
 input[type="range"] {
@@ -23,6 +34,7 @@ input[type="range"] {
 #home-logo {
   width: 100%;
   max-width: 400px;
+  margin-top: 10%;
 }
 
 
