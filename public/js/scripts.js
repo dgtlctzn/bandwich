@@ -66,6 +66,8 @@ $(document).ready(function () {
     mainStopEl.disabled = false;
     mainPauseEl.disabled = false;
 
+    cb();
+
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then(function (stream) {
@@ -81,10 +83,7 @@ $(document).ready(function () {
           numChannels: 1,
         });
         //start the recording process
-        cb();
-        setTimeout(function () {
-          rec.record();
-        }, 400);
+        rec.record();
         console.log("Recording started");
 
         // creates the audio level meter
