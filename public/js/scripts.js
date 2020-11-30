@@ -13,28 +13,26 @@ $(document).ready(function () {
   const trackTwo = $("#track-two");
   const trackThree = $("#track-three");
   const trackFour = $("#track-four");
-  
-  
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
     // conditional ensures a track is enabled and no audio stream is currently active
     if (track && !input) {
       let time = 3;
-      countdownEl.css("display", "block")
-      setTimeout(function() {
+      countdownEl.css("display", "block");
+      setTimeout(function () {
         // start record function is called with playAll audio as a callback for synchronous play/record
         startRecord(playAll);
       }, 3000);
       // countdown timer for the 3 second record delay
-      const timeout = setInterval(function() {
+      const timeout = setInterval(function () {
         time--;
         countdownEl.text(time);
         if (time === 0) {
           clearInterval(timeout);
-          countdownEl.css("display", "none")
+          countdownEl.css("display", "none");
         }
-      }, 1000)
+      }, 1000);
     } else if (!track) {
       alert("Please record enable one of the tracks!");
     }
@@ -126,14 +124,13 @@ $(document).ready(function () {
       gumStream.getAudioTracks()[0].stop();
       // creates wav blob and passes blob as argument to the callback
       rec.exportWAV(convertToBase64);
-      
 
       recIcon.removeClass("pulsing");
-      recIcon.removeAttr("id","glow");
+      recIcon.removeAttr("id", "glow");
     } else {
       stopAll();
       recIcon.removeClass("pulsing");
-      recIcon.removeAttr("id","glow");
+      recIcon.removeAttr("id", "glow");
     }
   }
 
@@ -149,17 +146,17 @@ $(document).ready(function () {
         // const postAudio = $("<p>").text("Posting audio...").attr("style", "text-align: center;");
         // stopBtn.append(postAudio);
         // sets an interval before reloading page to allow big POST request
-        setTimeout(function () {
-          location.reload();
-          trackCheck(track);
-        }, 3000);
+        // setTimeout(function () {
+        location.reload();
+        trackCheck(track);
+        // }, 3000);
       },
       error: function (err) {
         if (err) {
           console.log(err);
         }
-      }
-    })
+      },
+    });
   }
 
   function convertToBase64(blob) {
@@ -182,30 +179,43 @@ $(document).ready(function () {
 
   function trackCheck(track) {
     if (track === 1) {
-      enableTrack(trackOne)
-    } 
+      enableTrack(trackOne);
+    }
     if (track === 2) {
-      enableTrack(trackTwo)
-    } 
+      enableTrack(trackTwo);
+    }
     if (track === 3) {
-      enableTrack(trackThree)
-    } 
+      enableTrack(trackThree);
+    }
     if (track === 4) {
-      enableTrack(trackFour)
+      enableTrack(trackFour);
     }
   }
 
-  function enableTrack(enabledTrack){
+  function enableTrack(enabledTrack) {
     enabledTrack.addClass("recorded-track");
     enabledTrack.children().eq(0).children().eq(1).removeClass("hide");
     enabledTrack.children().eq(1).children().eq(0).removeClass("disable");
-    enabledTrack.children().eq(1).children().eq(1).children().eq(0).removeClass("disable");
+    enabledTrack
+      .children()
+      .eq(1)
+      .children()
+      .eq(1)
+      .children()
+      .eq(0)
+      .removeClass("disable");
   }
 
   function playAll() {
     // prevents play button with no associated audio
-    if (audioSrc1 === "/" && audioSrc2 === "/" && audioSrc3 === "/" && audioSrc4 === "/" && !mainRecordEl.disabled) {
-      alert("There is no recorded audio to play!")
+    if (
+      audioSrc1 === "/" &&
+      audioSrc2 === "/" &&
+      audioSrc3 === "/" &&
+      audioSrc4 === "/" &&
+      !mainRecordEl.disabled
+    ) {
+      alert("There is no recorded audio to play!");
     } else {
       // plays each audio track if exists
       if (audioSrc1 !== "/") {
@@ -256,8 +266,6 @@ $(document).ready(function () {
       enableTrack(trackFour);
     }
   }
-
-  
 
   // the following three functions are forked with permission from cwilso/volume-meter
   function createAudioMeter(audioContext, clipLevel, averaging, clipLag) {
@@ -328,13 +336,13 @@ $(document).ready(function () {
     if ($(this).is(":checked")) {
       switchStatus = $(this).is(":checked");
       track = $(this).data("track");
-      $( ".switch" ).css( "pointer-events", "none" );
+      $(".switch").css("pointer-events", "none");
       $(this).parent().css("pointer-events", "initial");
-      recIcon.attr("id","glow");
+      recIcon.attr("id", "glow");
     } else {
       switchStatus = $(this).is(":checked");
-      recIcon.removeAttr("id","glow");
-      $( ".switch" ).css( "pointer-events", "initial" );
+      recIcon.removeAttr("id", "glow");
+      $(".switch").css("pointer-events", "initial");
     }
   });
 
@@ -559,11 +567,17 @@ $(document).ready(function () {
     location.assign("/");
   });
 
-  
-  function disableTrack(button){
-    button.css("display","none");
+  function disableTrack(button) {
+    button.css("display", "none");
     button.parent().next().children().eq(0).addClass("disable");
-    button.parent().next().children().eq(1).children().eq(0).addClass("disable");
+    button
+      .parent()
+      .next()
+      .children()
+      .eq(1)
+      .children()
+      .eq(0)
+      .addClass("disable");
     button.parent().parent().removeClass("recorded-track");
   }
 
@@ -574,7 +588,10 @@ $(document).ready(function () {
     let newID = [];
     for (let i = 0; i < gettingID.length; i++) {
       const parsedAudioName = parseInt(gettingID[i]);
-      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+      if (
+        isNaN(parsedAudioName) === false &&
+        typeof parsedAudioName === "number"
+      ) {
         newID.push(parsedAudioName);
       }
     }
@@ -603,7 +620,10 @@ $(document).ready(function () {
     let newID = [];
     for (let i = 0; i < gettingID.length; i++) {
       const parsedAudioName = parseInt(gettingID[i]);
-      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+      if (
+        isNaN(parsedAudioName) === false &&
+        typeof parsedAudioName === "number"
+      ) {
         newID.push(parsedAudioName);
       }
     }
@@ -632,7 +652,10 @@ $(document).ready(function () {
     let newID = [];
     for (let i = 0; i < gettingID.length; i++) {
       const parsedAudioName = parseInt(gettingID[i]);
-      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+      if (
+        isNaN(parsedAudioName) === false &&
+        typeof parsedAudioName === "number"
+      ) {
         newID.push(parsedAudioName);
       }
     }
@@ -661,7 +684,10 @@ $(document).ready(function () {
     let newID = [];
     for (let i = 0; i < gettingID.length; i++) {
       const parsedAudioName = parseInt(gettingID[i]);
-      if (isNaN(parsedAudioName) === false && typeof parsedAudioName === "number") {
+      if (
+        isNaN(parsedAudioName) === false &&
+        typeof parsedAudioName === "number"
+      ) {
         newID.push(parsedAudioName);
       }
     }
@@ -684,43 +710,42 @@ $(document).ready(function () {
   });
 
   $("#deleteproject-btn").on("click", function () {
-    var deleteAlert = confirm("Are you sure you would like to delete this project?");
-    if(deleteAlert) {
+    var deleteAlert = confirm(
+      "Are you sure you would like to delete this project?"
+    );
+    if (deleteAlert) {
       const projectName = {
         name: $("#new-name").val(),
         id: $("#proj-name").data("id"),
       };
-  
+
       $.ajax("/api/project/" + projectName.id, {
         type: "DELETE",
         data: projectName,
       }).then(function () {
         location.assign("/");
       });
-    } 
-  })
+    }
+  });
 
   // VOLUME SLIDERS
-  
-  $("#volumeSlider1").on("input", function(){
+
+  $("#volumeSlider1").on("input", function () {
     audio1.volume = $("#volumeSlider1").val();
-  })
+  });
 
-  $("#volumeSlider2").on("input", function(){
+  $("#volumeSlider2").on("input", function () {
     audio2.volume = $("#volumeSlider2").val();
-  })
+  });
 
-  $("#volumeSlider3").on("input", function(){
+  $("#volumeSlider3").on("input", function () {
     audio3.volume = $("#volumeSlider3").val();
-  })
+  });
 
-  $("#volumeSlider4").on("input", function(){
+  $("#volumeSlider4").on("input", function () {
     audio4.volume = $("#volumeSlider4").val();
-  })
+  });
 
   // checks to see which tracks have content and toggles active state
   enableActive();
-
 });
-
-
