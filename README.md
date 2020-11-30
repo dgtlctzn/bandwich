@@ -1,47 +1,37 @@
-# bandwich
+# Bandwich
+
+![Example workstation](./public/img/bandwich-cover.png)
 
 ## Description 
 
-This project is a web app that will all the user to make collaborative music projects. Bandwich allows musicians to create their own workstations where they can record songs on a four track. These projects are available for friends and other user to come collaborate their own recordings. In a future update, projects will require passwords so that the owner of the project can determine who can edit their project.
-
+Bandwich is a simple 4-track interface built with collaboration in mind. A Bandwich audio workstation can be used to share song ideas between users or collaborate on audio tracks. The project utilizes [Recorder.js](https://github.com/mattdiamond/Recorderjs) to record audio files in the browser and stores the Base64 data in a SQL database.
 
 ## Table of Contents
 
-* [Installation](#installation)
+* [Dependencies](#Dependencies)
 * [Usage](#usage)
 * [Credits](#credits)
 * [License](#license)
 
 
-## Installation
-The user does not need to install anything to use this application if they choose to use the deployed Heruko application. This can be accessed [here](https://bandwich-app.herokuapp.com/).
-
-However, if the user wants to locally host the app, they must download the files from this repository. Those can be accessed [here](https://github.com/dgtlctzn/bandwich).
-
-Once the user downloads these files, they must open the files in VS Code. In VS Code, the user will run a new terminal. In the terminal, the user will change their working directory to the current directory. 
-
-Run "npm install" to install the app.
+## Dependencies
+A package.json is included in the repo with all the necessary dependencies. 
 
 
 ## Usage 
-*If the user uses the app locally, run the command node server.js in the terminal, then open localhost:8080 in a web browser.* 
+To start recording click the link below!
 
-Once in the app, the user will be placed on the home page, with the option to create a new project or to look through existing songs. When creating a new project, the user is sent to the project workstation. On here, there will be four tracks, along with a play/pause button for each track and a row of play, pause, stop recording, and start recording buttons that control the whole project. 
+[Bandwich](https://bandwich-app.herokuapp.com/)
 
-To record, select which track to record on and press the record button on the right side of the button row, and begin recording your song. Each song can be up to 30 seconds. When the song is done, press the stop button. To hear the song back, press the play/pause button on the desired track.
+A user can either click on `new project` to create a blank workstation or click `View All Projects` to search for existing projects. New projects will be given a randomly generated name which can be changed at any point by clicking on the title. 
+The workstation follows the same functionality of a classic 4 track tape recorder. To those not familiar with recording DAWs here are some basic tips: 
+* To record on an individual track the record enable button must be toggled to select which track (1-4) you want to record on. 
+* Once selected, the record button can be clicked to start recording.
+* The stop button terminates the recording and the audio track is ready to be played back.
+* The smaller play button on each track will play that track and that track alone. The big play button plays all recorded tracks simultaneously. 
+* At any point you would like to redo a track just click the trash can symbol on the upper right side of the track. 
 
-To change the name of your song, click the randomly generated title and enter a new name. When done, press the enter key.
-
-The navbar on the top left corner of the page will allow the user to go back to the home page or to the song directory. 
-
-Below is a image of how the workstation will look.
 ![Example workstation](./public/img/workstation.png)
-
-To view other songs, go to the song directory. The user can look through all the songs in a list or if they know the title of the project they want to work on, the user can search the title in the search bar. They will then be redirected to a page that either has a link to the desired project, or if the search doesn't exist they will be redirected to a no results page.
-
-<!-- Below is a image of how the song directory will look.
-![Example directory]() -->
-
 
 ## Credits
 
