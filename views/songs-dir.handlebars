@@ -31,12 +31,17 @@
 
 
     <div id="activeList">
+      {{#if project}}
       {{#each project}}
       <div id="activeListItem"></div>
-        <a href="/workstation/{{ id }}">
-          <p class="projectName">{{ projectName }}</p>
+        <a href="/workstation/{{ this.dataValues.id }}">
+          <p class="projectName">{{ this.dataValues.projectName }}</p>
         </a>
       {{/each}}
+      {{else}}
+        {{!-- <div id="activeListItem"></div> --}}
+        <p class="no-results">No results found</p>
+      {{/if}}
     </div>
 
 

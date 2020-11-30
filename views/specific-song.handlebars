@@ -13,9 +13,11 @@
 
     <main>
         <h1>Search Results:</h1>
-        <a href="/workstation/{{ this.id }}">
-            <p class="projectName">{{ this.projectName }}</p>
+        {{#each projects}}
+        <a href="/workstation/{{ this.dataValues.id }}">
+            <p class="projectName">{{ this.dataValues.projectName }}</p>
         </a>
+        {{/each}}
     </main>
 
 </div>

@@ -81,6 +81,13 @@ input[type="range"] {
   text-align: center;
 }
 
+.no-results {
+  color: rgb(80, 80, 255);
+  font-size: 20px;
+  text-decoration: none;
+  text-align: center;
+}
+
 .projectName:hover {
   color: rgb(134, 134, 255);
 }

@@ -1,5 +1,6 @@
 const db = require("../models");
 const randomWords = require("random-words");
+const { Op } = require("sequelize");
 const curatedRandomWords = [
   "bazooka",
   "bubblegum",
@@ -22,19 +23,6 @@ const curatedRandomWords = [
 ];
 
 module.exports = function (app) {
-  app.get("/api/projects/:name", (req, res) => {
-    if (req.params.name) {
-      db.Project.findOne({
-        where: {
-          projectName: req.params.name,
-        },
-      }).then((project) => {
-        res.json(project);
-      })
-    } 
-  });
-
-
   app.post("/api/project", (req, res) => {
     // const temporaryName = "Project " + Date.now(); // date.now generates a unique string of numbers for the project name
     // const temporaryName = randomWords({ exactly: 3, join: "-" });
