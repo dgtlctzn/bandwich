@@ -7,6 +7,8 @@ const db = require("./models");
 const {
   allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 
 // DEFINING PORT
 const PORT = process.env.PORT || 8080;
@@ -52,3 +54,15 @@ db.sequelize.sync().then(() => {
     console.log(`App listening at: http://localhost:${PORT}`);
   });
 });
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    db.Project.findOne({ id: username, projectPassword: password }, function (err, project) {
+      if (err) { return done(err); }
+      if (!project) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, project);
+    });
+  }
+));

@@ -733,3 +733,11 @@ $(document).ready(function () {
   // checks to see which tracks have content and toggles active state
   enableActive();
 });
+
+$("#password").on("submit", function() {
+  password = $(this).val()
+  console.log(password)
+  $.post("/pass", password, function (data) {
+
+  })
+});

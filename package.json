@@ -26,6 +26,8 @@
     "express-handlebars": "^5.1.0",
     "handlebars": "^4.7.6",
     "mysql2": "^2.2.5",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "random-words": "^1.1.1",
     "sequelize": "^6.3.5",
     "wavefile": "^11.0.0"
