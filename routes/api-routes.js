@@ -1,52 +1,51 @@
 const db = require("../models");
 const randomWords = require("random-words");
 const curatedRandomWords = [
-  "bazooka",
-  "bubblegum",
-  "jellyfish",
-  "lightning",
-  "rainbow",
-  "whiskey",
-  "beetroot",
-  "lawnmower",
-  "bathsalts",
-  "anteater",
-  "grandfather",
-  "broccoli",
-  "mainframe",
-  "deadbolt",
-  "spatula",
-  "daffodil",
-  "crumpet",
-  "elephant",
+  "Bazooka",
+  "Bubblegum",
+  "Jellyfish",
+  "Lightning",
+  "Rainbow",
+  "Whiskey",
+  "Beetroot",
+  "Lawnmower",
+  "Bathsalts",
+  "Anteater",
+  "Grandfather",
+  "Broccoli",
+  "Mainframe",
+  "Deadbolt",
+  "Spatula",
+  "Daffodil",
+  "Crumpet",
+  "Elephant",
+  "Bicycle",
+  "Einstein",
+  "Blues",
+  "Rock",
+  "Rag"
 ];
 
 module.exports = function (app) {
-  app.get("/api/projects/:name", (req, res) => {
-    if (req.params.name) {
-      db.Project.findOne({
-        where: {
-          projectName: req.params.name,
-        },
-      }).then((project) => {
-        res.json(project);
-      })
-    } 
-  });
-
-
   app.post("/api/project", (req, res) => {
-    // const temporaryName = "Project " + Date.now(); // date.now generates a unique string of numbers for the project name
-    // const temporaryName = randomWords({ exactly: 3, join: "-" });
-    let randomString = "";
-    for (let i = 0; i < 3; i++) {
-      randomWord =
-        curatedRandomWords[
-          Math.floor(Math.random() * curatedRandomWords.length)
-        ];
-      randomString = randomString + randomWord + "-";
-    }
-    const temporaryName = randomString.slice(0, -1);
+    const temporaryName =
+      randomWords({
+        exactly: 1,
+        wordsPerString: 2,
+        formatter: (word) => word.slice(0, 1).toUpperCase() + word.slice(1),
+      })[0] +
+      " " +
+      curatedRandomWords[Math.floor(Math.random() * curatedRandomWords.length)];
+    console.log(temporaryName);
+    // let randomString = "";
+    // for (let i = 0; i < 3; i++) {
+    //   randomWord =
+    //     curatedRandomWords[
+    //       Math.floor(Math.random() * curatedRandomWords.length)
+    //     ];
+    //   randomString = randomString + randomWord + "-";
+    // }
+    // const temporaryName = randomString.slice(0, -1);
 
     // creates a database,
     db.Project.create({
@@ -111,7 +110,7 @@ module.exports = function (app) {
   });
 
   app.delete("/api/project/:id", (req, res) => {
-    console.log(req.params.id)
+    console.log(req.params.id);
     db.Project.destroy({
       where: {
         id: req.params.id,
