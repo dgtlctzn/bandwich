@@ -732,12 +732,27 @@ $(document).ready(function () {
 
   // checks to see which tracks have content and toggles active state
   enableActive();
-});
 
-$("#password").on("submit", function() {
-  password = $(this).val()
-  console.log(password)
-  $.post("/pass", password, function (data) {
+  $("#password").on("submit", function (e) {
+    e.preventDefault();
 
-  })
+    projectId = window.location.href.split("pass/")[1]
+    password = $("#pass-input").val();
+    // console.log(password);
+    $.post(
+      "/login",
+      {
+        username: projectId,
+        password: password,
+      },
+      function (authenticated) {
+        console.log(authenticated)
+        if (authenticated) {
+          window.location.assign("/workstation/" + projectId);
+        } else {
+          alert("incorrect password");
+        }
+      }
+    );
+  });
 });

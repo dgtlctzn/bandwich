@@ -27,7 +27,13 @@ module.exports = function (app) {
     } 
   })
 
+  app.get("/pass/:id", (req, res) => {
+    res.render("project-login");
+  })
+
   app.get("/workstation/:id", (req, res) => {
+    console.log("workstation route")
+    console.log(req.user)
     let track1;
     let track2;
     let track3;
@@ -69,6 +75,7 @@ module.exports = function (app) {
   });
 
   app.get("/", (req, res) => {
+    console.log("index route")
     res.render("index");
   });
 };
