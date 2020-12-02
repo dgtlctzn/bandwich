@@ -61,7 +61,7 @@ app.use(passport.session());
 // ROUTE MODULE CONNECTION
 require("./routes/html-routes")(app);
 require("./routes/api-routes.js")(app);
-// require("./routes/auth-routes.js")(app);
+require("./routes/auth-routes.js")(app);
 
 // LISTEN ON SERVER
 // db.sequelize.sync({ force: true }).then(() => {
@@ -95,14 +95,3 @@ passport.use(
     });
   })
 );
-
-app.post("/login", function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
-    if (!user) { return res.json(false); }
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      return res.json(true);
-    });
-  })(req, res, next);
-});
