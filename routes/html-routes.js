@@ -16,6 +16,7 @@ module.exports = function (app) {
       db.Project.findAll({
         where: {
           projectName: {
+            // query for all matches that contain req.params.name
             [Op.like]: "%" + req.params.name + "%",
           }
         },
@@ -32,10 +33,9 @@ module.exports = function (app) {
   })
 
   app.get("/workstation/:id", (req, res) => {
-    console.log("workstation route")
-    console.log(typeof req.params.id)
-    if (!req.user || req.user.username !== parseInt(req.params.id)) {
-      console.log("failed to log in")
+    // checks for Passport.js user credentials tied to req.user
+    // if credentials don't match url project id a redirect to password entry is applied
+    if (!req.user || req.user.userProjectId !== parseInt(req.params.id)) {
       return res.redirect("/pass/" + req.params.id);
     }
     let track1;
@@ -71,15 +71,12 @@ module.exports = function (app) {
           track4 = file.path;
         }
       }
-      console.log(track1)
-      console.log(track2)
       // console.log(project.Audiofiles.track1)
       res.render("workstation", { project: project, track1: track1, track2: track2, track3: track3, track4: track4});
     });
   });
 
   app.get("/", (req, res) => {
-    console.log("index route")
     res.render("index");
   });
 };

@@ -45,12 +45,11 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
+// PASSPORT.JS MIDDLEWARE
 app.use(cookieParser());
-
-// app.use(express.session({ secret: 'SECRET' }));
 app.use(
   session({
-    secret: "secret", // session secret
+    secret: "secret", 
     resave: true,
     saveUninitialized: true,
   })
@@ -71,27 +70,29 @@ db.sequelize.sync().then(() => {
   });
 });
 
-passport.serializeUser(function (user, done) {
-  console.log("serialize")
-  console.log(user);
-  done(null, user.username);
+// passport user instances
+passport.serializeUser(function (project, done) {
+  done(null, project.userProjectId);
 });
-passport.deserializeUser(function (username, done) {
-  console.log("deserialize");
-  done(null, {username: username})
+
+passport.deserializeUser(function (userProjectId, done) {
+  done(null, {userProjectId: userProjectId})
 });
 
 passport.use(
-  new LocalStrategy(function (username, password, done) {
-    console.log(username + " " + password);
+  new LocalStrategy({
+    usernameField: 'userProjectId',
+    passwordField: 'password'
+  }, function (userProjectId, password, done) {
+    // searches for project model with associated id and password
+    // if not found reject authentication
     db.Project.findOne({
-      where: { id: username, projectPassword: password },
-    }).then((user) => {
-      if (!user) {
+      where: { id: userProjectId, projectPassword: password },
+    }).then((userProject) => {
+      if (!userProject) {
         return done(null, false, { message: "Incorrect password." });
       }
-      console.log(user);
-      return done(null, {username: user.dataValues.id});
+      return done(null, {userProjectId: userProject.dataValues.id});
     });
   })
 );

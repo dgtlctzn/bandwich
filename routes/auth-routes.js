@@ -2,6 +2,7 @@ const passport = require("passport");
 
 module.exports = function (app) {
   app.post("/login", function (req, res, next) {
+    // if LocalStrategy (in server.js) is succesful send boolean to prompt redirect or if failed alert user
     passport.authenticate("local", function (err, user, info) {
       if (err) {
         return next(err);

@@ -742,7 +742,7 @@ $(document).ready(function () {
     $.post(
       "/login",
       {
-        username: projectId,
+        userProjectId: projectId,
         password: password,
       },
       function (authenticated) {
