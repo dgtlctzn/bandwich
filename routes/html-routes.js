@@ -33,7 +33,11 @@ module.exports = function (app) {
 
   app.get("/workstation/:id", (req, res) => {
     console.log("workstation route")
-    console.log(req.user)
+    console.log(typeof req.params.id)
+    if (!req.user || req.user.username !== parseInt(req.params.id)) {
+      console.log("failed to log in")
+      return res.redirect("/pass/" + req.params.id);
+    }
     let track1;
     let track2;
     let track3;
