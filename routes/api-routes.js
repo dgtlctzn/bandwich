@@ -36,17 +36,6 @@ module.exports = function (app) {
       })[0] +
       " " +
       curatedRandomWords[Math.floor(Math.random() * curatedRandomWords.length)];
-    console.log(temporaryName);
-    // let randomString = "";
-    // for (let i = 0; i < 3; i++) {
-    //   randomWord =
-    //     curatedRandomWords[
-    //       Math.floor(Math.random() * curatedRandomWords.length)
-    //     ];
-    //   randomString = randomString + randomWord + "-";
-    // }
-    // const temporaryName = randomString.slice(0, -1);
-
     // creates a database,
     db.Project.create({
       projectName: temporaryName,
@@ -80,7 +69,6 @@ module.exports = function (app) {
   });
 
   app.put("/api/setpass", (req, res) => {
-    console.log(req.body);
     db.Project.update(
       {
         projectPassword: req.body.password,

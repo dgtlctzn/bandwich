@@ -33,6 +33,9 @@ module.exports = function (app) {
   })
 
   app.get("/setpass/:id", (req, res) => {
+    if (!req.user || req.user.userProjectId !== parseInt(req.params.id)) {
+      return res.redirect("/pass/" + req.params.id);
+    }
     res.render("set-password");
   })
 
