@@ -79,6 +79,23 @@ module.exports = function (app) {
     });
   });
 
+  app.put("/api/setpass", (req, res) => {
+    console.log(req.body);
+    db.Project.update(
+      {
+        projectPassword: req.body.password,
+      },
+      {
+        where: {
+          id: req.body.projectId,
+        },
+        returning: true
+      },
+    ).then(() => {
+      res.json(req.body.projectId);
+    });
+  });
+
   app.delete("/api/audio/:id", (req, res) => {
     console.log(req.params.id);
     db.Audiofile.destroy({

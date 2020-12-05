@@ -350,10 +350,26 @@ $(document).ready(function () {
   // Promise is a reassign for the created project
   newProjectEl.on("click", function () {
     $.ajax("/api/project", {
+      // $.ajax("/signin", {
       type: "POST",
       data: "userIpAddress",
     }).then(function (project) {
-      location.assign("/workstation/" + project.id);
+      $.post(
+        "/signup",
+        {
+          userProjectId: project.id,
+          password: "password",
+        },
+        function (authenticated) {
+          console.log(authenticated)
+          if (authenticated) {
+            window.location.assign("/setpass/" + project.id);
+          } else {
+            alert("incorrect password");
+          }
+        }
+      );
+      // location.assign("/workstation/" + project.id);
     });
   });
 
@@ -755,4 +771,23 @@ $(document).ready(function () {
       }
     );
   });
+
+  $("#set-password").on("submit", function (e) {
+    e.preventDefault()
+
+    projectId = window.location.href.split("pass/")[1]
+    password = $("#set-pass-input").val();
+    console.log(password)
+    // $.ajax("/api/project", {
+    $.ajax("/api/setpass", {
+      type: "PUT",
+      data: {
+        projectId: projectId,
+        password: password,
+      }
+    }).then(function (projectId) {
+      console.log(projectId)
+      location.assign("/workstation/" + projectId);
+    });
+  })
 });

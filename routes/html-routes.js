@@ -32,6 +32,10 @@ module.exports = function (app) {
     res.render("project-login");
   })
 
+  app.get("/setpass/:id", (req, res) => {
+    res.render("set-password");
+  })
+
   app.get("/workstation/:id", (req, res) => {
     // checks for Passport.js user credentials tied to req.user
     // if credentials don't match url project id a redirect to password entry is applied
