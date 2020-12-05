@@ -355,7 +355,7 @@ $(document).ready(function () {
       data: "userIpAddress",
     }).then(function (project) {
       $.post(
-        "/signup",
+        "/auth",
         {
           userProjectId: project.id,
           password: "password",
@@ -756,7 +756,7 @@ $(document).ready(function () {
     password = $("#pass-input").val();
     // console.log(password);
     $.post(
-      "/login",
+      "/auth",
       {
         userProjectId: projectId,
         password: password,
