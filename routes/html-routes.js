@@ -29,7 +29,12 @@ module.exports = function (app) {
   })
 
   app.get("/pass/:id", (req, res) => {
-    res.render("project-login");
+    console.log(req.params.id)
+    db.Project.findOne({where: {id: req.params.id}}).then(project => {
+      res.render("project-login", {projectName: project.dataValues.projectName});
+    }).catch(err => {
+      console.log(err);
+    });
   })
 
   app.get("/setpass/:id", (req, res) => {

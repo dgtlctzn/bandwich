@@ -56,6 +56,12 @@ input[type="range"] {
  text-align: left;
 }
 
+#pass-input {
+  /* width: 320px; */
+  width: 100%;
+  text-align: left;
+ }
+
 #projectsearch-btn{
   margin-top: 8px;
 }

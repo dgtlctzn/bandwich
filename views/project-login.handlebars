@@ -1,6 +1,14 @@
-<form id="password">
-    <input id="pass-input" type="password" name="password"/>
-    <button type="submit">
-        Submit
-    </button>
-</form>
+<main id="projectList">
+    {{!-- <h2>Enter Project Password</h2> --}}
+
+    <div id="projectSearch">
+        <h2 class="searchheader">Enter Project Password to access:</h2>
+        <h2 class="searchheader">{{projectName}}</h2>
+        <form id="password">
+            <input class="button" type="submit" value="Start" style="float: right" id="projectsearch-btn"/>
+            <div style="overflow: hidden; padding-right: .5em;">
+                <input id="pass-input" type="text" name="password" />
+            </div>
+        </form>
+    </div>
+</main>
