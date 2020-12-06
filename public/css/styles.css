@@ -56,7 +56,7 @@ input[type="range"] {
  text-align: left;
 }
 
-#pass-input {
+.pass-input {
   /* width: 320px; */
   width: 100%;
   text-align: left;

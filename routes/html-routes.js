@@ -41,7 +41,11 @@ module.exports = function (app) {
     if (!req.user || req.user.userProjectId !== parseInt(req.params.id)) {
       return res.redirect("/pass/" + req.params.id);
     }
-    res.render("set-password");
+    db.Project.findOne({where: {id: req.params.id}}).then(project => {
+      res.render("set-password", {projectName: project.dataValues.projectName});
+    }).catch(err => {
+      console.log(err);
+    });
   })
 
   app.get("/workstation/:id", (req, res) => {
