@@ -1,4 +1,5 @@
 const db = require("../models");
+const { Op } = require("sequelize");
 const randomWords = require("random-words");
 const curatedRandomWords = [
   "Bazooka",
@@ -67,6 +68,31 @@ module.exports = function (app) {
       res.json(req.body.id);
     });
   });
+
+  app.get("/api/projects/:name", (req, res) => {
+    if (req.params.name) {
+      db.Project.findAll({
+        where: {
+          projectName: {
+            // query for all matches that contain req.params.name
+            [Op.like]: "%" + req.params.name + "%",
+          }
+        },
+      }).then((foundProjects) => {
+        if (foundProjects !== null) {
+          const projects = foundProjects.map(project => (
+            {id: project.id, projectName: project.projectName}
+          ))
+          // return db results to front end to be place with jQuery
+          res.json({
+            error: null,
+            data: projects,
+            message: `projects searched for '${req.params.name}'`
+          })
+        } 
+      })
+    } 
+  })
 
   app.put("/api/setpass", (req, res) => {
     db.Project.update(

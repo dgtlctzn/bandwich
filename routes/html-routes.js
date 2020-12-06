@@ -11,23 +11,6 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/projects/:name", (req, res) => {
-    if (req.params.name) {
-      db.Project.findAll({
-        where: {
-          projectName: {
-            // query for all matches that contain req.params.name
-            [Op.like]: "%" + req.params.name + "%",
-          }
-        },
-      }).then((projects) => {
-        if (projects !== null) {
-          res.render("songs-dir", { project: projects });
-        } 
-      })
-    } 
-  })
-
   app.get("/pass/:id", (req, res) => {
     console.log(req.params.id)
     db.Project.findOne({where: {id: req.params.id}}).then(project => {

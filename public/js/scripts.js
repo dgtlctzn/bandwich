@@ -141,15 +141,8 @@ $(document).ready(function () {
       type: "POST",
       data: data,
       success: function (response) {
-        // const stopBtn = $("#main-stop")
-        // stopBtn.empty();
-        // const postAudio = $("<p>").text("Posting audio...").attr("style", "text-align: center;");
-        // stopBtn.append(postAudio);
-        // sets an interval before reloading page to allow big POST request
-        // setTimeout(function () {
         location.reload();
         trackCheck(track);
-        // }, 3000);
       },
       error: function (err) {
         if (err) {
@@ -361,7 +354,7 @@ $(document).ready(function () {
           password: "password",
         },
         function (authenticated) {
-          console.log(authenticated)
+          console.log(authenticated);
           if (authenticated) {
             window.location.assign("/setpass/" + project.id);
           } else {
@@ -406,11 +399,28 @@ $(document).ready(function () {
 
   // when user hits the search-btn
   $("#projectsearch-btn").on("click", function () {
-    var searchedProject = $("#projects-search").val().trim();
+    const searchedProject = $("#projects-search").val().trim();
 
-    $.get("/projects/" + searchedProject, function (data) {
-      // log the data to our console
-      window.location.assign("/projects/" + searchedProject);
+    $.get("/api/projects/" + searchedProject, function (projects) {
+      $("#activeList").empty();
+
+      if (!projects.data.length) {
+        noResults = $("<p>").addClass("no-results").text("No results found");
+        $("#activeList").append(noResults);
+
+      } else {
+        // make project link for each returned result
+        for (const project of projects.data) {
+          const divider = $("<div>").attr("id", "activeListItem");
+          const projectEl = $("<a>")
+            .attr("href", `/pass/${project.id}`);
+          const innerText = $("<p>").addClass("projectName").text(project.projectName);
+          projectEl.append(innerText);
+  
+          $("#activeList").append(divider);
+          $("#activeList").append(projectEl);
+        }
+      }
     });
   });
 
@@ -749,12 +759,12 @@ $(document).ready(function () {
   // checks to see which tracks have content and toggles active state
   enableActive();
 
+  // authorizes user for specific project depending on correct password
   $("#password").on("submit", function (e) {
     e.preventDefault();
 
-    projectId = window.location.href.split("pass/")[1]
+    projectId = window.location.href.split("pass/")[1];
     password = $("#pass-input").val();
-    // console.log(password);
     $.post(
       "/auth",
       {
@@ -762,7 +772,7 @@ $(document).ready(function () {
         password: password,
       },
       function (authenticated) {
-        console.log(authenticated)
+        console.log(authenticated);
         if (authenticated) {
           window.location.assign("/workstation/" + projectId);
         } else {
@@ -772,22 +782,22 @@ $(document).ready(function () {
     );
   });
 
+  // authorizes user for new project, sets password for project, redirects to workstation
   $("#set-password").on("submit", function (e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    projectId = window.location.href.split("pass/")[1]
+    projectId = window.location.href.split("pass/")[1];
     password = $("#set-pass-input").val();
-    console.log(password)
-    // $.ajax("/api/project", {
+    console.log(password);
     $.ajax("/api/setpass", {
       type: "PUT",
       data: {
         projectId: projectId,
         password: password,
-      }
+      },
     }).then(function (projectId) {
-      console.log(projectId)
+      console.log(projectId);
       location.assign("/workstation/" + projectId);
     });
-  })
+  });
 });
