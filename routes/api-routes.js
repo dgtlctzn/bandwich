@@ -1,4 +1,5 @@
 const db = require("../models");
+const { Op } = require("sequelize");
 const randomWords = require("random-words");
 const curatedRandomWords = [
   "Bazooka",
@@ -36,17 +37,6 @@ module.exports = function (app) {
       })[0] +
       " " +
       curatedRandomWords[Math.floor(Math.random() * curatedRandomWords.length)];
-    console.log(temporaryName);
-    // let randomString = "";
-    // for (let i = 0; i < 3; i++) {
-    //   randomWord =
-    //     curatedRandomWords[
-    //       Math.floor(Math.random() * curatedRandomWords.length)
-    //     ];
-    //   randomString = randomString + randomWord + "-";
-    // }
-    // const temporaryName = randomString.slice(0, -1);
-
     // creates a database,
     db.Project.create({
       projectName: temporaryName,
@@ -76,6 +66,47 @@ module.exports = function (app) {
       }
     ).then((project) => {
       res.json(req.body.id);
+    });
+  });
+
+  app.get("/api/projects/:name", (req, res) => {
+    if (req.params.name) {
+      db.Project.findAll({
+        where: {
+          projectName: {
+            // query for all matches that contain req.params.name
+            [Op.like]: "%" + req.params.name + "%",
+          }
+        },
+      }).then((foundProjects) => {
+        if (foundProjects !== null) {
+          const projects = foundProjects.map(project => (
+            {id: project.id, projectName: project.projectName}
+          ))
+          // return db results to front end to be place with jQuery
+          res.json({
+            error: null,
+            data: projects,
+            message: `projects searched for '${req.params.name}'`
+          })
+        } 
+      })
+    } 
+  })
+
+  app.put("/api/setpass", (req, res) => {
+    db.Project.update(
+      {
+        projectPassword: req.body.password,
+      },
+      {
+        where: {
+          id: req.body.projectId,
+        },
+        returning: true
+      },
+    ).then(() => {
+      res.json(req.body.projectId);
     });
   });
 
