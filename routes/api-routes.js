@@ -1,4 +1,5 @@
 const db = require("../models");
+const axios = require("axios");
 const randomWords = require("random-words");
 const curatedRandomWords = [
   "Bazooka",
@@ -28,40 +29,37 @@ const curatedRandomWords = [
 
 module.exports = function (app) {
   app.post("/api/project", (req, res) => {
-    const temporaryName =
-      randomWords({
-        exactly: 1,
-        wordsPerString: 2,
-        formatter: (word) => word.slice(0, 1).toUpperCase() + word.slice(1),
-      })[0] +
-      " " +
-      curatedRandomWords[Math.floor(Math.random() * curatedRandomWords.length)];
-    console.log(temporaryName);
-    // let randomString = "";
-    // for (let i = 0; i < 3; i++) {
-    //   randomWord =
-    //     curatedRandomWords[
-    //       Math.floor(Math.random() * curatedRandomWords.length)
-    //     ];
-    //   randomString = randomString + randomWord + "-";
-    // }
-    // const temporaryName = randomString.slice(0, -1);
-
-    // creates a database,
-    db.Project.create({
-      projectName: temporaryName,
-      projectPassword: "password",
-    }).then(() => {
-      // retrieves the id of that database,
-      db.Project.findOne({
-        where: {
-          projectName: temporaryName,
-        },
-      }).then((project) => {
-        // and then sends the id to the front end for a redirect
-        res.json(project);
+    // const temporaryName =
+    //   randomWords({
+    //     exactly: 1,
+    //     wordsPerString: 2,
+    //     formatter: (word) => word.slice(0, 1).toUpperCase() + word.slice(1),
+    //   })[0] +
+    //   " " +
+    //   curatedRandomWords[Math.floor(Math.random() * curatedRandomWords.length)];
+    // console.log(temporaryName);
+    axios({
+      method: "GET",
+      url: "http://titlegen.us-east-1.elasticbeanstalk.com/api/v1/titlegen?type=song&no=1"
+    }).then(songTitle => {
+      const temporaryName = songTitle.data.data[0];
+      db.Project.create({
+        projectName: temporaryName,
+        projectPassword: "password",
+      }).then(() => {
+        // retrieves the id of that database,
+        db.Project.findOne({
+          where: {
+            projectName: temporaryName,
+          },
+        }).then((project) => {
+          // and then sends the id to the front end for a redirect
+          res.json(project);
+        });
       });
-    });
+    }).catch(err => {
+      console.log(err);
+    })
   });
 
   app.put("/api/project", (req, res) => {
