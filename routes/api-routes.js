@@ -1,44 +1,10 @@
 const db = require("../models");
 const axios = require("axios");
 const { Op } = require("sequelize");
-const randomWords = require("random-words");
-const curatedRandomWords = [
-  "Bazooka",
-  "Bubblegum",
-  "Jellyfish",
-  "Lightning",
-  "Rainbow",
-  "Whiskey",
-  "Beetroot",
-  "Lawnmower",
-  "Bathsalts",
-  "Anteater",
-  "Grandfather",
-  "Broccoli",
-  "Mainframe",
-  "Deadbolt",
-  "Spatula",
-  "Daffodil",
-  "Crumpet",
-  "Elephant",
-  "Bicycle",
-  "Einstein",
-  "Blues",
-  "Rock",
-  "Rag"
-];
+
 
 module.exports = function (app) {
   app.post("/api/project", (req, res) => {
-    // const temporaryName =
-    //   randomWords({
-    //     exactly: 1,
-    //     wordsPerString: 2,
-    //     formatter: (word) => word.slice(0, 1).toUpperCase() + word.slice(1),
-    //   })[0] +
-    //   " " +
-    //   curatedRandomWords[Math.floor(Math.random() * curatedRandomWords.length)];
-    // console.log(temporaryName);
     axios({
       method: "GET",
       url: "http://titlegen.us-east-1.elasticbeanstalk.com/api/v1/titlegen?type=song&no=1"
@@ -49,16 +15,6 @@ module.exports = function (app) {
         projectPassword: "password",
       }).then((project) => {
         res.json(project);
-        // retrieves the id of that database,
-        // console.log(returnProject);
-        // db.Project.findOne({
-        //   where: {
-        //     projectName: temporaryName,
-        //   },
-        // }).then((project) => {
-        //   // and then sends the id to the front end for a redirect
-        //   res.json(project);
-        // });
       });
     }).catch(err => {
       console.log(err);
