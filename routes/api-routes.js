@@ -47,16 +47,18 @@ module.exports = function (app) {
       db.Project.create({
         projectName: temporaryName,
         projectPassword: "password",
-      }).then(() => {
+      }).then((project) => {
+        res.json(project);
         // retrieves the id of that database,
-        db.Project.findOne({
-          where: {
-            projectName: temporaryName,
-          },
-        }).then((project) => {
-          // and then sends the id to the front end for a redirect
-          res.json(project);
-        });
+        // console.log(returnProject);
+        // db.Project.findOne({
+        //   where: {
+        //     projectName: temporaryName,
+        //   },
+        // }).then((project) => {
+        //   // and then sends the id to the front end for a redirect
+        //   res.json(project);
+        // });
       });
     }).catch(err => {
       console.log(err);
