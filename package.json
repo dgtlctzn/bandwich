@@ -20,6 +20,7 @@
   "homepage": "https://github.com/dgtlctzn/bandwich#readme",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.3",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
@@ -30,7 +31,6 @@
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "random-words": "^1.1.1",
     "sequelize": "^6.3.5",
     "wavefile": "^11.0.0"
   }

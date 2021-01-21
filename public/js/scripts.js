@@ -765,6 +765,7 @@ $(document).ready(function () {
 
     projectId = window.location.href.split("pass/")[1];
     password = $("#pass-input").val();
+
     $.post(
       "/auth",
       {
@@ -772,11 +773,11 @@ $(document).ready(function () {
         password: password,
       },
       function (authenticated) {
-        console.log(authenticated);
         if (authenticated) {
           window.location.assign("/workstation/" + projectId);
         } else {
-          alert("incorrect password");
+          const errorMsg = $(".error-message");
+          errorMsg.text("Incorrect passcode")
         }
       }
     );
@@ -788,7 +789,14 @@ $(document).ready(function () {
 
     projectId = window.location.href.split("pass/")[1];
     password = $("#set-pass-input").val();
-    console.log(password);
+    console.log("here")
+
+    if (!password.length || password.length < 5) {
+      const errorMsg = $(".error-message");
+      errorMsg.text("Passcode must be at least 5 characters")
+      return;
+    }
+
     $.ajax("/api/setpass", {
       type: "PUT",
       data: {

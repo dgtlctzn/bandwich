@@ -15,6 +15,14 @@ body {
   margin: 0px;
 }
 
+#pass-image {
+  height: 100vh;
+  background: url("/img/mixer.png") no-repeat center center fixed;
+  background-size: cover;
+  background-color: black;
+  margin: 0px;
+}
+
 input[type="range"] {
   width: 240px;
 }
@@ -49,6 +57,12 @@ input[type="range"] {
   margin-top: 40px;
 }
 
+/* Password set */
+
+.search-header {
+  font-size: 35px;
+}
+
 /* Song directory */
 
 #projects-search {
@@ -58,8 +72,14 @@ input[type="range"] {
 
 .pass-input {
   /* width: 320px; */
+  font-size: 20px;
+  margin-top: 8px;
+  margin-right: 10px;
   width: 100%;
+  height: 40px;
   text-align: left;
+  color: white;
+  border-radius: 5px;
  }
 
 #projectsearch-btn,
