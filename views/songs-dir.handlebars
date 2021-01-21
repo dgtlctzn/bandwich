@@ -35,7 +35,7 @@
       {{#each project}}
       <div id="activeListItem"></div>
         <a href="/pass/{{ this.dataValues.id }}">
-          <p class="projectName">{{ this.dataValues.projectName }}</p>
+          <p class="projectName"><em>{{ this.dataValues.projectName }}</em></p>
         </a>
       {{/each}}
       {{else}}
