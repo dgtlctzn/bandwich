@@ -15,6 +15,14 @@ body {
   margin: 0px;
 }
 
+#pass-image {
+  height: 100vh;
+  background: url("/img/mixer.png") no-repeat center center fixed;
+  background-size: cover;
+  background-color: black;
+  margin: 0px;
+}
+
 input[type="range"] {
   width: 240px;
 }
@@ -47,6 +55,12 @@ input[type="range"] {
 
 #btnDiv {
   margin-top: 40px;
+}
+
+/* Password set */
+
+.search-header {
+  font-size: 35px;
 }
 
 /* Song directory */
