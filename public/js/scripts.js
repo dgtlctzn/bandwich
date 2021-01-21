@@ -765,6 +765,7 @@ $(document).ready(function () {
 
     projectId = window.location.href.split("pass/")[1];
     password = $("#pass-input").val();
+
     $.post(
       "/auth",
       {
@@ -788,7 +789,16 @@ $(document).ready(function () {
 
     projectId = window.location.href.split("pass/")[1];
     password = $("#set-pass-input").val();
-    console.log(password);
+    console.log("here")
+
+    if (!password.length || password.length < 5) {
+      // alert("Passcode must be at least 5 characters!")
+      const errorMsg = $(".error-message");
+      console.log(errorMsg);
+      errorMsg.text("Passcode must be at least 5 characters")
+      return;
+    }
+
     $.ajax("/api/setpass", {
       type: "PUT",
       data: {
