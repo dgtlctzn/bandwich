@@ -773,11 +773,11 @@ $(document).ready(function () {
         password: password,
       },
       function (authenticated) {
-        console.log(authenticated);
         if (authenticated) {
           window.location.assign("/workstation/" + projectId);
         } else {
-          alert("incorrect password");
+          const errorMsg = $(".error-message");
+          errorMsg.text("Incorrect passcode")
         }
       }
     );
@@ -792,9 +792,7 @@ $(document).ready(function () {
     console.log("here")
 
     if (!password.length || password.length < 5) {
-      // alert("Passcode must be at least 5 characters!")
       const errorMsg = $(".error-message");
-      console.log(errorMsg);
       errorMsg.text("Passcode must be at least 5 characters")
       return;
     }
