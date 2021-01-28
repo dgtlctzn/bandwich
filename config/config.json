@@ -1,9 +1,6 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "vpubpxlmcxl6ah82",
-    "host": "3306",
+    "use_env_variable": "LOCAL_URL",
     "dialect": "mysql"
   },
   "test": {
