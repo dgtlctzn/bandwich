@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "katsu",
-    "database": "bandwichDB",
-    "host": "127.0.0.1",
+    "password": null,
+    "database": "vpubpxlmcxl6ah82",
+    "host": "3306",
     "dialect": "mysql"
   },
   "test": {
@@ -14,7 +14,7 @@
     "dialect": "mysql"
   },
   "production": {
-    "use_env_variable": "JAWSDB_URL",
+    "use_env_variable": "KATSUDB_URL",
     "dialect": "mysql"
   }
 }
