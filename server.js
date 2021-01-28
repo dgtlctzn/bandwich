@@ -11,6 +11,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+require("dotenv").config()
 
 // DEFINING PORT
 const PORT = process.env.PORT || 8080;
