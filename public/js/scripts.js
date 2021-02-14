@@ -83,7 +83,6 @@ $(document).ready(function () {
         rec = new Recorder(input, {
           // mono sound
           numChannels: 1,
-          bufferLen: 1024
         });
         //start the recording process
         rec.record();
