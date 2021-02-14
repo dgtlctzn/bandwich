@@ -13,6 +13,9 @@ $(document).ready(function () {
   const trackTwo = $("#track-two");
   const trackThree = $("#track-three");
   const trackFour = $("#track-four");
+  const click = $("#click").attr("src");
+  const clickAudio = new Audio(click);
+  
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
@@ -25,9 +28,11 @@ $(document).ready(function () {
         startRecord(playAll);
       }, 3000);
       // countdown timer for the 3 second record delay
+      clickAudio.play();
       const timeout = setInterval(function () {
         time--;
         countdownEl.text(time);
+        clickAudio.play();
         if (time === 0) {
           clearInterval(timeout);
           countdownEl.css("display", "none");
