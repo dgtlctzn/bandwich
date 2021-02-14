@@ -15,7 +15,6 @@ $(document).ready(function () {
   const trackFour = $("#track-four");
   const click = $("#click").attr("src");
   const clickAudio = new Audio(click);
-  
 
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
@@ -412,16 +411,16 @@ $(document).ready(function () {
       if (!projects.data.length) {
         noResults = $("<p>").addClass("no-results").text("No results found");
         $("#activeList").append(noResults);
-
       } else {
         // make project link for each returned result
         for (const project of projects.data) {
           const divider = $("<div>").attr("id", "activeListItem");
-          const projectEl = $("<a>")
-            .attr("href", `/pass/${project.id}`);
-          const innerText = $("<p>").addClass("projectName").text(project.projectName);
+          const projectEl = $("<a>").attr("href", `/pass/${project.id}`);
+          const innerText = $("<p>")
+            .addClass("projectName")
+            .text(project.projectName);
           projectEl.append(innerText);
-  
+
           $("#activeList").append(divider);
           $("#activeList").append(projectEl);
         }
@@ -620,10 +619,11 @@ $(document).ready(function () {
       url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
-        setTimeout(function () {
-          location.reload();
-        }, 1000);
-        console.log(111);
+        location.reload();
+      },
+      error: function (err) {
+        console.log(err);
+        alert("track failed to delete!");
       },
     });
   });
@@ -652,10 +652,11 @@ $(document).ready(function () {
       url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
-        setTimeout(function () {
-          location.reload();
-        }, 1000);
-        console.log(111);
+        location.reload();
+      },
+      error: function (err) {
+        console.log(err);
+        alert("track failed to delete!");
       },
     });
   });
@@ -684,10 +685,11 @@ $(document).ready(function () {
       url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
-        setTimeout(function () {
-          location.reload();
-        }, 1000);
-        console.log(111);
+        location.reload();
+      },
+      error: function (err) {
+        console.log(err);
+        alert("track failed to delete!");
       },
     });
   });
@@ -716,10 +718,11 @@ $(document).ready(function () {
       url: `/api/audio/${newID}`,
       method: "DELETE",
       success: function () {
-        setTimeout(function () {
-          location.reload();
-        }, 1000);
-        console.log(111);
+        location.reload();
+      },
+      error: function (err) {
+        console.log(err);
+        alert("track failed to delete!");
       },
     });
   });
@@ -782,7 +785,7 @@ $(document).ready(function () {
           window.location.assign("/workstation/" + projectId);
         } else {
           const errorMsg = $(".error-message");
-          errorMsg.text("Incorrect passcode")
+          errorMsg.text("Incorrect passcode");
         }
       }
     );
@@ -794,11 +797,11 @@ $(document).ready(function () {
 
     projectId = window.location.href.split("pass/")[1];
     password = $("#set-pass-input").val();
-    console.log("here")
+    console.log("here");
 
     if (!password.length || password.length < 5) {
       const errorMsg = $(".error-message");
-      errorMsg.text("Passcode must be at least 5 characters")
+      errorMsg.text("Passcode must be at least 5 characters");
       return;
     }
 
