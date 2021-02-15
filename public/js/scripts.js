@@ -202,6 +202,7 @@ $(document).ready(function () {
   }
 
   function playAll() {
+    const enabled = [];
     // prevents play button with no associated audio
     if (
       audioSrc1 === "/" &&
@@ -216,31 +217,38 @@ $(document).ready(function () {
       if (audioSrc1 !== "/") {
         audio1.load();
         audio1.play();
+        enabled.push(audio1);
       }
       if (audioSrc2 !== "/") {
         audio2.load();
         audio2.play();
+        enabled.push(audio2);
       }
       if (audioSrc3 !== "/") {
         audio3.load();
         audio3.play();
+        enabled.push(audio3);
       }
       if (audioSrc4 !== "/") {
         audio4.load();
         audio4.play();
+        enabled.push(audio4);
       }
     }
-    audio1.onended = function() {
-      mainPlayEl.removeClass("play-button");
-    }
-    audio2.onended = function() {
-      mainPlayEl.removeClass("play-button");
-    }
-    audio3.onended = function() {
-      mainPlayEl.removeClass("play-button");
-    }
-    audio4.onended = function() {
-      mainPlayEl.removeClass("play-button");
+    // sets a callback for each audio tracks end
+    for (const track of enabled) {
+      track.onended = function() {
+        // counts number of finished tracks for each audio end
+        let finished = 0;
+        for (const audioTrack of enabled) {
+          if (audioTrack.ended) {
+            finished++;
+          }
+        }
+        if (finished === enabled.length) {
+          mainPlayEl.removeClass("play-button");
+        }
+      }
     }
   }
 
