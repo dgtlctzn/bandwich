@@ -6,7 +6,6 @@ $(document).ready(function () {
   const mainPauseEl = $("#main-pause");
   const saveTrackEl = $("#name-input");
   const editTrackEl = $("#new-name");
-  const newProjectEl = $("#new-project");
   const recIcon = $("#rec-icon");
   const countdownEl = $("#count");
   const trackOne = $("#track-one");
@@ -361,33 +360,6 @@ $(document).ready(function () {
     }
   });
 
-  // When new project button is clicked it sends user info (IP adress at some point...)
-  // Promise is a reassign for the created project
-  newProjectEl.on("click", function () {
-    $.ajax("/api/project", {
-      // $.ajax("/signin", {
-      type: "POST",
-      data: "userIpAddress",
-    }).then(function (project) {
-      $.post(
-        "/auth",
-        {
-          userProjectId: project.id,
-          password: "password",
-        },
-        function (authenticated) {
-          console.log(authenticated);
-          if (authenticated) {
-            window.location.assign("/setpass/" + project.id);
-          } else {
-            alert("incorrect password");
-          }
-        }
-      );
-      // location.assign("/workstation/" + project.id);
-    });
-  });
-
   saveTrackEl.on("click", function () {
     console.log(this.children[0].innerHTML);
     var currentTitle = this.children[0].innerHTML;
@@ -416,33 +388,6 @@ $(document).ready(function () {
       data: projectName,
     }).then(function (project) {
       location.assign("/workstation/" + project);
-    });
-  });
-
-  // when user hits the search-btn
-  $("#projectsearch-btn").on("click", function () {
-    const searchedProject = $("#projects-search").val().trim();
-
-    $.get("/api/projects/" + searchedProject, function (projects) {
-      $("#activeList").empty();
-
-      if (!projects.data.length) {
-        noResults = $("<p>").addClass("no-results").text("No results found");
-        $("#activeList").append(noResults);
-      } else {
-        // make project link for each returned result
-        for (const project of projects.data) {
-          const divider = $("<div>").attr("id", "activeListItem");
-          const projectEl = $("<a>").attr("href", `/pass/${project.id}`);
-          const innerText = $("<p>")
-            .addClass("projectName")
-            .text(project.projectName);
-          projectEl.append(innerText);
-
-          $("#activeList").append(divider);
-          $("#activeList").append(projectEl);
-        }
-      }
     });
   });
 
@@ -766,7 +711,6 @@ $(document).ready(function () {
   });
 
   // VOLUME SLIDERS
-
   $("#volumeSlider1").on("input", function () {
     audio1.volume = $("#volumeSlider1").val();
   });
@@ -785,54 +729,4 @@ $(document).ready(function () {
 
   // checks to see which tracks have content and toggles active state
   enableActive();
-
-  // authorizes user for specific project depending on correct password
-  $("#password").on("submit", function (e) {
-    e.preventDefault();
-
-    projectId = window.location.href.split("pass/")[1];
-    password = $("#pass-input").val();
-
-    $.post(
-      "/auth",
-      {
-        userProjectId: projectId,
-        password: password,
-      },
-      function (authenticated) {
-        if (authenticated) {
-          window.location.assign("/workstation/" + projectId);
-        } else {
-          const errorMsg = $(".error-message");
-          errorMsg.text("Incorrect passcode");
-        }
-      }
-    );
-  });
-
-  // authorizes user for new project, sets password for project, redirects to workstation
-  $("#set-password").on("submit", function (e) {
-    e.preventDefault();
-
-    projectId = window.location.href.split("pass/")[1];
-    password = $("#set-pass-input").val();
-    console.log("here");
-
-    if (!password.length || password.length < 5) {
-      const errorMsg = $(".error-message");
-      errorMsg.text("Passcode must be at least 5 characters");
-      return;
-    }
-
-    $.ajax("/api/setpass", {
-      type: "PUT",
-      data: {
-        projectId: projectId,
-        password: password,
-      },
-    }).then(function (projectId) {
-      console.log(projectId);
-      location.assign("/workstation/" + projectId);
-    });
-  });
 });
