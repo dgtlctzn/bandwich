@@ -128,14 +128,12 @@ $(document).ready(function () {
       gumStream.getAudioTracks()[0].stop();
       // creates wav blob and passes blob as argument to the callback
       rec.exportWAV(convertToBase64);
-
-      recIcon.removeClass("pulsing");
-      recIcon.removeAttr("id", "glow");
     } else {
       stopAll();
-      recIcon.removeClass("pulsing");
-      recIcon.removeAttr("id", "glow");
     }
+    recIcon.removeClass("pulsing");
+    recIcon.removeAttr("id", "glow");
+    mainPlayEl.removeClass("play-button");
   }
 
   function postAudio(data) {
@@ -231,6 +229,18 @@ $(document).ready(function () {
         audio4.load();
         audio4.play();
       }
+    }
+    audio1.onended = function() {
+      mainPlayEl.removeClass("play-button");
+    }
+    audio2.onended = function() {
+      mainPlayEl.removeClass("play-button");
+    }
+    audio3.onended = function() {
+      mainPlayEl.removeClass("play-button");
+    }
+    audio4.onended = function() {
+      mainPlayEl.removeClass("play-button");
     }
   }
 
@@ -454,6 +464,7 @@ $(document).ready(function () {
   const audio4 = new Audio(audioSrc4);
 
   mainPlayEl.on("click", function () {
+    mainPlayEl.addClass("play-button");
     playAll();
   });
 

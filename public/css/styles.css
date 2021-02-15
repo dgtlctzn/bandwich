@@ -429,6 +429,10 @@ input:checked + .slider:before {
   
 }
 
+.play-button {
+  color: rgb(117, 255, 117);
+}
+
 .audio-meter {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
