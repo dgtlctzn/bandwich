@@ -99,8 +99,8 @@ module.exports = function (app) {
       ProjectId: req.body.id,
       track: req.body.track,
     })
-      .then(() => {
-        res.end();
+      .then((audioRes) => {
+        res.json(audioRes);
       })
       .catch((err) => {
         if (err) throw err;

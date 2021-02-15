@@ -214,22 +214,22 @@ $(document).ready(function () {
     } else {
       // plays each audio track if exists
       if (audioSrc1 !== "/") {
-        audio1.load();
+        // audio1.load();
         audio1.play();
         enabled.push(audio1);
       }
       if (audioSrc2 !== "/") {
-        audio2.load();
+        // audio2.load();
         audio2.play();
         enabled.push(audio2);
       }
       if (audioSrc3 !== "/") {
-        audio3.load();
+        // audio3.load();
         audio3.play();
         enabled.push(audio3);
       }
       if (audioSrc4 !== "/") {
-        audio4.load();
+        // audio4.load();
         audio4.play();
         enabled.push(audio4);
       }
@@ -246,12 +246,29 @@ $(document).ready(function () {
         }
         if (finished === enabled.length) {
           mainPlayEl.removeClass("play-button");
+          loadAll();
         }
       }
     }
   }
 
+  function loadAll() {
+    if (audioSrc1 !== "/") {
+      audio1.load();
+    }
+    if (audioSrc2 !== "/") {
+      audio2.load();
+    }
+    if (audioSrc3 !== "/") {
+      audio3.load();
+    }
+    if (audioSrc4 !== "/") {
+      audio4.load();
+    }
+  }
+
   function stopAll() {
+    loadAll();
     if (audioSrc1 !== "/") {
       audio1.pause();
     }
@@ -652,4 +669,6 @@ $(document).ready(function () {
 
   // checks to see which tracks have content and toggles active state
   enableActive();
+  // preloads all available audio at page load
+  loadAll();
 });
