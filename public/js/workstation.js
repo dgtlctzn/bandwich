@@ -31,7 +31,7 @@ $(document).ready(function () {
         time--;
         countdownEl.text(time);
         clickAudio.play();
-        if (time === 0) {
+        if (!time) {
           clearInterval(timeout);
           countdownEl.css("display", "none");
         }
@@ -545,6 +545,13 @@ $(document).ready(function () {
     location.assign("/");
   });
 
+  // delete track functions
+  const deleteTrack1 = $("#destroyBtn1");
+  const deleteTrack2 = $("#destroyBtn2");
+  const deleteTrack3 = $("#destroyBtn3");
+  const deleteTrack4 = $("#destroyBtn4");
+  const deleteProject = $("#deleteproject-btn");
+
   function disableTrack(button) {
     button.css("display", "none");
     button.parent().next().children().eq(0).addClass("disable");
@@ -559,9 +566,9 @@ $(document).ready(function () {
     button.parent().parent().removeClass("recorded-track");
   }
 
-  $("#destroyBtn1").on("click", function () {
+  function deleteTrack(audioId) {
     disableTrack($("#destroyBtn1"));
-    let gettingID = audioId1.attr("src");
+    let gettingID = audioId.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
     for (let i = 0; i < gettingID.length; i++) {
@@ -575,42 +582,8 @@ $(document).ready(function () {
     }
     newID = parseInt(newID.join(""));
     console.log(newID);
-    // gettingID = parseFloat(gettingID.pop());
 
-    audioId1.attr("src", "/");
-
-    $.ajax({
-      url: `/api/audio/${newID}`,
-      method: "DELETE",
-      success: function () {
-        location.reload();
-      },
-      error: function (err) {
-        console.log(err);
-        alert("track failed to delete!");
-      },
-    });
-  });
-
-  $("#destroyBtn2").on("click", function () {
-    disableTrack($("#destroyBtn2"));
-    let gettingID = audioId2.attr("src");
-    gettingID = gettingID.split("");
-    let newID = [];
-    for (let i = 0; i < gettingID.length; i++) {
-      const parsedAudioName = parseInt(gettingID[i]);
-      if (
-        isNaN(parsedAudioName) === false &&
-        typeof parsedAudioName === "number"
-      ) {
-        newID.push(parsedAudioName);
-      }
-    }
-    newID = parseInt(newID.join(""));
-    console.log(newID);
-    // gettingID = parseFloat(gettingID.pop());
-
-    audioId2.attr("src", "/");
+    audioId.attr("src", "/");
 
     $.ajax({
       url: `/api/audio/${newID}`,
@@ -623,75 +596,25 @@ $(document).ready(function () {
         alert("track failed to delete!");
       },
     });
+  }
+
+  deleteTrack1.on("click", function () {
+    deleteTrack(audioId1);
   });
 
-  $("#destroyBtn3").on("click", function () {
-    disableTrack($("#destroyBtn3"));
-    let gettingID = audioId3.attr("src");
-    gettingID = gettingID.split("");
-    let newID = [];
-    for (let i = 0; i < gettingID.length; i++) {
-      const parsedAudioName = parseInt(gettingID[i]);
-      if (
-        isNaN(parsedAudioName) === false &&
-        typeof parsedAudioName === "number"
-      ) {
-        newID.push(parsedAudioName);
-      }
-    }
-    newID = parseInt(newID.join(""));
-    console.log(newID);
-    // gettingID = parseFloat(gettingID.pop());
-
-    audioId3.attr("src", "/");
-
-    $.ajax({
-      url: `/api/audio/${newID}`,
-      method: "DELETE",
-      success: function () {
-        location.reload();
-      },
-      error: function (err) {
-        console.log(err);
-        alert("track failed to delete!");
-      },
-    });
+  deleteTrack2.on("click", function () {
+    deleteTrack(audioId2);
   });
 
-  $("#destroyBtn4").on("click", function () {
-    disableTrack($("#destroyBtn4"));
-    let gettingID = audioId4.attr("src");
-    gettingID = gettingID.split("");
-    let newID = [];
-    for (let i = 0; i < gettingID.length; i++) {
-      const parsedAudioName = parseInt(gettingID[i]);
-      if (
-        isNaN(parsedAudioName) === false &&
-        typeof parsedAudioName === "number"
-      ) {
-        newID.push(parsedAudioName);
-      }
-    }
-    newID = parseInt(newID.join(""));
-    console.log(newID);
-    // gettingID = parseFloat(gettingID.pop());
-
-    audioId4.attr("src", "/");
-
-    $.ajax({
-      url: `/api/audio/${newID}`,
-      method: "DELETE",
-      success: function () {
-        location.reload();
-      },
-      error: function (err) {
-        console.log(err);
-        alert("track failed to delete!");
-      },
-    });
+  deleteTrack3.on("click", function () {
+    deleteTrack(audioId3);
   });
 
-  $("#deleteproject-btn").on("click", function () {
+  deleteTrack4.on("click", function () {
+    deleteTrack(audioId4);
+  });
+
+  deleteProject.on("click", function () {
     var deleteAlert = confirm(
       "Are you sure you would like to delete this project?"
     );
