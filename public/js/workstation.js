@@ -587,8 +587,8 @@ $(document).ready(function () {
     button.parent().parent().removeClass("recorded-track");
   }
 
-  function deleteTrack(audioId) {
-    disableTrack($("#destroyBtn1"));
+  function deleteTrack(audioId, deleteTrack) {
+    disableTrack(deleteTrack);
     let gettingID = audioId.attr("src");
     gettingID = gettingID.split("");
     let newID = [];
@@ -620,19 +620,19 @@ $(document).ready(function () {
   }
 
   deleteTrack1.on("click", function () {
-    deleteTrack(audioId1);
+    deleteTrack(audioId1, deleteTrack1);
   });
 
   deleteTrack2.on("click", function () {
-    deleteTrack(audioId2);
+    deleteTrack(audioId2, deleteTrack2);
   });
 
   deleteTrack3.on("click", function () {
-    deleteTrack(audioId3);
+    deleteTrack(audioId3, deleteTrack3);
   });
 
   deleteTrack4.on("click", function () {
-    deleteTrack(audioId4);
+    deleteTrack(audioId4, deleteTrack4);
   });
 
   deleteProject.on("click", function () {
