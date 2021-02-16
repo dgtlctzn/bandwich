@@ -125,13 +125,12 @@ $(document).ready(function () {
       // stops the recording and gets the track
       rec.stop();
       gumStream.getAudioTracks()[0].stop();
-
-      setLoader(track);
       // creates wav blob and passes blob as argument to the callback
       rec.exportWAV(convertToBase64);
     } else {
       stopAll();
     }
+    setLoader(track);
     recIcon.removeClass("pulsing");
     recIcon.removeAttr("id", "glow");
     mainPlayEl.removeClass("play-button");
