@@ -183,8 +183,8 @@ canvas {
 } */
 
 .title-bar {
-  /* position: absolute;
-  left: 0px;
+  /* position: relative; */
+  /* left: 0px;
   top: 0px; */
   box-sizing: border-box;
   width: 100%;
@@ -210,7 +210,38 @@ h4 {
   margin-right: 40px;
 } */
 
+/* uploading track animation */
+@keyframes blink {
+  0% {
+    opacity: .2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .2;
+  }
+}
 
+.loading {
+  font-size: 100px;
+  margin-bottom: 55px;
+}
+
+.loading span{
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.loading span:nth-child(2) {
+  animation-delay: .2s;
+}
+
+.loading span:nth-child(3) {
+  animation-delay: .4s;
+}
 
 
 
