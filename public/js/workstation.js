@@ -117,6 +117,7 @@ $(document).ready(function () {
 
   function stopRecord() {
     if (input) {
+      setLoader(track);
       console.log("Recording stopped");
       //disable the stop button, enable the record too allow for new recordings
       mainRecordEl.disabled = false;
@@ -170,23 +171,34 @@ $(document).ready(function () {
       });
     };
   }
+
+  function setLoader(track) {
+    if (track === 1) {
+      $(".loading.load1").removeClass("hide");
+    }
+    if (track === 2) {
+      $(".loading.load2").removeClass("hide");
+    }
+    if (track === 3) {
+      $(".loading.load3").removeClass("hide");
+    }
+    if (track === 4) {
+      $(".loading.load4").removeClass("hide");
+    }
+  }
   
   function trackCheck(track) {
     if (track === 1) {
       enableTrack(trackOne);
-      $(".loading.load1").removeClass("hide");
     }
     if (track === 2) {
       enableTrack(trackTwo);
-      $(".loading.load2").removeClass("hide");
     }
     if (track === 3) {
       enableTrack(trackThree);
-      $(".loading.load3").removeClass("hide");
     }
     if (track === 4) {
       enableTrack(trackFour);
-      $(".loading.load4").removeClass("hide");
     }
   }
 
