@@ -117,7 +117,6 @@ $(document).ready(function () {
 
   function stopRecord() {
     if (input) {
-      setLoader(track);
       console.log("Recording stopped");
       //disable the stop button, enable the record too allow for new recordings
       mainRecordEl.disabled = false;
@@ -126,6 +125,8 @@ $(document).ready(function () {
       // stops the recording and gets the track
       rec.stop();
       gumStream.getAudioTracks()[0].stop();
+
+      setLoader(track);
       // creates wav blob and passes blob as argument to the callback
       rec.exportWAV(convertToBase64);
     } else {
