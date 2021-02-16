@@ -15,6 +15,31 @@ $(document).ready(function () {
   const click = $("#click").attr("src");
   const clickAudio = new Audio(click);
 
+  // PLAY BTN FOR EACH TRACK
+  // ========================================================
+  const mainPlayEl = $("#main-play");
+  const playBtn1 = $("#playBtn1");
+  const playBtn2 = $("#playBtn2");
+  const playBtn3 = $("#playBtn3");
+  const playBtn4 = $("#playBtn4");
+  const audioId1 = $("#audio1");
+  const audioId2 = $("#audio2");
+  const audioId3 = $("#audio3");
+  const audioId4 = $("#audio4");
+  var count1 = 0;
+  var count2 = 0;
+  var count3 = 0;
+  var count4 = 0;
+  var playPauseReset = 2;
+  const audioSrc1 = audioId1.attr("src");
+  const audio1 = new Audio(audioSrc1);
+  const audioSrc2 = audioId2.attr("src");
+  const audio2 = new Audio(audioSrc2);
+  const audioSrc3 = audioId3.attr("src");
+  const audio3 = new Audio(audioSrc3);
+  const audioSrc4 = audioId4.attr("src");
+  const audio4 = new Audio(audioSrc4);
+
   // click events on the big record/pause/stop buttons
   mainRecordEl.on("click", function () {
     // conditional ensures a track is enabled and no audio stream is currently active
@@ -102,16 +127,56 @@ $(document).ready(function () {
   }
 
   function pauseRecord() {
-    console.log("Recording paused", rec.recording);
+    // console.log("Recording paused", rec.recording);
     recIcon.removeClass("pulsing");
-    if (rec.recording) {
-      // pause
-      rec.stop();
-      // here maybe we can target the pause button (mainPauseEl) and get it to blink/change color
+    if (input) {
+      if (rec.recording) {
+        // pause
+        rec.stop();
+        pauseTracks();
+        $("#pause-icon").addClass("pause-animate");
+        // here maybe we can target the pause button (mainPauseEl) and get it to blink/change color
+      } else {
+        // resume
+        playTracks();
+        rec.record();
+        $("#pause-icon").removeClass("pause-animate");
+        // same for here
+      }
     } else {
-      // resume
-      rec.record();
-      // same for here
+      pauseTracks();
+      mainPlayEl.removeClass("play-disable");
+      $("#pause-icon").addClass("pause-animate");
+    }
+  }
+
+  function pauseTracks() {
+    if (audioSrc1 !== "/") {
+      audio1.pause();
+    }
+    if (audioSrc2 !== "/") {
+      audio2.pause();
+    }
+    if (audioSrc3 !== "/") {
+      audio3.pause();
+    }
+    if (audioSrc4 !== "/") {
+      audio4.pause();
+    }
+  }
+
+  function playTracks() {
+    if (audioSrc1 !== "/") {
+      audio1.play();
+    }
+    if (audioSrc2 !== "/") {
+      audio2.play();
+    }
+    if (audioSrc3 !== "/") {
+      audio3.play();
+    }
+    if (audioSrc4 !== "/") {
+      audio4.play();
     }
   }
 
@@ -127,7 +192,7 @@ $(document).ready(function () {
       gumStream.getAudioTracks()[0].stop();
       // creates wav blob and passes blob as argument to the callback
       rec.exportWAV(convertToBase64);
-    } 
+    }
     stopAll();
     setLoader(track);
     recIcon.removeClass("pulsing");
@@ -185,7 +250,7 @@ $(document).ready(function () {
       $(".loading.load4").removeClass("hide");
     }
   }
-  
+
   function trackCheck(track) {
     if (track === 1) {
       enableTrack(trackOne);
@@ -249,6 +314,13 @@ $(document).ready(function () {
         enabled.push(audio4);
       }
     }
+    playBtn1.addClass("disable");
+    playBtn2.addClass("disable");
+    playBtn3.addClass("disable");
+    playBtn4.addClass("disable");
+    mainPlayEl.addClass("play-disable");
+    $(".switch").addClass("disable");
+    $("#pause-icon").removeClass("pause-animate");
     // sets a callback for each audio tracks end
     for (const track of enabled) {
       track.onended = function () {
@@ -261,6 +333,7 @@ $(document).ready(function () {
         }
         if (finished === enabled.length) {
           mainPlayEl.removeClass("play-button");
+          stopAll();
           loadAll();
         }
       };
@@ -286,16 +359,24 @@ $(document).ready(function () {
     loadAll();
     if (audioSrc1 !== "/") {
       audio1.pause();
+      playBtn1.removeClass("disable");
     }
     if (audioSrc2 !== "/") {
       audio2.pause();
+      playBtn2.removeClass("disable");
     }
     if (audioSrc3 !== "/") {
       audio3.pause();
+      playBtn3.removeClass("disable");
     }
     if (audioSrc4 !== "/") {
       audio4.pause();
+      playBtn4.removeClass("disable");
     }
+    mainPlayEl.removeClass("play-disable");
+    mainRecordEl.removeClass("disable");
+    $(".switch").removeClass("disable");
+    $("#pause-icon").removeClass("pause-animate");
   }
 
   function enableActive() {
@@ -423,34 +504,10 @@ $(document).ready(function () {
     });
   });
 
-  // PLAY BTN FOR EACH TRACK
-  // ========================================================
-  const mainPlayEl = $("#main-play");
-  const playBtn1 = $("#playBtn1");
-  const playBtn2 = $("#playBtn2");
-  const playBtn3 = $("#playBtn3");
-  const playBtn4 = $("#playBtn4");
-  const audioId1 = $("#audio1");
-  const audioId2 = $("#audio2");
-  const audioId3 = $("#audio3");
-  const audioId4 = $("#audio4");
-  var count1 = 0;
-  var count2 = 0;
-  var count3 = 0;
-  var count4 = 0;
-  var playPauseReset = 2;
-  const audioSrc1 = audioId1.attr("src");
-  const audio1 = new Audio(audioSrc1);
-  const audioSrc2 = audioId2.attr("src");
-  const audio2 = new Audio(audioSrc2);
-  const audioSrc3 = audioId3.attr("src");
-  const audio3 = new Audio(audioSrc3);
-  const audioSrc4 = audioId4.attr("src");
-  const audio4 = new Audio(audioSrc4);
-
   mainPlayEl.on("click", function () {
     mainPlayEl.addClass("play-button");
     playAll();
+    mainRecordEl.addClass("disable");
   });
 
   playBtn1.on("click", function () {

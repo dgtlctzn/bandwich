@@ -149,6 +149,30 @@ a {
   pointer-events: none;
 }
 
+.play-disable {
+  pointer-events: none;
+}
+
+@keyframes blink {
+  0% {
+    opacity: .2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .2;
+  }
+}
+
+.pause-animate {
+  color: orange;
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
 .deleteBtn {
   padding: 5px 10px;
   background-color: white;
