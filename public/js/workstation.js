@@ -127,9 +127,8 @@ $(document).ready(function () {
       gumStream.getAudioTracks()[0].stop();
       // creates wav blob and passes blob as argument to the callback
       rec.exportWAV(convertToBase64);
-    } else {
-      stopAll();
-    }
+    } 
+    stopAll();
     setLoader(track);
     recIcon.removeClass("pulsing");
     recIcon.removeAttr("id", "glow");
