@@ -332,10 +332,9 @@ $(document).ready(function () {
             finished++;
           }
         }
-        if (finished === enabled.length) {
+        if (finished === enabled.length && !input) {
           mainPlayEl.removeClass("play-button");
           stopAll();
-          // loadAll();
         }
       };
     }
