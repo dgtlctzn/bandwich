@@ -170,19 +170,23 @@ $(document).ready(function () {
       });
     };
   }
-
+  
   function trackCheck(track) {
     if (track === 1) {
       enableTrack(trackOne);
+      $(".loading.load1").removeClass("hide");
     }
     if (track === 2) {
       enableTrack(trackTwo);
+      $(".loading.load2").removeClass("hide");
     }
     if (track === 3) {
       enableTrack(trackThree);
+      $(".loading.load3").removeClass("hide");
     }
     if (track === 4) {
       enableTrack(trackFour);
+      $(".loading.load4").removeClass("hide");
     }
   }
 
@@ -236,7 +240,7 @@ $(document).ready(function () {
     }
     // sets a callback for each audio tracks end
     for (const track of enabled) {
-      track.onended = function() {
+      track.onended = function () {
         // counts number of finished tracks for each audio end
         let finished = 0;
         for (const audioTrack of enabled) {
@@ -248,7 +252,7 @@ $(document).ready(function () {
           mainPlayEl.removeClass("play-button");
           loadAll();
         }
-      }
+      };
     }
   }
 
