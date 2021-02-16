@@ -102,11 +102,12 @@ $(document).ready(function () {
         gumStream = stream;
 
         input = audioContext.createMediaStreamSource(stream);
-
+ 
         // recorder.js constructor
         rec = new Recorder(input, {
           // mono sound
           numChannels: 1,
+          // bufferLen: 512
         });
         //start the recording process
         rec.record();
@@ -120,6 +121,7 @@ $(document).ready(function () {
       })
       .catch(function (err) {
         //enable the record button if getUserMedia() fails
+        console.log(err)
         mainRecordEl.disabled = false;
         mainStopEl.disabled = true;
         mainPauseEl.disabled = true;
@@ -333,7 +335,7 @@ $(document).ready(function () {
         if (finished === enabled.length) {
           mainPlayEl.removeClass("play-button");
           stopAll();
-          loadAll();
+          // loadAll();
         }
       };
     }
@@ -355,7 +357,6 @@ $(document).ready(function () {
   }
 
   function stopAll() {
-    loadAll();
     if (audioSrc1 !== "/") {
       audio1.pause();
       playBtn1.removeClass("disable");
@@ -380,6 +381,7 @@ $(document).ready(function () {
     } else {
       $("#switch4").removeClass("disable");
     }
+    loadAll();
     mainPlayEl.removeClass("play-disable");
     mainRecordEl.removeClass("disable");
     // $(".switch").removeClass("disable");
