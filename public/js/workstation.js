@@ -267,17 +267,16 @@ $(document).ready(function () {
   }
 
   function enableTrack(enabledTrack) {
+    const trashIcon = enabledTrack.children().eq(0).children().eq(1);
+    const playBtn = enabledTrack.children().eq(1).children().eq(0);
+    const volumeSlider = enabledTrack.children().eq(1).children().eq(1).children().eq(0);
+    const recordEnable = enabledTrack.children().eq(1).children().eq(2);
+
     enabledTrack.addClass("recorded-track");
-    enabledTrack.children().eq(0).children().eq(1).removeClass("hide");
-    enabledTrack.children().eq(1).children().eq(0).removeClass("disable");
-    enabledTrack
-      .children()
-      .eq(1)
-      .children()
-      .eq(1)
-      .children()
-      .eq(0)
-      .removeClass("disable");
+    playBtn.removeClass("disable");
+    volumeSlider.removeClass("disable");
+    trashIcon.removeClass("hide");
+    recordEnable.addClass("disable");
   }
 
   function playAll() {
@@ -360,22 +359,30 @@ $(document).ready(function () {
     if (audioSrc1 !== "/") {
       audio1.pause();
       playBtn1.removeClass("disable");
+    } else {
+      $("#switch1").removeClass("disable");
     }
     if (audioSrc2 !== "/") {
       audio2.pause();
       playBtn2.removeClass("disable");
+    } else {
+      $("#switch2").removeClass("disable");
     }
     if (audioSrc3 !== "/") {
       audio3.pause();
       playBtn3.removeClass("disable");
+    } else {
+      $("#switch3").removeClass("disable");
     }
     if (audioSrc4 !== "/") {
       audio4.pause();
       playBtn4.removeClass("disable");
+    } else {
+      $("#switch4").removeClass("disable");
     }
     mainPlayEl.removeClass("play-disable");
     mainRecordEl.removeClass("disable");
-    $(".switch").removeClass("disable");
+    // $(".switch").removeClass("disable");
     $("#pause-icon").removeClass("pause-animate");
   }
 
