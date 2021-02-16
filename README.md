@@ -35,12 +35,10 @@ The workstation follows the same functionality of a classic 4 track tape recorde
 
 ## Credits
 
-* [Node.js](https://nodejs.org/en/)
-* [MySQL](https://www.npmjs.com/package/mysql)
 * [Recorder.js](https://www.npmjs.com/package/recorder-js)
 * [Octavian Naicu](https://blog.addpipe.com/using-recorder-js-to-capture-wav-audio-in-your-html5-web-site/) 
 * [Volume-meter.js](https://github.com/cwilso/volume-meter) 
-* [Random-words](https://www.npmjs.com/package/random-words) 
+* [Title Gen](https://github.com/dgtlctzn/API-title-generation) 
 * [Body-parser](https://www.npmjs.com/package/body-parser) 
 * [Wavefile](https://www.npmjs.com/package/wavefile) 
 
