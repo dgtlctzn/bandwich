@@ -1,3 +1,5 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 # Bandwich
 
 ![Example workstation](./public/img/bandwich-cover.png)
@@ -23,15 +25,10 @@ To start recording click the link below!
 
 [Bandwich](https://bandwich-app.herokuapp.com/)
 
-A user can either click on `new project` to create a blank workstation or click `View All Projects` to search for existing projects. New projects will be given a randomly generated name which can be changed at any point by clicking on the title. 
-The workstation follows the same functionality of a classic 4 track tape recorder. To those not familiar with recording DAWs here are some basic tips: 
-* To record on an individual track the record enable button must be toggled to select which track (1-4) you want to record on. 
-* Once selected, the record button can be clicked to start recording.
-* The stop button terminates the recording and the audio track is ready to be played back.
-* The smaller play button on each track will play that track and that track alone. The big play button plays all recorded tracks simultaneously. 
-* At any point you would like to redo a track just click the trash can symbol on the upper right side of the track. 
+A user can either click on `New Project` to create a blank workstation or click `View All Projects` to search for existing projects. New projects will be given a randomly generated name which can be changed at any point by clicking on the title. 
+The workstation follows the same functionality of a classic 4 track tape recorder. To those not familiar with recording DAWs here is a walkthrough: 
 
-![Example workstation](./public/img/workstation.png)
+[Bandwich Demo](https://drive.google.com/file/d/1xfoNn7JXKiiwWl5DcbDmGuiQyss56FQb/view)
 
 ## Credits
 
@@ -46,12 +43,6 @@ The workstation follows the same functionality of a classic 4 track tape recorde
 
 ## License
 
-MIT License
+This project is covered under the GNU license
 
 Copyright (c) 2020 Joseph Perry, Kai Reed, Andrew Stewart, and Patrick Hannan
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
